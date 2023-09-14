@@ -24,4 +24,10 @@
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
 
+    <fragment
+        android:id="@+id/navigation_community"
+        android:name="com.example.owlingo.ui.community.QuestionFragment"
+        android:label="@string/title_community"
+        tools:layout="@layout/fragment_question" />
+
 </navigation>
