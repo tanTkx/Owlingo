@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/share"
+        android:checkable="false"
+        android:enabled="true"
+        android:icon="?attr/actionModeShareDrawable"
+        android:iconTint="#090909"
+        android:title="@string/share"
+        android:visible="true" />
+    <item
+        android:id="@+id/pin"
+        android:enabled="true"
+        android:icon="?attr/actionModeShareDrawable"
+        android:iconTint="#000000"
+        android:title="@string/pin" />
+        </menu>
