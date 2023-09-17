@@ -20,8 +20,13 @@
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.example.owlingo.ui.notifications.NotificationsFragment"
+        android:name="com.example.owlingo.ui.home.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+    <fragment
+        android:id="@+id/blankFragment"
+        android:name="com.example.owlingo.BlankFragment"
+        android:label="fragment_blank"
+        tools:layout="@layout/fragment_blank" />
 
 </navigation>

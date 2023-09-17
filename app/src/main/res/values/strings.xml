@@ -4,4 +4,17 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="avatar">Avatar</string>
+    <string name="owlingo">Owlingo</string>
+    <string name="timeToLearn">TIME TO LEARN</string>
+    <string name="EducationLearningPlatform">Education Learning Platform</string>
+    <string name="platformDesc">Take control of your learning journey with our customizable online courses.</string>
+    <string name="register">REGISTER</string>
+    <string name="app_title">Owlingo Online Course App</string>
+    <string name="create_title">Create A account</string>
+    <string name="exist_acc" >Already have an Account? </string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="login">LOG IN</string>
 </resources>

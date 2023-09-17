@@ -1,4 +1,4 @@
-package com.example.owlingo.ui.notifications
+package com.example.owlingo.ui.home.notifications
 
 import android.os.Bundle
 import android.view.LayoutInflater
