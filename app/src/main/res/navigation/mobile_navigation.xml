@@ -24,15 +24,35 @@
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
     <fragment
-        android:id="@+id/blankFragment"
+        android:id="@+id/StartFragment"
         android:name="com.example.owlingo.BlankFragment"
-        android:label="fragment_blank"
-        tools:layout="@layout/fragment_blank" />
+        android:label="Start"
+        tools:layout="@layout/start_fragment" />
 
     <fragment
         android:id="@+id/navigation_community"
         android:name="com.example.owlingo.ui.community.QuestionFragment"
         android:label="@string/title_community"
         tools:layout="@layout/fragment_question" />
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.owlingo.LoginFragment"
+        android:label="login_fragment"
+        tools:layout="@layout/login_fragment" />
+    <fragment
+        android:id="@+id/signupFragment"
+        android:name="com.example.owlingo.SignupFragment"
+        android:label="signup_fragment"
+        tools:layout="@layout/signup_fragment" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.owlingo.ProfileFragment"
+        android:label="profile_fragment"
+        tools:layout="@layout/profile_fragment" />
+    <fragment
+        android:id="@+id/logoFragment"
+        android:name="com.example.owlingo.LogoFragment"
+        android:label="logo_fragment"
+        tools:layout="@layout/logo_fragment" />
 
 </navigation>
