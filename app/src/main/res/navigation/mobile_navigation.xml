@@ -36,23 +36,23 @@
         tools:layout="@layout/fragment_question" />
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.owlingo.LoginFragment"
+        android:name="com.example.owlingo.ui.profile.LoginFragment"
         android:label="login_fragment"
         tools:layout="@layout/login_fragment" />
     <fragment
         android:id="@+id/signupFragment"
-        android:name="com.example.owlingo.SignupFragment"
+        android:name="com.example.owlingo.ui.profile.SignupFragment"
         android:label="signup_fragment"
         tools:layout="@layout/signup_fragment" />
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.owlingo.ProfileFragment"
+        android:name="com.example.owlingo.ui.profile.ProfileFragment"
         android:label="profile_fragment"
         tools:layout="@layout/profile_fragment" />
     <fragment
         android:id="@+id/logoFragment"
         android:name="com.example.owlingo.LogoFragment"
         android:label="logo_fragment"
-        tools:layout="@layout/logo_fragment" />
+        tools:layout="@layout/activity_splash_screen" />
 
 </navigation>
