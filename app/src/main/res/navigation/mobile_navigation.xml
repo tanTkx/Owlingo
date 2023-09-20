@@ -25,7 +25,7 @@
         tools:layout="@layout/fragment_notifications" />
     <fragment
         android:id="@+id/StartFragment"
-        android:name="com.example.owlingo.BlankFragment"
+        android:name="com.example.owlingo.StartFragment"
         android:label="Start"
         tools:layout="@layout/start_fragment" />
 
@@ -49,10 +49,5 @@
         android:name="com.example.owlingo.ui.profile.ProfileFragment"
         android:label="profile_fragment"
         tools:layout="@layout/profile_fragment" />
-    <fragment
-        android:id="@+id/logoFragment"
-        android:name="com.example.owlingo.LogoFragment"
-        android:label="logo_fragment"
-        tools:layout="@layout/activity_splash_screen" />
 
 </navigation>
