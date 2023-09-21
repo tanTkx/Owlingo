@@ -1,4 +1,4 @@
-package com.example.owlingo.ui.community
+package com.example.owlingo.ui.profile
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,16 +7,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.owlingo.R
 
-class QuestionFragment : Fragment() {
-
-    private lateinit var viewModel: QuestionViewModel
+class LoginFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_question, container, false)
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.login_fragment, container, false)
     }
-
 
 }

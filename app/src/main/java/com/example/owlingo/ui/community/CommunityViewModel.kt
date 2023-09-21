@@ -1,18 +1,50 @@
 package com.example.owlingo.ui.community
 
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
+import com.example.owlingo.database.community.Question
+import com.example.owlingo.database.community.QuestionDatabase
+import com.example.owlingo.database.community.QuestionDatabaseDao
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-class CommunityViewModel : ViewModel() {
+class CommunityViewModel(
+    val database: QuestionDatabaseDao,
+    application: Application
+) : AndroidViewModel(application) {
 
-    private lateinit var questionList: MutableList<String>
-    private fun loadQuestions() {
-//        questionList = mutableListOf(
-//            Language("Java" , "Exp : 3 years"),
-//            Language("Kotlin" , "Exp : 2 years"),
-//            Language("Python" , "Exp : 4 years"),
-//            Language("JavaScript" , "Exp : 6 years"),
-//            Language("PHP" , "Exp : 1 years"),
-//            Language("CPP" , "Exp : 8 years"),
-//        )
+    var questions: LiveData<List<Question>> = MutableLiveData<List<Question>>()
+
+    init {
+        loadQuestions()
     }
+
+    private fun loadQuestions() {
+        viewModelScope.launch {
+            questions = database.getAll(listOf(0L))
+        }
+    }
+
+     fun getQuestion() {
+//        viewModelScope.launch {
+//            questionList = getAll()
+//        }
+    }
+
+//    private suspend fun getAll(): List<Question> {
+//        val list = database.getAll();
+//        if(list.isEmpty()){
+//            return []
+//        }
+//
+//        return
+//    }
+
+
+
+
 }
