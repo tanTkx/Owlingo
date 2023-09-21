@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.community.CommunityFragment"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="communityViewModel"
+            type="com.example.owlingo.ui.community.CommunityViewModel" />
+    </data>
+
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.community.CommunityFragment">
+    >
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/topAppBar"
@@ -43,13 +51,13 @@
         android:layout_marginBottom="16dp"
         android:backgroundTint="#FFFFFF"
         android:foreground="@drawable/ic_filter"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+        app:layout_constraintBottom_toTopOf="@+id/question_list"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/searchView"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+        android:id="@+id/question_list"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="@dimen/activity_horizontal_margin"
@@ -64,3 +72,4 @@
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

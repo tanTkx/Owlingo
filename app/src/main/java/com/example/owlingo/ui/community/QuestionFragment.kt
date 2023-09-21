@@ -9,7 +9,7 @@ import com.example.owlingo.R
 
 class QuestionFragment : Fragment() {
 
-    private lateinit var viewModel: CommunityViewModel
+    private lateinit var viewModel: QuestionViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

@@ -23,6 +23,7 @@
         android:name="com.example.owlingo.ui.home.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+
     <fragment
         android:id="@+id/StartFragment"
         android:name="com.example.owlingo.StartFragment"
@@ -31,9 +32,9 @@
 
     <fragment
         android:id="@+id/navigation_community"
-        android:name="com.example.owlingo.ui.community.QuestionFragment"
+        android:name="com.example.owlingo.ui.community.CommunityFragment"
         android:label="@string/title_community"
-        tools:layout="@layout/fragment_question" />
+        tools:layout="@layout/fragment_community" />
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.owlingo.ui.profile.LoginFragment"
