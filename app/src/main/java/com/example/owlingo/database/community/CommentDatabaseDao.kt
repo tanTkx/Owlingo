@@ -17,24 +17,15 @@ interface CommentDatabaseDao {
     suspend fun update(comment: Comment)
 
     @Query("SELECT * from comment WHERE question_id = :key")
-    suspend fun get(key: Long): List<Comment>?
+    fun get(key: Long): LiveData<List<Comment>>
 
     @Query("DELETE FROM comment WHERE commentId = :key")
-    suspend fun removeComment(key: Long)
+    suspend fun removeComment(key: Long): Int
 
     @Query("DELETE FROM sub_comment WHERE comment_id = :key")
     suspend fun removeSubCommentForComment(key: Long)
 
     @Query("SELECT * FROM comment WHERE commentId = :key")
-    suspend fun getComment(key: Long): CommentWithSubComments?
+    suspend fun getComment(key: Long): Comment?
 
 }
-
-data class CommentWithSubComments(
-    @Embedded val comment: Comment,
-    @Relation(
-        parentColumn = "commentId",
-        entityColumn = "comment_id"
-    )
-    val subComments: List<SubComment>
-)

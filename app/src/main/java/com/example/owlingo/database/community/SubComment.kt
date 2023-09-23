@@ -15,10 +15,10 @@ data class SubComment(
     var commentId: Long = 0L,
 
     @ColumnInfo(name = "subComment_text", typeAffinity = ColumnInfo.TEXT)
-    val subCommentText: String = " ",
+    val subCommentText: String,
 
     @ColumnInfo(name = "subComment_dateTime")
-    var subCommentDateTime: LocalDateTime = LocalDateTime.now(),
+    var subCommentDateTime: String,
 
     @ColumnInfo(name = "user_id")
     var userId: Long = 0L,

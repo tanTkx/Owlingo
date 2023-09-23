@@ -15,10 +15,10 @@ data class Comment(
     var questionId: Long = 0L,
 
     @ColumnInfo(name = "comment_title")
-    val commentTitle: String = " ",
+    val commentTitle: String,
 
     @ColumnInfo(name = "comment_text", typeAffinity = ColumnInfo.TEXT)
-    val commentText: String = " ",
+    val commentText: String,
 
     @ColumnInfo(name = "comment_like")
     val commentLike: Int = 0,
@@ -27,7 +27,7 @@ data class Comment(
     val commentDisLike: Int = 0,
 
     @ColumnInfo(name = "comment_dateTime")
-    var commentDateTime: LocalDateTime = LocalDateTime.now(),
+    var commentDateTime: String,
 
     @ColumnInfo(name = "user_id")
     var userId: Long = 0L,
