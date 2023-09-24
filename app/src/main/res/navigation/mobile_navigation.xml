@@ -27,7 +27,11 @@
         android:id="@+id/StartFragment"
         android:name="com.example.owlingo.BlankFragment"
         android:label="Start"
-        tools:layout="@layout/start_fragment" />
+        tools:layout="@layout/start_fragment" >
+        <action
+            android:id="@+id/action_StartFragment_to_signupFragment"
+            app:destination="@id/signupFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_community"

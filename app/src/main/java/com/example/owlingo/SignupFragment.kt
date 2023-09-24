@@ -1,52 +1,125 @@
 package com.example.owlingo
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.Button
+import android.widget.EditText
+import android.widget.Spinner
+import android.widget.TextView
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import com.android.volley.AuthFailureError
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [SignupFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class SignupFragment : Fragment() {
-    // TODO: Rename and change types of parameters
+
     private var param1: String? = null
     private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    lateinit var etName: EditText
+    lateinit var etEmail: EditText
+    lateinit var etPassword: EditText
+    lateinit var etCourseLevel: Spinner
+    lateinit var btnRegister: Button
+    lateinit var spinner: Spinner
+
+    var name: String? = ""
+    var email: String? = ""
+    var password: String? = ""
+    var courseLevel: String? = ""
+
+    private val URL: String = "http://10.0.2.2/Owlingo_php/register.php"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.signup_fragment, container, false)
+        val rootView = inflater.inflate(R.layout.signup_fragment, container, false)
+
+        // Find the Spinner within the fragment's layout
+        spinner = rootView.findViewById(R.id.spinner)
+
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter.createFromResource(
+            requireContext(),
+            R.array.CoursesLevel,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            // Specify the layout to use when the list of choices appears
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            // Apply the adapter to the spinner
+            spinner.adapter = adapter
+        }
+
+        etName = rootView.findViewById(R.id.name_edit)
+        etEmail = rootView.findViewById(R.id.email_edit)
+        etPassword = rootView.findViewById(R.id.password_edit)
+        etCourseLevel = rootView.findViewById(R.id.spinner)
+        btnRegister = rootView.findViewById(R.id.register_btn)
+
+        btnRegister.setOnClickListener {
+            save()
+        }
+
+        return rootView
+    }
+
+    private fun save() {
+        name = etName.text.toString().trim()
+        email = etEmail.text.toString().trim()
+        password = etPassword.text.toString().trim()
+        courseLevel = etCourseLevel.selectedItem.toString().trim()
+
+        if (name != "" && email != "" && password != "" && courseLevel.toString() != "") {
+            val stringRequest: StringRequest = object : StringRequest(
+                Request.Method.POST, URL,
+                Response.Listener { response ->
+                    Log.d("Register", response)
+                    if (response == "success") {
+                        btnRegister.isClickable = false
+                    } else if (response == "failure") {
+                    }
+                },
+                Response.ErrorListener { error ->
+                    Toast.makeText(
+                        requireContext(),
+                        error.toString().trim(),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }) {
+                @Throws(AuthFailureError::class)
+                override fun getParams(): Map<String, String>? {
+                    val data: MutableMap<String, String> = HashMap()
+                    data["name"] = name!!
+                    data["email"] = email!!
+                    data["password"] = password!!
+                    return data
+                }
+            }
+
+            val requestQueue = Volley.newRequestQueue(requireContext())
+            requestQueue.add(stringRequest)
+        }
+    }
+
+    fun login(view: View?) {
+        val intent = Intent(requireContext(), MainActivity::class.java)
+        startActivity(intent)
+        requireActivity().finish()
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment SignupFragment.
-         */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
             SignupFragment().apply {

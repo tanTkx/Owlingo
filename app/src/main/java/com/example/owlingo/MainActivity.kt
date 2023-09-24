@@ -18,25 +18,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val navView: BottomNavigationView = binding.navView
-        val navController = findNavController(R.id.nav_host_fragment_activity_main)
+        val navController = findNavController(R.id.nav_host_fragment_activity_main)  // Use the correct ID here
         navView.setupWithNavController(navController)
-
-//        val chipGroup = findViewById<ChipGroup>(R.id.courseGroup)
-//
-//        val chip1 = Chip(this)
-//        chip1.text = "Value 1"
-//        chip1.setChipBackgroundColorResource(R.color.chip_background_color) // Customize the background color
-//
-//        chip1.setTextColor(resources.getColor(R.color.chip_text_color)) // Customize the text color
-//
-//        chipGroup.addView(chip1)
-//
-//        val chip2 = Chip(this)
-//        chip2.text = "Value 2"
-//        chip2.setChipBackgroundColorResource(R.color.chip_background_color) // Customize the background color
-//
-//        chip2.setTextColor(resources.getColor(R.color.chip_text_color)) // Customize the text color
-//
-//        chipGroup.addView(chip2)
     }
 }
