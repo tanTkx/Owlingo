@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="questionViewModel"
+            type="com.example.owlingo.ui.community.QuestionViewModel" />
+    </data>
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.community.CommunityFragment">
+    tools:context=".ui.community.QuestionFragment">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/topAppBar"
@@ -30,7 +37,7 @@
         android:contextClickable="false"
         android:linksClickable="false"
         android:longClickable="false"
-        android:text="Question Title"
+        android:text="@{String.valueOf(questionViewModel.question.questionTitle)}"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/imageView"
@@ -58,17 +65,32 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="@dimen/activity_horizontal_margin"
         android:clickable="false"
         android:contextClickable="false"
         android:linksClickable="false"
         android:longClickable="false"
-        android:text="Question Subtitle"
+        android:text="@{String.valueOf(questionViewModel.question.questionText)}"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <TextView
+        android:id="@+id/dateTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginBottom="8dp"
+        android:text="@{String.valueOf(questionViewModel.question.questionDateTime)}"
+        app:layout_constraintBottom_toTopOf="@+id/question_subtitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.947"
+        app:layout_constraintStart_toStartOf="@+id/questionTitle"
+        app:layout_constraintTop_toBottomOf="@+id/questionTitle"
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -124,5 +146,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/recyclerView2" />
 
-
 </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

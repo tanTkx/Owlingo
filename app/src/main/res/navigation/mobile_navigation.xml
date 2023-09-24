@@ -34,7 +34,26 @@
         android:id="@+id/navigation_community"
         android:name="com.example.owlingo.ui.community.CommunityFragment"
         android:label="@string/title_community"
-        tools:layout="@layout/fragment_community" />
+        tools:layout="@layout/fragment_community" >
+        <action
+            android:id="@+id/action_navigation_view_question"
+            app:destination="@id/navigation_view_question"
+            app:launchSingleTop="true"
+            app:popUpTo="@+id/title_destination" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_view_question"
+        android:name="com.example.owlingo.ui.community.QuestionFragment"
+        android:label="@string/title_community"
+        tools:layout="@layout/fragment_question" >
+        <argument
+            android:name="questionId"
+            android:defaultValue="0"
+            app:argType="integer" />
+    </fragment>
+
+
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.owlingo.ui.profile.LoginFragment"
