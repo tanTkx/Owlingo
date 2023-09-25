@@ -53,6 +53,11 @@ class CommunityFragment : Fragment(), ClickListener {
                 viewModel.toastShown()
             }
         }
+        binding.floatingActionButton.setOnClickListener{
+            val action = CommunityFragmentDirections.actionNavigationCreateQuestion()
+            NavHostFragment.findNavController(this).navigate(action)
+        }
+
 
         binding.lifecycleOwner = this
 

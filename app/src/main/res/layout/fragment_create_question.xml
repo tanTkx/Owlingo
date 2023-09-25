@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.community.CreateQuestionFragment"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="questionViewModel"
+            type="com.example.owlingo.ui.community.QuestionViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBar"
+            style="@style/Widget.MaterialComponents.Toolbar.Primary"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_constraintTop_toTopOf="parent"
+            app:menu="@menu/top_bar_menu"
+            app:title="@string/title_community"
+            app:titleCentered="true" />
+
+        <TextView
+            android:id="@+id/questionTitleLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="@string/question"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.081"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/topAppBar" />
+
+        <TextView
+            android:id="@+id/fieldLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            android:text="@string/question"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@+id/questionExplainTV"
+            app:layout_constraintTop_toBottomOf="@+id/questionExplainTV" />
+
+        <TextView
+            android:id="@+id/explainLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            android:text="Expalain of Your Question"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@+id/questionTV"
+            app:layout_constraintTop_toBottomOf="@+id/questionTV" />
+
+        <EditText
+            android:id="@+id/questionTV"
+            android:layout_width="350dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:ems="10"
+            android:inputType="text"
+            android:lines="3"
+            android:maxLines="3"
+            android:text="Ask Your Question"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/questionTitleLabel"
+            app:layout_constraintTop_toBottomOf="@+id/questionTitleLabel" />
+
+        <EditText
+            android:id="@+id/questionExplainTV"
+            android:layout_width="350dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            android:ems="10"
+            android:inputType="text"
+            android:lines="10"
+            android:maxLines="10"
+            android:text="Explaination"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/explainLabel"
+            app:layout_constraintTop_toBottomOf="@+id/explainLabel" />
+
+        <Spinner
+            android:id="@+id/spinner2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            app:layout_constraintStart_toStartOf="@+id/fieldLabel"
+            app:layout_constraintTop_toBottomOf="@+id/fieldLabel" />
+
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:text="Save"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spinner2" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
