@@ -1,41 +1,42 @@
 package com.example.owlingo
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.EditText
 import android.widget.Spinner
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
+import org.json.JSONException
+import org.json.JSONObject
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [ProfileFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ProfileFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
-
+    private lateinit var etEmail: EditText
+    private lateinit var etName: EditText
+    private lateinit var etPassword: EditText
+    private lateinit var etCourseLevel: Spinner
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val rootView = inflater.inflate(R.layout.profile_fragment, container, false)
+
+        // Assume you have a user ID, replace '123' with the actual user ID
+        val userID = "1"
+        etEmail = rootView.findViewById(R.id.email_edit)
+        etName = rootView.findViewById(R.id.name_edit)
+        etPassword = rootView.findViewById(R.id.password_edit)
+        etCourseLevel = rootView.findViewById(R.id.spinner)
+
+        // Fetch user data based on the userID
+        fetchUserData(userID)
 
         // Find the Spinner within the fragment's layout
         val spinner: Spinner = rootView.findViewById(R.id.spinner)
@@ -52,29 +53,61 @@ class ProfileFragment : Fragment() {
             spinner.adapter = adapter
         }
 
-//        // Set the item selection listener for the spinner
-//        spinner.onItemSelectedListener = this
-
         return rootView
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ProfileFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ProfileFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    private fun fetchUserData(userID: String) {
+        val getUserURL = "http://10.0.2.2/Owlingo_php/getUser.php?userID=$userID"
+
+        val stringRequest: StringRequest = object : StringRequest(
+            Request.Method.GET, getUserURL,
+            Response.Listener { response ->
+                Log.d("FetchData", response)
+
+                // Parse the JSON response
+                try {
+                    val jsonObject = JSONObject(response)
+
+                    if (jsonObject.has("name")) {
+                        val name = jsonObject.getString("name")
+                        // Handle the name
+                        etName.setText(name.trim())
+                    }
+
+                    if (jsonObject.has("email")) {
+                        val email = jsonObject.getString("email")
+                        // Handle the email
+                        etEmail.setText(email.trim())
+                    }
+
+                    if (jsonObject.has("courseLevel")) {
+                        val courseLevel = jsonObject.getString("courseLevel")
+                        val adapter = etCourseLevel.adapter as ArrayAdapter<String>
+                        val position = adapter.getPosition(courseLevel)
+                        etCourseLevel.setSelection(position)
+                    }
+
+
+                    if (jsonObject.has("password")) {
+                        val password = jsonObject.getString("password")
+                        // Handle the email
+                        etPassword.setText(password.trim())
+                    }
+
+                } catch (e: JSONException) {
+                    e.printStackTrace()
                 }
+            },
+            Response.ErrorListener { error ->
+                error.printStackTrace()
+            }) {
+            // No request params needed for a GET request
+            override fun getParams(): Map<String, String>? {
+                return null
             }
+        }
+
+        val requestQueue = Volley.newRequestQueue(requireContext())
+        requestQueue.add(stringRequest)
     }
 }

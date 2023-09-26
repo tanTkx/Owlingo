@@ -24,6 +24,7 @@
     <string name="ans">1 Answer</string>
 
     <string-array name="CoursesLevel">
+        <item>Select Your Course Level</item>
         <item>Primary</item>
         <item>Secondary</item>
         <item>Professional</item>

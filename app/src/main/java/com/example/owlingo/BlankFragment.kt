@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import androidx.navigation.findNavController
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -33,8 +35,19 @@ class BlankFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.start_fragment, container, false)
+        val view = inflater.inflate(R.layout.start_fragment, container, false)
+
+        // Find the button by its ID
+        val button = view.findViewById<Button>(R.id.button)
+
+        // Set an OnClickListener to handle button click
+        button.setOnClickListener {
+            // Navigate to another fragment (you'll need to replace YourNextFragment with the actual fragment)
+            view.findNavController().navigate(R.id.action_StartFragment_to_loginFragment)
+
+        }
+
+        return view
     }
 
     companion object {

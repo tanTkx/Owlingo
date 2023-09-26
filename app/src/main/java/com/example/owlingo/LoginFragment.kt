@@ -6,9 +6,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import com.android.volley.AuthFailureError
 import com.android.volley.Request
 import com.android.volley.Response
@@ -34,10 +37,24 @@ class LoginFragment : Fragment() {
         val view = inflater.inflate(R.layout.login_fragment, container, false)
         etEmail = view.findViewById(R.id.email_edit)
         etPassword = view.findViewById(R.id.password_edit)
+
+        val button = view.findViewById<Button>(R.id.login_btn)
+        val create_button = view.findViewById<TextView>(R.id.loginHere_btn)
+        // Set an OnClickListener to handle button click
+        button.setOnClickListener {
+            // Navigate to another fragment (you'll need to replace YourNextFragment with the actual fragment)
+            login(view);
+
+        }
+
+        create_button.setOnClickListener {
+            yourClickFunction(view)
+        }
+
         return view
     }
 
-    fun login(view: View?) {
+    private fun login(view: View?) {
         val email = etEmail.text.toString().trim()
         val password = etPassword.text.toString().trim()
         if (email.isNotEmpty() && password.isNotEmpty()) {
@@ -46,10 +63,17 @@ class LoginFragment : Fragment() {
                 Response.Listener { response ->
                     Log.d("res", response)
                     if (response.trim() == "success") {
-                        // Navigate to the SuccessActivity after successful login
-                        val intent = Intent(requireActivity(), MainActivity::class.java)
-                        startActivity(intent)
-                        requireActivity().finish()
+//                        // Navigate to the SuccessActivity after successful login
+//                        val intent = Intent(requireActivity(), MainActivity::class.java)
+//                        startActivity(intent)
+//                        requireActivity().finish()
+                        Toast.makeText(
+                            requireActivity(),
+                            "Success",
+                            Toast.LENGTH_SHORT
+                        ).show()
+
+                        view?.findNavController()?.navigate(R.id.action_loginFragment_to_profileFragment)
                     } else if (response.trim() == "failure") {
                         Toast.makeText(
                             requireActivity(),
@@ -89,5 +113,9 @@ class LoginFragment : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    fun yourClickFunction(view: View) {
+        view.findNavController().navigate(R.id.action_loginFragment_to_signupFragment2)
     }
 }

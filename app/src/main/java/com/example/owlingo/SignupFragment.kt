@@ -81,14 +81,23 @@ class SignupFragment : Fragment() {
         password = etPassword.text.toString().trim()
         courseLevel = etCourseLevel.selectedItem.toString().trim()
 
-        if (name != "" && email != "" && password != "" && courseLevel.toString() != "") {
+        if (name != "" && email != "" && password != "" && courseLevel.toString() != "Select Your Course Level") {
             val stringRequest: StringRequest = object : StringRequest(
                 Request.Method.POST, URL,
                 Response.Listener { response ->
                     Log.d("Register", response)
                     if (response == "success") {
-                        btnRegister.isClickable = false
+                        Toast.makeText(
+                            requireContext(),
+                            "Success",
+                            Toast.LENGTH_LONG
+                        ).show()
                     } else if (response == "failure") {
+                        Toast.makeText(
+                            requireContext(),
+                            "Error",
+                            Toast.LENGTH_LONG
+                        ).show()
                     }
                 },
                 Response.ErrorListener { error ->
@@ -104,12 +113,15 @@ class SignupFragment : Fragment() {
                     data["name"] = name!!
                     data["email"] = email!!
                     data["password"] = password!!
+                    data["courseLevel"] = courseLevel.toString()!!
                     return data
                 }
             }
 
             val requestQueue = Volley.newRequestQueue(requireContext())
             requestQueue.add(stringRequest)
+        } else {
+            Toast.makeText(requireActivity(), "Fields cannot be empty!", Toast.LENGTH_SHORT).show()
         }
     }
 
