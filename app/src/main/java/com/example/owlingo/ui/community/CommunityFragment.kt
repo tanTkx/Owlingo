@@ -55,7 +55,7 @@ class CommunityFragment : Fragment(), ClickListener {
         }
         viewModel.refreshQuestionList(1)
 
-        binding.floatingActionButton.setOnClickListener{
+        binding.delBtn.setOnClickListener{
             val action = CommunityFragmentDirections.actionNavigationCreateQuestion()
             NavHostFragment.findNavController(this).navigate(action)
         }

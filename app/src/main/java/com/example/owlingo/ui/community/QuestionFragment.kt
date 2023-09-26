@@ -67,7 +67,7 @@ class QuestionFragment : Fragment(), ClickListener {
 
         topAppBar.setNavigationOnClickListener {
             val action =
-                QuestionFragmentDirections.actionNavigationViewQuestionToNavigationCommunity()
+                QuestionFragmentDirections.actionNavigationCommunity()
             NavHostFragment.findNavController(this).navigate(action)
         }
 
