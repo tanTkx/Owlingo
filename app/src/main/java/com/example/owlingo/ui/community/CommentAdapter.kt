@@ -10,6 +10,7 @@ import com.example.owlingo.database.community.Comment
 import com.example.owlingo.databinding.AnswerCardBinding
 
 class CommentAdapter(
+    private val clickListener: ClickListener
 ) : ListAdapter<Comment, CommentAdapter.ViewHolder>(CommentDiffCallback()) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
