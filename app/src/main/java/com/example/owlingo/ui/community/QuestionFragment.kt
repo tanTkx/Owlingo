@@ -14,14 +14,17 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.example.owlingo.R
 import com.example.owlingo.component.ClickListener
+import com.example.owlingo.database.community.Comment
+import com.example.owlingo.database.community.Question
 import com.example.owlingo.databinding.FragmentQuestionBinding
 import com.google.android.material.appbar.MaterialToolbar
 
-class QuestionFragment : Fragment() {
+class QuestionFragment : Fragment(), ClickListener {
 
     private lateinit var binding: FragmentQuestionBinding
     private lateinit var viewModel: QuestionViewModel
     private lateinit var navController: NavController
+    private lateinit var clickListener: ClickListener
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,12 +41,13 @@ class QuestionFragment : Fragment() {
 
         val application = requireNotNull(this.activity).application
         val viewModelFactory = QuestionFactory(
-            QuestionFragmentArgs.fromBundle(requireArguments()).questionId, application)
+            QuestionFragmentArgs.fromBundle(requireArguments()).questionId, application
+        )
         viewModel = ViewModelProvider(this, viewModelFactory)
             .get(QuestionViewModel::class.java)
         binding.questionViewModel = viewModel
 
-        val adapter = CommentAdapter()
+        val adapter = CommentAdapter(clickListener)
         binding.commentList.adapter = adapter
         viewModel.commentList.observe(viewLifecycleOwner, Observer {
             it?.let {
@@ -62,7 +66,8 @@ class QuestionFragment : Fragment() {
         (activity as AppCompatActivity).setSupportActionBar(topAppBar)
 
         topAppBar.setNavigationOnClickListener {
-            val action = QuestionFragmentDirections.actionNavigationViewQuestionToNavigationCommunity()
+            val action =
+                QuestionFragmentDirections.actionNavigationViewQuestionToNavigationCommunity()
             NavHostFragment.findNavController(this).navigate(action)
         }
 
@@ -70,6 +75,13 @@ class QuestionFragment : Fragment() {
 
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
+    }
+
+    override fun onClick(any: Any) {
+        val comment = any as Comment
+        val action = QuestionFragmentDirections.
+        action. = question.questionId
+        NavHostFragment.findNavController(this).navigate(action)
     }
 
 }
