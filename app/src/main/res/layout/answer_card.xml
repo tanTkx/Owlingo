@@ -73,8 +73,19 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/author_info"
+            app:layout_constraintTop_toBottomOf="@+id/dateTimeTv"
             app:layout_constraintVertical_bias="0.128" />
+
+        <TextView
+            android:id="@+id/dateTimeTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:text="Date Time"
+            app:commentDateTime="@{comment}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/author_info"
+            app:layout_constraintTop_toBottomOf="@+id/author_info" />
 
         <TextView
             android:id="@+id/ans_detail"
@@ -127,6 +138,25 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.03"
             app:layout_constraintStart_toEndOf="@+id/like"
+            app:layout_constraintTop_toBottomOf="@+id/ans_detail"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <Button
+            android:id="@+id/dislike2"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            app:dislike="@{comment}"
+            app:icon="@drawable/car_ui_icon_edit"
+            app:iconGravity="end"
+            app:iconPadding="0dp"
+            app:iconSize="25dp"
+            app:iconTint="#000000"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.853"
+            app:layout_constraintStart_toEndOf="@+id/dislike"
             app:layout_constraintTop_toBottomOf="@+id/ans_detail"
             app:layout_constraintVertical_bias="0.0" />
 

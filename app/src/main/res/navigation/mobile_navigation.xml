@@ -61,6 +61,9 @@
         <action
             android:id="@+id/action_navigation_create_comment"
             app:destination="@id/navigation_create_comment" />
+        <action
+            android:id="@+id/action_navigation_view_question_to_navigation_community"
+            app:destination="@id/navigation_community" />
     </fragment>
 
 

@@ -15,7 +15,6 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.example.owlingo.R
 import com.example.owlingo.databinding.FragmentCreateCommentBinding
-import com.example.owlingo.databinding.FragmentCreateQuestionBinding
 import com.google.android.material.appbar.MaterialToolbar
 
 class CreateCommentFragment : Fragment() {

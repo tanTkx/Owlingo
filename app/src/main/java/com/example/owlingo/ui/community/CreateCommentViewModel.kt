@@ -12,7 +12,9 @@ import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.owlingo.database.community.Comment
+import java.text.SimpleDateFormat
 import java.util.Date
+import java.util.Locale
 
 class CreateCommentViewModel (
     userId: Int,
@@ -40,14 +42,13 @@ class CreateCommentViewModel (
     init {
         _commentTitle.value = " "
         _commentText.value = " "
-        _questionId.value = 1
+        _questionId.value = questionId
         _userId.value = 1
     }
 
     fun updateCommentDetail(title:String, text: String) {
         _commentText.value = text
         _commentTitle.value = title
-        _questionId.value = 1
         createComment()
     }
 
@@ -64,6 +65,7 @@ class CreateCommentViewModel (
                     }else{
                         Log.e("Connection Error Msg", response.toString())
                     }},
+
                 Response.ErrorListener { error ->
                     showToast("Comment Uploaded Failed")
                     Log.e("Connection Error Msg", "$error")
@@ -72,12 +74,13 @@ class CreateCommentViewModel (
                 @Throws(AuthFailureError::class)
                 override fun getParams(): Map<String, String>? {
                     val data: MutableMap<String, String> = HashMap()
+                    val dateFormat = SimpleDateFormat("yyyy-M-d", Locale.getDefault())
 
                     data["commentTitle"] = _commentTitle.value.toString()
                     data["commentText"] = _commentText.value.toString()
-                    data["userId"] = userId.toString()
-                    data["questionId"] = questionId.toString()
-                    data["commentDateTime"] = Date().toString()
+                    data["userId"] = userId.value.toString()
+                    data["questionId"] = _questionId.value.toString()
+                    data["commentDateTime"] = dateFormat.format(Date()).toString()
                     data["commentLike"] = "0"
                     data["commentDisLike"] = "0"
 

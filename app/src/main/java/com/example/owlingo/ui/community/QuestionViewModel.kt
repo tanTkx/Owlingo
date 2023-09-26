@@ -36,6 +36,11 @@ class QuestionViewModel(questionId: Int, application: Application) : ViewModel()
     private val toastMsg = MutableLiveData<String?>()
 
     init {
+        refresh(questionId)
+    }
+
+    fun refresh(questionId: Int){
+
         viewModelScope.launch {
             try {
                 val urlWithParams = "http://10.0.2.2/Owlingo/questionDAO.php?questionId=$questionId"
