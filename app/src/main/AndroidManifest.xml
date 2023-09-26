@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<<<<<<< Updated upstream
     xmlns:tools="http://schemas.android.com/tools">
+=======
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.owlingo">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+>>>>>>> Stashed changes
 
     <application
         android:allowBackup="true"
@@ -11,7 +18,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Owlingo"
+<<<<<<< Updated upstream
         tools:targetApi="31">
+=======
+        android:usesCleartextTraffic="true"
+        tools:targetApi="34">
+        <activity
+            android:name=".ui.schedule.ScheduleActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.schedule.Schedule_Activity"
+            android:exported="false"
+            android:label="@string/title_activity_schedule"
+            android:theme="@style/Theme.Owlingo.NoActionBar" />
+        <activity android:name=".MainActivity" />
+>>>>>>> Stashed changes
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -22,6 +43,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
