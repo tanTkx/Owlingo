@@ -1,28 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-<<<<<<< Updated upstream
-    xmlns:tools="http://schemas.android.com/tools">
-=======
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.owlingo"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.owlingo">
+    >
 
     <uses-permission android:name="android.permission.INTERNET" />
->>>>>>> Stashed changes
 
     <application
         android:allowBackup="true"
+        android:usesCleartextTraffic="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_launcher_foreground"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/ic_launcher_foreground"
         android:supportsRtl="true"
         android:theme="@style/Theme.Owlingo"
-<<<<<<< Updated upstream
-        tools:targetApi="31">
-=======
-        android:usesCleartextTraffic="true"
         tools:targetApi="34">
+        <activity android:name=".MainActivity"></activity>
         <activity
             android:name=".ui.schedule.ScheduleActivity"
             android:exported="false" />
@@ -31,19 +27,16 @@
             android:exported="false"
             android:label="@string/title_activity_schedule"
             android:theme="@style/Theme.Owlingo.NoActionBar" />
-        <activity android:name=".MainActivity" />
->>>>>>> Stashed changes
         <activity
-            android:name=".MainActivity"
+            android:name=".SplashScreen"
             android:exported="true"
-            android:label="@string/app_name">
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
