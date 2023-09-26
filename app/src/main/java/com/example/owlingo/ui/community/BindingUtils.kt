@@ -41,6 +41,11 @@ class BindingUtils {
             text = item.commentText.toString()
         }
 
+        @BindingAdapter("commentDateTime")
+        @JvmStatic
+        fun TextView.setCommentDateTime(item: Comment) {
+            text = item.commentDateTime.toString()
+        }
 
         @BindingAdapter("dislike")
         @JvmStatic

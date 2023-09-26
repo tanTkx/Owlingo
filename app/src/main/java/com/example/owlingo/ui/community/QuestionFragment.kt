@@ -62,8 +62,11 @@ class QuestionFragment : Fragment() {
         (activity as AppCompatActivity).setSupportActionBar(topAppBar)
 
         topAppBar.setNavigationOnClickListener {
-            navController.navigateUp()
+            val action = QuestionFragmentDirections.actionNavigationViewQuestionToNavigationCommunity()
+            NavHostFragment.findNavController(this).navigate(action)
         }
+
+        viewModel.refresh(QuestionFragmentArgs.fromBundle(requireArguments()).questionId)
 
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
