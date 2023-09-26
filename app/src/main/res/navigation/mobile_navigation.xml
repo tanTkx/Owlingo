@@ -65,26 +65,117 @@
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
 
+    <fragment
+        android:id="@+id/StartFragment"
+        android:name="com.example.owlingo.StartFragment"
+        android:label="Start"
+        tools:layout="@layout/start_fragment" />
 
     <fragment
         android:id="@+id/navigation_community"
-        android:name="com.example.owlingo.ui.community.QuestionFragment"
+        android:name="com.example.owlingo.ui.community.CommunityFragment"
         android:label="@string/title_community"
-        tools:layout="@layout/fragment_question" />
+        tools:layout="@layout/fragment_community" >
+        <action
+            android:id="@+id/action_navigation_view_question"
+            app:destination="@id/navigation_view_question"
+            app:launchSingleTop="true"
+            app:popUpTo="@+id/title_destination" />
+        <argument
+            android:name="userId"
+            android:defaultValue="0"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_navigation_create_question"
+            app:destination="@id/navigation_create_question" />
+    </fragment>
 
     <fragment
+        android:id="@+id/navigation_view_question"
+        android:name="com.example.owlingo.ui.community.QuestionFragment"
+        android:label="@string/title_community"
+        tools:layout="@layout/fragment_question" >
+        <argument
+            android:name="questionId"
+            android:defaultValue="0"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_navigation_create_comment"
+            app:destination="@id/navigation_create_comment" />
+        <action
+            android:id="@+id/action_navigation_community"
+            app:destination="@id/navigation_community" />
+        <action
+            android:id="@+id/action_navigation_edit_comment"
+            app:destination="@id/navigation_edit_comment" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/navigation_create_question"
+        android:name="com.example.owlingo.ui.community.CreateQuestionFragment"
+        android:label="create_question_fragment"
+        tools:layout="@layout/fragment_create_question" >
+        <argument
+            android:name="userId"
+            android:defaultValue="0"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_navigation_community"
+            app:destination="@id/navigation_community" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_create_comment"
+        android:name="com.example.owlingo.ui.community.CreateCommentFragment"
+        android:label="create_comment_fragment"
+        tools:layout="@layout/fragment_create_comment" >
+
+        <argument
+            android:name="userId"
+            android:defaultValue="0"
+            app:argType="integer" />
+
+        <argument
+            android:name="questionId"
+            android:defaultValue="0"
+            app:argType="integer" />
+
+        <action
+            android:id="@+id/action_navigation_view_question"
+            app:destination="@id/navigation_view_question" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_edit_comment"
+        android:name="com.example.owlingo.ui.community.EditCommentFragment"
+        android:label="edit_comment_fragment"
+        tools:layout="@layout/fragment_edit_comment" >
+        <action
+            android:id="@+id/action_navigation_view_question"
+            app:destination="@id/navigation_view_question" />
+        <argument
+            android:name="questionId"
+            android:defaultValue="0"
+            app:argType="integer" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.owlingo.ui.profile.LoginFragment"
+        android:label="login_fragment"
+        tools:layout="@layout/login_fragment" />
+    <fragment
+        android:id="@+id/signupFragment"
+        android:name="com.example.owlingo.ui.profile.SignupFragment"
+        android:label="signup_fragment"
+        tools:layout="@layout/signup_fragment" />
+    <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.owlingo.ProfileFragment"
+        android:name="com.example.owlingo.ui.profile.ProfileFragment"
         android:label="profile_fragment"
         tools:layout="@layout/profile_fragment" />
-    <fragment
-        android:id="@+id/logoFragment"
-        android:name="com.example.owlingo.LogoFragment"
-        android:label="logo_fragment"
-        tools:layout="@layout/logo_fragment" >
-        <action
-            android:id="@+id/action_logoFragment_to_StartFragment"
-            app:destination="@id/StartFragment" />
-    </fragment>
 
 </navigation>

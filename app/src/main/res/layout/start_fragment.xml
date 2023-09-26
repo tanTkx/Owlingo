@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BlankFragment">
+    tools:context=".StartFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -25,6 +25,7 @@
             android:id="@+id/platformTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:fontFamily="@font/pt_serif_caption"
             android:text="@string/EducationLearningPlatform"
             android:textColor="#4E83C0"
@@ -41,6 +42,7 @@
             android:layout_width="310dp"
             android:layout_height="41dp"
             android:layout_marginStart="10sp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="20sp"
             android:fontFamily="@font/acme"
             android:text="@string/platformDesc"
@@ -57,6 +59,7 @@
             android:id="@+id/button"
             android:layout_width="192dp"
             android:layout_height="47dp"
+            android:layout_marginTop="28dp"
             android:text="Start Learning"
             app:cornerRadius="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
