@@ -103,7 +103,6 @@ class QuestionViewModel(questionId: Int, application: Application) : ViewModel()
                 commentLike = jsonObject.getInt("commentLike"),
                 commentDisLike = jsonObject.getInt("commentDislike"),
                 commentDateTime   = jsonObject.getString("commentDateTime"),
-                commentNo  = jsonObject.getInt("commentNo"),
             )
             comments.add(comment)
         }

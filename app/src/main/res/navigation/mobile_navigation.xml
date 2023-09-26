@@ -58,7 +58,11 @@
             android:name="questionId"
             android:defaultValue="0"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_navigation_create_comment"
+            app:destination="@id/navigation_create_comment" />
     </fragment>
+
 
     <fragment
         android:id="@+id/navigation_create_question"
@@ -72,6 +76,28 @@
         <action
             android:id="@+id/action_navigation_community"
             app:destination="@id/navigation_community" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_create_comment"
+        android:name="com.example.owlingo.ui.community.CreateCommentFragment"
+        android:label="create_comment_fragment"
+        tools:layout="@layout/fragment_create_comment" >
+
+        <argument
+            android:name="userId"
+            android:defaultValue="0"
+            app:argType="integer" />
+
+        <argument
+            android:name="questionId"
+            android:defaultValue="0"
+            app:argType="integer" />
+
+        <action
+            android:id="@+id/action_navigation_view_question"
+            app:destination="@id/navigation_view_question" />
+
     </fragment>
 
     <fragment

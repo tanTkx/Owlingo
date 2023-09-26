@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -49,6 +50,12 @@ class QuestionFragment : Fragment() {
                 adapter.submitList(it)
             }
         })
+
+        binding.addComment.setOnClickListener {
+            val action = QuestionFragmentDirections.actionNavigationCreateComment()
+            action.questionId = QuestionFragmentArgs.fromBundle(requireArguments()).questionId
+            NavHostFragment.findNavController(this).navigate(action)
+        }
 
         val topAppBar: MaterialToolbar = binding.topAppBar
         navController = NavHostFragment.findNavController(this)

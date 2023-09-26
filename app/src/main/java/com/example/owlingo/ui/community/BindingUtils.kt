@@ -41,11 +41,6 @@ class BindingUtils {
             text = item.commentText.toString()
         }
 
-        @BindingAdapter("subCommentNo")
-        @JvmStatic
-        fun Button.setSubCommentNo(item: Comment) {
-            text = item.commentNo.toString()
-        }
 
         @BindingAdapter("dislike")
         @JvmStatic
