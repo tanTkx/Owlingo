@@ -1,6 +1,5 @@
 package com.example.owlingo
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -17,6 +16,7 @@ import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.example.owlingo.ui.AppPreferences
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -25,7 +25,7 @@ class LoginFragment : Fragment() {
 
     private var param1: String? = null
     private var param2: String? = null
-
+    private var userID: Int? = null
     private lateinit var etEmail: EditText
     private lateinit var etPassword: EditText
     private val URL: String = "http://10.0.2.2/Owlingo_php/login.php"
@@ -72,6 +72,8 @@ class LoginFragment : Fragment() {
                             "Success",
                             Toast.LENGTH_SHORT
                         ).show()
+
+                        userID?.let { AppPreferences.setUserId(it) }
 
                         view?.findNavController()?.navigate(R.id.action_loginFragment_to_profileFragment)
                     } else if (response.trim() == "failure") {

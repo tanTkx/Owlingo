@@ -77,14 +77,6 @@
         android:name="com.example.owlingo.ProfileFragment"
         android:label="profile_fragment"
         tools:layout="@layout/profile_fragment" />
-    <fragment
-        android:id="@+id/logoFragment"
-        android:name="com.example.owlingo.LogoFragment"
-        android:label="logo_fragment"
-        tools:layout="@layout/logo_fragment" >
-        <action
-            android:id="@+id/action_logoFragment_to_StartFragment"
-            app:destination="@id/StartFragment" />
-    </fragment>
+    
 
 </navigation>
