@@ -115,7 +115,7 @@
             android:id="@+id/action_navigation_view_question"
             app:destination="@id/navigation_view_question" />
         <argument
-            android:name="questionId"
+            android:name="commentId"
             android:defaultValue="0"
             app:argType="integer" />
 

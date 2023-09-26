@@ -79,8 +79,8 @@ class QuestionFragment : Fragment(), ClickListener {
 
     override fun onClick(any: Any) {
         val comment = any as Comment
-        val action = QuestionFragmentDirections.
-        action. = question.questionId
+        val action = QuestionFragmentDirections.actionNavigationEditComment()
+        action.commentId = comment.commentId
         NavHostFragment.findNavController(this).navigate(action)
     }
 
