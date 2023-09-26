@@ -5,10 +5,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.owlingo.component.ClickListener
 import com.example.owlingo.database.community.Question
 import com.example.owlingo.databinding.CommunityCardBinding
 
-class CommunityAdapter : ListAdapter<Question, CommunityAdapter.ViewHolder>(QuestionDiffCallback()) {
+class CommunityAdapter(
+    private val clickListener: ClickListener
+) : ListAdapter<Question, CommunityAdapter.ViewHolder>(QuestionDiffCallback()) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
@@ -16,23 +19,29 @@ class CommunityAdapter : ListAdapter<Question, CommunityAdapter.ViewHolder>(Ques
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder.from(parent)
+        return ViewHolder.from(parent, clickListener)
     }
 
-    class ViewHolder private constructor(private val binding: CommunityCardBinding) : RecyclerView.ViewHolder(binding.root){
+    class ViewHolder private constructor(
+        private val binding: CommunityCardBinding,
+        private val clickListener: ClickListener
+    ) : RecyclerView.ViewHolder(binding.root){
 
         fun bind(item: Question) {
             binding.question = item
             binding.executePendingBindings()
+            binding.root.setOnClickListener {
+                clickListener.onClick(item)
+            }
         }
 
         companion object {
-            fun from(parent: ViewGroup): ViewHolder {
+            fun from(parent: ViewGroup, clickListener: ClickListener): ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding =
                     CommunityCardBinding.inflate(layoutInflater, parent, false)
 
-                return ViewHolder(binding)
+                return ViewHolder(binding, clickListener)
             }
         }
     }
@@ -44,6 +53,6 @@ class QuestionDiffCallback : DiffUtil.ItemCallback<Question>() {
     }
 
     override fun areContentsTheSame(oldItem: Question, newItem: Question): Boolean {
-        return oldItem == newItem
+        return oldItem.equals(newItem)
     }
 }

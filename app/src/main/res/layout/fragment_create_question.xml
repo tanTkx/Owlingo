@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="createQuestionViewModel"
+            type="com.example.owlingo.ui.community.CreateQuestionViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBar"
+            style="@style/Widget.MaterialComponents.Toolbar.Primary"
+            android:layout_width="match_parent"
+            app:navigationIcon="@drawable/car_ui_icon_arrow_back"
+            app:navigationIconTint="#FFFFFF"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_constraintTop_toTopOf="parent"
+            app:menu="@menu/top_bar_menu"
+            app:title="@string/title_community"
+            app:titleCentered="true" />
+
+        <TextView
+            android:id="@+id/questionTitleLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="@string/question"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.081"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/topAppBar" />
+
+        <TextView
+            android:id="@+id/fieldLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            android:text="Course"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@+id/questionExplainLayout"
+            app:layout_constraintTop_toBottomOf="@+id/questionExplainLayout" />
+
+        <TextView
+            android:id="@+id/explainLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            android:text="Expalain of Your Question"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@+id/questionTV"
+            app:layout_constraintTop_toBottomOf="@+id/questionTV" />
+
+        <EditText
+            android:id="@+id/questionTV"
+            android:layout_width="350dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:ems="10"
+            android:inputType="text|textMultiLine"
+            android:lines="3"
+            android:maxLines="3"
+            android:singleLine="false"
+            android:text="Question Title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/questionTitleLabel"
+            app:layout_constraintTop_toBottomOf="@+id/questionTitleLabel" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/questionExplainLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="32dp"
+            android:gravity="center"
+            android:importantForAutofill="no"
+            app:boxBackgroundMode="outline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/explainLabel"
+            app:layout_constraintTop_toBottomOf="@+id/explainLabel">
+
+            <EditText
+                android:id="@+id/questionExplainTV"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="fill_horizontal"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                android:backgroundTint="#A8494444"
+                android:ems="10"
+                android:gravity="center|top|left"
+                android:inputType="text|textMultiLine"
+                android:lines="10"
+                android:maxLines="10"
+                android:nestedScrollingEnabled="true"
+                android:outlineAmbientShadowColor="#00050505"
+                android:outlineProvider="none"
+                android:outlineSpotShadowColor="#00000000"
+                android:text="Explain Your Question" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Spinner
+            android:id="@+id/courseSelect"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            app:layout_constraintStart_toStartOf="@+id/fieldLabel"
+            app:layout_constraintTop_toBottomOf="@+id/fieldLabel" />
+
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:text="Save"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/courseSelect" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

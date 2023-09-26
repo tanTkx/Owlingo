@@ -1,16 +1,60 @@
 package com.example.owlingo.ui.community
 
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
+import com.example.owlingo.database.community.Comment
 import com.example.owlingo.database.community.Question
 
 
 class BindingUtils {
 
-    @BindingAdapter("questionTitle")
-    fun TextView.setQuestionTitle(item: Question) {
-        text = item.questionTitle
+    companion object {
+        @BindingAdapter("questionTitle")
+        @JvmStatic
+        fun TextView.setQuestionTitle(item: Question) {
+            text = item.questionTitle
+        }
+
+        @BindingAdapter("questionText")
+        @JvmStatic
+        fun TextView.setQuestionText(item: Question) {
+            text = item.questionText
+        }
+
+        @BindingAdapter("commentNo")
+        @JvmStatic
+        fun Button.setCommentNo(item: Question) {
+            text = item.commentNo.toString()
+        }
+
+        @BindingAdapter("commentTitle")
+        @JvmStatic
+        fun TextView.setCommentTitle(item: Comment) {
+            text = item.commentTitle.toString()
+        }
+
+        @BindingAdapter("commentText")
+        @JvmStatic
+        fun TextView.setCommentText(item: Comment) {
+            text = item.commentText.toString()
+        }
+
+
+        @BindingAdapter("dislike")
+        @JvmStatic
+        fun Button.setDislike(item: Comment) {
+            text = item.commentDisLike.toString()
+        }
+
+        @BindingAdapter("like")
+        @JvmStatic
+        fun Button.setLike(item: Comment) {
+            text = item.commentLike.toString()
+        }
+
+
     }
 
 //    @BindingAdapter("sleepImage")
