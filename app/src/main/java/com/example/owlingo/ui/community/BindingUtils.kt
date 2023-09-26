@@ -4,6 +4,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
+import com.example.owlingo.database.community.Comment
 import com.example.owlingo.database.community.Question
 
 
@@ -27,6 +28,38 @@ class BindingUtils {
         fun Button.setCommentNo(item: Question) {
             text = item.commentNo.toString()
         }
+
+        @BindingAdapter("commentTitle")
+        @JvmStatic
+        fun TextView.setCommentTitle(item: Comment) {
+            text = item.commentTitle.toString()
+        }
+
+        @BindingAdapter("commentText")
+        @JvmStatic
+        fun TextView.setCommentText(item: Comment) {
+            text = item.commentText.toString()
+        }
+
+        @BindingAdapter("subCommentNo")
+        @JvmStatic
+        fun Button.setSubCommentNo(item: Comment) {
+            text = item.commentNo.toString()
+        }
+
+        @BindingAdapter("dislike")
+        @JvmStatic
+        fun Button.setDislike(item: Comment) {
+            text = item.commentDisLike.toString()
+        }
+
+        @BindingAdapter("like")
+        @JvmStatic
+        fun Button.setLike(item: Comment) {
+            text = item.commentLike.toString()
+        }
+
+
     }
 
 //    @BindingAdapter("sleepImage")

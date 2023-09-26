@@ -20,4 +20,6 @@ data class Comment(
 
     var userId: Int = 0,
 
+    var commentNo: Int = 0,
+
     )

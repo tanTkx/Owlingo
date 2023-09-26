@@ -40,7 +40,10 @@
             app:destination="@id/navigation_view_question"
             app:launchSingleTop="true"
             app:popUpTo="@+id/title_destination" />
-
+        <argument
+            android:name="userId"
+            android:defaultValue="0"
+            app:argType="integer" />
         <action
             android:id="@+id/action_navigation_create_question"
             app:destination="@id/navigation_create_question" />
@@ -61,7 +64,15 @@
         android:id="@+id/navigation_create_question"
         android:name="com.example.owlingo.ui.community.CreateQuestionFragment"
         android:label="create_question_fragment"
-        tools:layout="@layout/fragment_create_question" />
+        tools:layout="@layout/fragment_create_question" >
+        <argument
+            android:name="userId"
+            android:defaultValue="0"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_navigation_community"
+            app:destination="@id/navigation_community" />
+    </fragment>
 
     <fragment
         android:id="@+id/loginFragment"

@@ -31,6 +31,10 @@ class CommunityViewModel( application: Application) : ViewModel(){
         initializeQuestionList( userId = 1)
     }
 
+    fun refreshQuestionList(userId: Int) {
+        initializeQuestionList(userId)
+    }
+
     private fun initializeQuestionList( userId: Int) {
         viewModelScope.launch {
             try {
@@ -48,43 +52,6 @@ class CommunityViewModel( application: Application) : ViewModel(){
                 )
 
                 requestQueue.add(jsonArrayRequest)
-            } catch (e: Exception) {
-                showToast("Exception $e")
-            }
-        }
-    }
-
-    private fun createQuestion(courseId: Int, userId: Int, question: Question) {
-        viewModelScope.launch {
-            try {
-                val stringRequest: StringRequest = object : StringRequest(
-                    Request.Method.POST, "http://192.168.100.11:80/Owlingo/questionDAO.php",
-                    Response.Listener { response ->
-
-                        if (response == "success") {
-                            showToast("Question Successful Uploaded ")
-                        } else if (response == "failure") {
-                            showToast("Question Uploaded Failed")
-                        }
-                    },
-                    Response.ErrorListener { error ->
-                        showToast("Question Uploaded Failed")
-                        Log.e("Connection Error Msg", "$error")
-                    }) {
-
-                    @Throws(AuthFailureError::class)
-                    override fun getParams(): Map<String, String>? {
-                        val data: MutableMap<String, String> = HashMap()
-                        data["questionTitle"] = question.questionTitle!!
-                        data["questionText"] = question.questionTitle
-                        data["userId"] = userId.toString()
-                        data["courseId"] = courseId.toString()!!
-                        data["questionDateTime"] = question.questionDateTime!!
-                        data["commentNo"] = "0"
-                        return data
-                    }
-                }
-                requestQueue.add(stringRequest)
             } catch (e: Exception) {
                 showToast("Exception $e")
             }

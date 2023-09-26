@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
+<layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <data>
+        <variable
+            name="comment"
+            type="com.example.owlingo.database.community.Comment" />
+    </data>
+
+<com.google.android.material.card.MaterialCardView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginStart="5dp"
@@ -25,7 +34,7 @@
             android:scaleType="fitCenter"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@mipmap/ic_launcher" />
+            tools:src="@mipmap/ic_launcher_round" />
 
         <TextView
             android:id="@+id/author_name"
@@ -38,7 +47,8 @@
             android:textStyle="bold"
             app:layout_constraintLeft_toRightOf="@id/iv_avatar"
             app:layout_constraintStart_toEndOf="@+id/iv_avatar"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            />
 
         <TextView
             android:id="@+id/author_info"
@@ -47,7 +57,8 @@
             android:layout_marginTop="10dp"
             android:text="Lecturer of UI/UX Designer"
             app:layout_constraintLeft_toLeftOf="@id/author_name"
-            app:layout_constraintTop_toBottomOf="@id/author_name" />
+            app:layout_constraintTop_toBottomOf="@id/author_name"
+           />
 
         <TextView
             android:id="@+id/ans_tv"
@@ -57,12 +68,13 @@
             android:layout_marginEnd="@dimen/activity_horizontal_margin"
             android:layout_marginBottom="@dimen/activity_horizontal_margin"
             android:text="Answer"
+            app:commentTitle="@{comment}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/author_info"
-            app:layout_constraintVertical_bias="0.261" />
+            app:layout_constraintVertical_bias="0.128" />
 
         <TextView
             android:id="@+id/ans_detail"
@@ -72,21 +84,21 @@
             android:layout_marginTop="@dimen/activity_horizontal_margin"
             android:layout_marginEnd="@dimen/activity_horizontal_margin"
             android:layout_marginBottom="@dimen/activity_horizontal_margin"
-            android:text="Answer Detail is XXX"
+            android:text="Answer Detail"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ans_tv"
-            app:layout_constraintVertical_bias="0.179" />
+            app:layout_constraintVertical_bias="0.179"
+            app:commentText="@{comment}"/>
 
         <Button
             android:id="@+id/commentBtn"
             style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_marginEnd="24dp"
             android:background="#00FFFFFF"
             android:backgroundTint="#000000"
             android:outlineProvider="none"
@@ -98,8 +110,8 @@
             app:iconTint="#000000"
             app:layout_constraintBottom_toTopOf="@+id/author_info"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/author_info"
-            app:strokeWidth="0dp" />
+            app:strokeWidth="0dp"
+            app:subCommentNo="@{comment}" />
 
         <Button
             android:id="@+id/like"
@@ -107,7 +119,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:text="10"
+            android:text="0"
+            app:like="@{comment}"
             android:textColor="#000000"
             app:icon="@drawable/thumbs_up"
             app:iconPadding="0dp"
@@ -124,6 +137,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0"
+            app:dislike="@{comment}"
             android:textColor="#000000"
             app:icon="@drawable/thumbs_down"
             app:iconPadding="0dp"
@@ -140,3 +154,5 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.google.android.material.card.MaterialCardView>
+
+</layout>

@@ -53,18 +53,19 @@ class CommunityFragment : Fragment(), ClickListener {
                 viewModel.toastShown()
             }
         }
+        viewModel.refreshQuestionList(1)
+
         binding.floatingActionButton.setOnClickListener{
             val action = CommunityFragmentDirections.actionNavigationCreateQuestion()
             NavHostFragment.findNavController(this).navigate(action)
         }
 
-
         binding.lifecycleOwner = this
-
         return binding.root
     }
 
-    override fun onClick(question: Question) {
+    override fun onClick(any: Any) {
+        val question = any as Question
         val action = CommunityFragmentDirections.actionNavigationViewQuestion()
         action.questionId = question.questionId
         NavHostFragment.findNavController(this).navigate(action)
