@@ -39,6 +39,7 @@ class QuestionFragment : Fragment(), ClickListener {
             false
         )
 
+        clickListener = this
         val application = requireNotNull(this.activity).application
         val viewModelFactory = QuestionFactory(
             QuestionFragmentArgs.fromBundle(requireArguments()).questionId, application
@@ -81,6 +82,7 @@ class QuestionFragment : Fragment(), ClickListener {
         val comment = any as Comment
         val action = QuestionFragmentDirections.actionNavigationEditComment()
         action.commentId = comment.commentId
+        action.questionId = comment.questionId
         NavHostFragment.findNavController(this).navigate(action)
     }
 

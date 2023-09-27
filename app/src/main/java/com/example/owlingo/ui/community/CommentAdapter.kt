@@ -19,25 +19,29 @@ class CommentAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder.from(parent)
+        return ViewHolder.from(parent, clickListener)
     }
 
     class ViewHolder private constructor(
         private val binding: AnswerCardBinding,
+        private val clickListener: ClickListener
     ) : RecyclerView.ViewHolder(binding.root){
 
         fun bind(item: Comment) {
             binding.comment = item
             binding.executePendingBindings()
+            binding.editBtn.setOnClickListener{
+                clickListener.onClick(item)
+            }
         }
 
         companion object {
-            fun from(parent: ViewGroup): ViewHolder {
+            fun from(parent: ViewGroup, clickListener: ClickListener): ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding =
                     AnswerCardBinding.inflate(layoutInflater, parent, false)
 
-                return ViewHolder(binding)
+                return ViewHolder(binding, clickListener)
             }
         }
     }

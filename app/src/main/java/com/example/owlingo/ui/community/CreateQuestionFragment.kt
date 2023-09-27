@@ -23,7 +23,6 @@ class CreateQuestionFragment : Fragment() {
     private lateinit var viewModelFactory: CreateQuestionFactory
     private lateinit var navController: NavController
 
-    @SuppressLint("ServiceCast")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
