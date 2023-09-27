@@ -1,10 +1,12 @@
 package com.example.owlingo.ui.community
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -55,10 +57,27 @@ class CommunityFragment : Fragment(), ClickListener {
         }
         viewModel.refreshQuestionList(1)
 
-        binding.delBtn.setOnClickListener{
+        binding.createBtn.setOnClickListener{
             val action = CommunityFragmentDirections.actionNavigationCreateQuestion()
+            action.userId = 1
             NavHostFragment.findNavController(this).navigate(action)
         }
+
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                if (query != null) {
+                    handleSearchQuery(query)
+                }
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                if (newText != null) {
+                    handleSearchTextChange(newText)
+                }
+                return true
+            }
+        })
 
         binding.lifecycleOwner = this
         return binding.root
@@ -69,6 +88,14 @@ class CommunityFragment : Fragment(), ClickListener {
         val action = CommunityFragmentDirections.actionNavigationViewQuestion()
         action.questionId = question.questionId
         NavHostFragment.findNavController(this).navigate(action)
+    }
+
+    private fun handleSearchQuery(query: String) {
+        Log.i("search", query)
+    }
+
+    private fun handleSearchTextChange(newText: String) {
+        viewModel.refreshQuestionList(1, newText)
     }
 
 }

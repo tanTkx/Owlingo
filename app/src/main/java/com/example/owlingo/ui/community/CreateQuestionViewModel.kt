@@ -51,11 +51,11 @@ class CreateQuestionViewModel (userId: Int, application: Application) : ViewMode
     private val toastMsg = MutableLiveData<String?>()
 
     init {
-        getRegisteredCourse(1)
+        getRegisteredCourse(userId)
         _questionTitle.value = " "
         _questionText.value = " "
         _courseName.value = " "
-        _userId.value = 1
+        _userId.value = userId
     }
 
     private fun getRegisteredCourse(userId: Int){
