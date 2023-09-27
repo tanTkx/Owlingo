@@ -119,4 +119,37 @@
         android:label="profile_fragment"
         tools:layout="@layout/profile_fragment" />
 
+    <fragment
+        android:id="@+id/navigation_manage_schedule"
+        android:name="com.example.owlingo.ui.schedule.ScheduleFragment"
+        android:label="manage_schedule_fragment"
+        tools:layout="@layout/manage_schedule" >
+        <action
+            android:id="@+id/action_navigation_manage_schedule_to_navigation_add_schedule"
+            app:destination="@id/navigation_add_schedule" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_add_schedule"
+        android:name="com.example.owlingo.ui.schedule.AddScheduleFragment"
+        android:label="add_schedule_fragment"
+        tools:layout="@layout/add_schedule" >
+        <action
+            android:id="@+id/action_navigation_add_schedule_to_navigation_manage_schedule"
+            app:destination="@id/navigation_manage_schedule" />
+    </fragment>
+
+<!--    <fragment-->
+<!--        android:id="@+id/edit_schedule"-->
+<!--        android:name="com.example.owlingo.ui.she"-->
+<!--        android:label="fragment_edit_schedule"-->
+<!--        tools:layout="@layout/fragment_edit_schedule" />-->
+<!--    -->
+<!--    <activity-->
+<!--        android:id="@+id/addSchedule"-->
+<!--        android:name="com.example.owlingo.MainActivity"-->
+<!--        android:label="add_schedule"-->
+<!--        tools:layout="@layout/add_schedule" />-->
+
+
 </navigation>

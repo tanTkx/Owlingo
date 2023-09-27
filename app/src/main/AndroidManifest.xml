@@ -20,14 +20,6 @@
         tools:targetApi="34">
         <activity android:name=".MainActivity"></activity>
         <activity
-            android:name=".ui.schedule.ScheduleActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.schedule.Schedule_Activity"
-            android:exported="false"
-            android:label="@string/title_activity_schedule"
-            android:theme="@style/Theme.Owlingo.NoActionBar" />
-        <activity
             android:name=".SplashScreen"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">

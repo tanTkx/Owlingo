@@ -113,4 +113,50 @@
         "when a user tries to pick up one of cards.\n\n"
     </string>
     <string name="action_settings">Settings</string>
+
+    <string-array name="scheduleDay">
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+    </string-array>
+    <string-array name="scheduleStartTime">
+        <item>9.00AM</item>
+        <item>9.30AM</item>
+        <item>10.00AM</item>
+        <item>10.30AM</item>
+        <item>11.00AM</item>
+        <item>11.30AM</item>
+        <item>12.00PM</item>
+        <item>12.30PM</item>
+        <item>1.00PM</item>
+        <item>1.30PM</item>
+        <item>2.00PM</item>
+        <item>2.30PM</item>
+        <item>3.00PM</item>
+        <item>3.30PM</item>
+        <item>4.00PM</item>
+    </string-array>
+    <string-array name="scheduleEndTime">
+        <item>11.00AM</item>
+        <item>11.30AM</item>
+        <item>12.00PM</item>
+        <item>12.30PM</item>
+        <item>1.00PM</item>
+        <item>1.30PM</item>
+        <item>2.00PM</item>
+        <item>2.30PM</item>
+        <item>3.00PM</item>
+        <item>3.30PM</item>
+        <item>4.00PM</item>
+        <item>4.30PM</item>
+        <item>5.00PM</item>
+        <item>5.30PM</item>
+        <item>6.00PM</item>
+    </string-array>
+
+
+
 </resources>
