@@ -22,7 +22,7 @@
             android:layout_height="?attr/actionBarSize"
             app:layout_constraintTop_toTopOf="parent"
             app:menu="@menu/top_bar_menu"
-            app:title="@string/title_addcourse"
+            app:title="Add Course"
             app:titleCentered="true" />
 
         <TextView
@@ -122,7 +122,7 @@
             android:layout_marginEnd="16dp"
             android:ems="10"
             android:hint="Enter price"
-            android:inputType="text"
+            android:inputType="number"
             android:lines="10"
             android:maxLines="10"
             app:layout_constraintEnd_toEndOf="parent"

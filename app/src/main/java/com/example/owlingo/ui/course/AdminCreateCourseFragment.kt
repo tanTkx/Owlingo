@@ -18,6 +18,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.example.owlingo.R
 import com.example.owlingo.database.course.Course
+import com.example.owlingo.databinding.FragmentCreateCourseBinding
 import com.example.owlingo.databinding.FragmentCreateQuestionBinding
 import com.example.owlingo.ui.community.CreateQuestionFactory
 import com.example.owlingo.ui.community.CreateQuestionFragmentArgs
@@ -27,8 +28,8 @@ import com.google.android.material.appbar.MaterialToolbar
 
 class AdminCreateCourseFragment : Fragment(){
 
-    private lateinit var viewModel: AdminAllCourseViewModel
-    private lateinit var viewModelFactory: AdminAllCourseFactory
+    private lateinit var viewModel: AdminCreateCourseViewModel
+    private lateinit var viewModelFactory: AdminCreateCourseFactory
     private lateinit var navController: NavController
     private lateinit var courseListAdapter: ArrayAdapter<String>
 
@@ -38,18 +39,17 @@ class AdminCreateCourseFragment : Fragment(){
         savedInstanceState: Bundle?
     ): View? {
 
-        val binding: FragmentCreateQuestionBinding = DataBindingUtil.inflate(
+        val binding: FragmentCreateCourseBinding = DataBindingUtil.inflate(
             inflater,
-            R.layout.fragment_create_question,
+            R.layout.fragment_create_course,
             container,
             false
         )
         val application = requireNotNull(this.activity).application
-        viewModelFactory = AdminAllCourseFactory(
-            CreateQuestionFragmentArgs.fromBundle(requireArguments()).userId, application)
+        viewModelFactory = AdminCreateCourseFactory(application)
         viewModel = ViewModelProvider(this, viewModelFactory)
-            .get(AdminAllCourseFactory::class.java)
-        binding.createQuestionViewModel = viewModel
+            .get(AdminCreateCourseViewModel::class.java)
+        binding.adminCreateCourseViewModel = viewModel
 
         viewModel.getToastMessage().observe(viewLifecycleOwner) { message ->
             if (message != null) {
@@ -58,33 +58,20 @@ class AdminCreateCourseFragment : Fragment(){
             }
         }
 
-        binding.btnSave.setOnClickListener {
-            val questionTitle = binding.questionTV.text.toString()
-            val questionText = binding.questionExplainTV.text.toString()
-            viewModel.updateQuestionDetail(questionTitle, questionText)
-            val action = CreateQuestionFragmentDirections.actionNavigationCommunity()
-            NavHostFragment.findNavController(this).navigate(action)
+        binding.btnCreate.setOnClickListener {
+            val courseName = binding.etCn.text.toString()
+            val courseLecture = binding.etLn.text.toString()
+            val courseDetail = binding.etDes.text.toString()
+            val courseFee = binding.etPrice.text.toString().toInt()
+
+            viewModel.createCourse(courseName, courseLecture, courseDetail, courseFee)
+//
+//            val action = CreateQuestionFragmentDirections.actionNavigationCommunity()
+//            NavHostFragment.findNavController(this).navigate(action)
         }
 
         courseListAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item)
         courseListAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding.courseSelect.adapter = courseListAdapter
-        binding.courseSelect.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                val selectedValue = parent?.getItemAtPosition(position).toString()
-                viewModel._courseName.value = selectedValue
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                Log.i("Selected", "Nothing Selected")
-            }
-        }
-
-        viewModel.courseList.observe(viewLifecycleOwner) { courseList ->
-            courseListAdapter.clear()
-            courseListAdapter.addAll(courseList)
-            courseListAdapter.notifyDataSetChanged()
-        }
 
         val topAppBar: MaterialToolbar = binding.topAppBar
         navController = NavHostFragment.findNavController(this)
