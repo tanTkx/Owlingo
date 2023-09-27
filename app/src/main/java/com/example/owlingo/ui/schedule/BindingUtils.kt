@@ -9,11 +9,24 @@ import com.example.owlingo.database.schedule.Schedule
 
 class BindingUtils {
     companion object {
-        @BindingAdapter("scheduleText")
+        @BindingAdapter("scheduleID")
         @JvmStatic
-        fun TextView.setScheduleText(item: Schedule) {
+        fun TextView.setScheduleID(item: Schedule) {
+            text = item.scheduleID
+        }
+        @BindingAdapter("scheduleCourse")
+        @JvmStatic
+        fun TextView.setScheduleCourse(item: Schedule) {
             text = item.selectedCourse
         }
+        @BindingAdapter("scheduleDayTime")
+        @JvmStatic
+        fun TextView.setScheduleDayTime(item: Schedule) {
+            text = item.selectedDay + " " +item.selectedStartTime + " - " + item.selectedEndTime
+        }
+
+
+
 
     }
 }

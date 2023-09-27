@@ -2,9 +2,12 @@ package com.example.owlingo.ui.schedule
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -26,6 +29,7 @@ class AddScheduleFragment : Fragment() {
     private lateinit var viewModel: AddScheduleViewModel
     private lateinit var viewModelFactory: AddScheduleFactory
     private lateinit var navController: NavController
+    private lateinit var courseListAdapter: ArrayAdapter<String>
 
     @SuppressLint("ServiceCast")
     override fun onCreateView(
@@ -57,13 +61,93 @@ class AddScheduleFragment : Fragment() {
         }
 
         binding.btnCreate.setOnClickListener {
-            val selectedCourse = ""
-            val selectedDay = ""
-            val selectedStartTime =""
-            val selectedEndTime = ""
+            val selectedCourse = binding.spinnerCourse.selectedItem.toString()
+            val selectedDay = binding.spinnerDay.selectedItem.toString()
+            val selectedStartTime = binding.spinnerStartTime.selectedItem.toString()
+            val selectedEndTime = binding.spinnerEndTime.selectedItem.toString()
             viewModel.updateScheduleDetail(selectedCourse, selectedDay,selectedStartTime,selectedEndTime)
             val action = AddScheduleFragmentDirections.actionNavigationAddScheduleToNavigationManageSchedule()
             NavHostFragment.findNavController(this).navigate(action)
+        }
+
+        val scheduleDayArrayAdapter = ArrayAdapter.createFromResource(
+            application,
+            R.array.scheduleDay,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        }
+        binding.spinnerDay.adapter=scheduleDayArrayAdapter
+        binding.spinnerDay.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val selectedValue = parent?.getItemAtPosition(position).toString()
+                viewModel._selectedDay.value = selectedValue
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                Log.i("Selected", "Nothing Selected")
+            }
+        }
+
+
+        val scheduleStartTimeArrayAdapter = ArrayAdapter.createFromResource(
+            application,
+            R.array.scheduleStartTime,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        }
+        binding.spinnerStartTime.adapter=scheduleStartTimeArrayAdapter
+        binding.spinnerStartTime.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val selectedValue = parent?.getItemAtPosition(position).toString()
+                viewModel._selectedStartTime.value = selectedValue
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                Log.i("Selected", "Nothing Selected")
+            }
+        }
+
+
+        val scheduleEndTimeArrayAdapter = ArrayAdapter.createFromResource(
+            application,
+            R.array.scheduleEndTime,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        }
+        binding.spinnerEndTime.adapter=scheduleEndTimeArrayAdapter
+        binding.spinnerEndTime.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val selectedValue = parent?.getItemAtPosition(position).toString()
+                viewModel._selectedEndTime.value = selectedValue
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                Log.i("Selected", "Nothing Selected")
+            }
+        }
+
+
+        courseListAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item)
+        courseListAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.spinnerCourse.adapter = courseListAdapter
+        binding.spinnerCourse.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val selectedValue = parent?.getItemAtPosition(position).toString()
+                viewModel._selectedCourse.value = selectedValue
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                Log.i("Selected", "Nothing Selected")
+            }
+        }
+
+        viewModel.courseList.observe(viewLifecycleOwner) { courseList ->
+            courseListAdapter.clear()
+            courseListAdapter.addAll(courseList)
+            courseListAdapter.notifyDataSetChanged()
         }
 
         val topAppBar: MaterialToolbar = binding.topAppBar

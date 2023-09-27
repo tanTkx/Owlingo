@@ -13,7 +13,7 @@
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="171dp"
         android:layout_marginStart="5dp"
         android:layout_marginEnd="5dp"
         android:layout_marginBottom="10dp"
@@ -30,31 +30,38 @@
                 android:layout_height="52dp"
                 android:layout_weight="1"
                 android:width="30dp"
-                app:scheduleText= "@{schedule}"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/courseNameTextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.043"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:scheduleID="@{schedule}" />
 
             <TextView
                 android:id="@+id/courseNameTextView"
-                android:layout_width="106dp"
-                android:layout_height="52dp"
+                android:layout_width="233dp"
+                android:layout_height="28dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginBottom="12dp"
                 android:layout_weight="1"
                 android:width="100dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/dayTimeTextView"
+                app:layout_constraintStart_toEndOf="@+id/scheduleIDTextView"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:layout_editor_absoluteX="40dp" />
+                app:layout_constraintVertical_bias="1.0"
+                app:scheduleCourse="@{schedule}" />
 
             <TextView
                 android:id="@+id/dayTimeTextView"
-                android:layout_width="128dp"
-                android:layout_height="52dp"
+                android:layout_width="234dp"
+                android:layout_height="67dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginBottom="16dp"
                 android:layout_weight="1"
                 android:width="120dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/courseNameTextView"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintStart_toEndOf="@+id/scheduleIDTextView"
+                app:scheduleDayTime="@{schedule}" />
 
             <Button
                 android:id="@+id/deleteScheduleBtn"
@@ -65,7 +72,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/dayTimeTextView"
-                app:layout_constraintTop_toBottomOf="@+id/editScheduleBtn" />
+                app:layout_constraintTop_toBottomOf="@+id/editScheduleBtn"
+                app:layout_constraintVertical_bias="0.466" />
 
             <Button
                 android:id="@+id/editScheduleBtn"
@@ -75,6 +83,7 @@
                 android:layout_weight="1"
                 android:text="Edit"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.562"
                 app:layout_constraintStart_toEndOf="@+id/dayTimeTextView"
                 app:layout_constraintTop_toTopOf="parent" />
 

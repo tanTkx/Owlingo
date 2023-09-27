@@ -5,12 +5,16 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.android.volley.AuthFailureError
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.Response
+import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import kotlinx.coroutines.launch
+import org.json.JSONArray
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -23,20 +27,22 @@ class AddScheduleViewModel (
 ) : ViewModel() {
     private val requestQueue: RequestQueue = Volley.newRequestQueue(application)
     private val toastMsg = MutableLiveData<String?>()
-
-    private val _selectedCourse = MutableLiveData<String>()
+    private val _courseList = MutableLiveData<List<String>>()
+    val courseList: LiveData<List<String>>
+        get() = _courseList
+     val _selectedCourse = MutableLiveData<String>()
     val selectedCourse : LiveData<String>
         get() = _selectedCourse
 
-    private val _selectedDay = MutableLiveData<String>()
+     val _selectedDay = MutableLiveData<String>()
     val selectedDay : LiveData<String>
         get() = _selectedDay
 
-    private val _selectedStartTime = MutableLiveData<String>()
+     val _selectedStartTime = MutableLiveData<String>()
     val selectedStartTime: LiveData<String>
         get() = _selectedStartTime
 
-    private val _selectedEndTime = MutableLiveData<String>()
+     val _selectedEndTime = MutableLiveData<String>()
     val selectedEndTime: LiveData<String>
         get() = _selectedEndTime
 
@@ -45,6 +51,7 @@ class AddScheduleViewModel (
         _selectedDay.value = " "
         _selectedStartTime.value = " "
         _selectedEndTime.value = " "
+        getCourse()
     }
 
     fun updateScheduleDetail(selectedCourse:String, selectedDay: String, selectedStartTime: String, selectedEndTime: String) {
@@ -94,6 +101,39 @@ class AddScheduleViewModel (
             showToast("Exception $e")
         }
     }
+    private fun getCourse(){
+        viewModelScope.launch {
+            try {
+                val urlWithParams = "http://10.0.2.2/Owlingo/scheduleDAO.php"
+
+                val jsonArrayRequest = JsonArrayRequest(
+                    Request.Method.GET, urlWithParams, null,
+                    { response ->
+                        _courseList.postValue(parseCourses(response))
+                    },
+                    { error ->
+                        showToast("$error")
+                        Log.e("Connection Error Msg", "$error")
+                    }
+                )
+
+                requestQueue.add(jsonArrayRequest)
+            } catch (e: Exception) {
+                showToast("Exception $e")
+            }
+        }
+    }
+
+    private fun parseCourses(response: JSONArray): MutableList<String> {
+        val courses = mutableListOf<String>()
+        for (i in 0 until response.length()) {
+            val jsonObject = response.getJSONObject(i)
+            val course = jsonObject.getString("course_name")
+            courses.add(course)
+        }
+        return courses
+    }
+
 
     private fun showToast(message: String) {
         toastMsg.value = message

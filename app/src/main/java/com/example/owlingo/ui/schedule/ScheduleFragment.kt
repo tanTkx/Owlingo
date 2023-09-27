@@ -68,7 +68,7 @@ class ScheduleFragment  : Fragment(), ClickListener {
         return binding.root
     }
 
-    override fun onClick(any: Any) {
+    override fun onClick(any: Any, action: String?) {
         val question = any as Schedule
 //        val action = ScheduleFragmentDirections.actionNavigationViewQuestion()
 //        action.scheduleID = question.scheduleID
