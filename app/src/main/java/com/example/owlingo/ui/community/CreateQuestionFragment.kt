@@ -7,6 +7,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -14,16 +17,17 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.example.owlingo.R
+import com.example.owlingo.database.course.Course
 import com.example.owlingo.databinding.FragmentCreateQuestionBinding
 import com.google.android.material.appbar.MaterialToolbar
 
-class CreateQuestionFragment : Fragment() {
+class CreateQuestionFragment : Fragment(){
 
     private lateinit var viewModel: CreateQuestionViewModel
     private lateinit var viewModelFactory: CreateQuestionFactory
     private lateinit var navController: NavController
+    private lateinit var courseListAdapter: ArrayAdapter<String>
 
-    @SuppressLint("ServiceCast")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -58,6 +62,26 @@ class CreateQuestionFragment : Fragment() {
             NavHostFragment.findNavController(this).navigate(action)
         }
 
+        courseListAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item)
+        courseListAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.courseSelect.adapter = courseListAdapter
+        binding.courseSelect.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val selectedValue = parent?.getItemAtPosition(position).toString()
+                viewModel._courseName.value = selectedValue
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                Log.i("Selected", "Nothing Selected")
+            }
+        }
+
+        viewModel.courseList.observe(viewLifecycleOwner) { courseList ->
+            courseListAdapter.clear()
+            courseListAdapter.addAll(courseList)
+            courseListAdapter.notifyDataSetChanged()
+        }
+
         val topAppBar: MaterialToolbar = binding.topAppBar
         navController = NavHostFragment.findNavController(this)
         (activity as AppCompatActivity).setSupportActionBar(topAppBar)
@@ -67,7 +91,6 @@ class CreateQuestionFragment : Fragment() {
         }
 
         binding.lifecycleOwner = this
-
         return binding.root
     }
 

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="editCommentViewModel"
+            type="com.example.owlingo.ui.community.EditCommentViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBar"
+            style="@style/Widget.MaterialComponents.Toolbar.Primary"
+            android:layout_width="match_parent"
+            app:navigationIcon="@drawable/car_ui_icon_arrow_back"
+            app:navigationIconTint="#FFFFFF"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_constraintTop_toTopOf="parent"
+            app:menu="@menu/top_bar_menu"
+            app:title="Edit Comment"
+            app:titleCentered="true" />
+
+        <TextView
+            android:id="@+id/answerTitleLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="@string/ans"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.081"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/topAppBar" />
+
+        <TextView
+            android:id="@+id/explainLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            android:text="@string/explanation"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@+id/answerTV"
+            app:layout_constraintTop_toBottomOf="@+id/answerTV" />
+
+        <EditText
+            android:id="@+id/answerTV"
+            android:layout_width="350dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:ems="10"
+            android:inputType="text|textMultiLine"
+            android:lines="3"
+            android:maxLines="3"
+            android:singleLine="false"
+            android:text="@{editCommentViewModel.comment.commentTitle}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/answerTitleLabel"
+            app:layout_constraintTop_toBottomOf="@+id/answerTitleLabel" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/questionExplainLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="32dp"
+            android:gravity="center"
+            android:importantForAutofill="no"
+            app:boxBackgroundMode="outline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/explainLabel"
+            app:layout_constraintTop_toBottomOf="@+id/explainLabel">
+
+            <EditText
+                android:id="@+id/commentExplainTV"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="fill_horizontal"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                android:backgroundTint="#A8494444"
+                android:ems="10"
+                android:gravity="top|left"
+                android:inputType="text|textMultiLine"
+                android:lines="10"
+                android:maxLines="10"
+                android:nestedScrollingEnabled="false"
+                android:outlineAmbientShadowColor="#00050505"
+                android:outlineProvider="none"
+                android:outlineSpotShadowColor="#00000000"
+                android:text="@{editCommentViewModel.comment.commentText}" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:text="Update"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/questionExplainLayout" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

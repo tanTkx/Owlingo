@@ -2,7 +2,6 @@ package com.example.owlingo.ui.community
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,13 +13,14 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.example.owlingo.R
-import com.example.owlingo.databinding.FragmentCreateCommentBinding
+import com.example.owlingo.databinding.FragmentCreateQuestionBinding
+import com.example.owlingo.databinding.FragmentEditCommentBinding
 import com.google.android.material.appbar.MaterialToolbar
 
-class CreateCommentFragment : Fragment() {
+class EditCommentFragment : Fragment() {
 
-    private lateinit var viewModel: CreateCommentViewModel
-    private lateinit var viewModelFactory: CreateCommentFactory
+    private lateinit var viewModel: EditCommentViewModel
+    private lateinit var viewModelFactory: EditCommentFactory
     private lateinit var navController: NavController
 
     override fun onCreateView(
@@ -29,22 +29,18 @@ class CreateCommentFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        val binding: FragmentCreateCommentBinding = DataBindingUtil.inflate(
+        val binding: FragmentEditCommentBinding = DataBindingUtil.inflate(
             inflater,
-            R.layout.fragment_create_comment,
+            R.layout.fragment_edit_comment,
             container,
             false
         )
         val application = requireNotNull(this.activity).application
-
-        viewModelFactory = CreateCommentFactory(
-            CreateCommentFragmentArgs.fromBundle(requireArguments()).userId,
-            CreateCommentFragmentArgs.fromBundle(requireArguments()).questionId,
-        application)
-
+        viewModelFactory = EditCommentFactory(
+            EditCommentFragmentArgs.fromBundle(requireArguments()).commentId, application)
         viewModel = ViewModelProvider(this, viewModelFactory)
-            .get(CreateCommentViewModel::class.java)
-        binding.createCommentViewModel = viewModel
+            .get(EditCommentViewModel::class.java)
+        binding.editCommentViewModel = viewModel
 
         viewModel.getToastMessage().observe(viewLifecycleOwner) { message ->
             if (message != null) {
@@ -57,8 +53,8 @@ class CreateCommentFragment : Fragment() {
             val commentTitle = binding.answerTV.text.toString()
             val commentText = binding.commentExplainTV.text.toString()
             viewModel.updateCommentDetail(commentTitle, commentText)
-            val action = CreateCommentFragmentDirections.actionNavigationViewQuestion()
-            action.questionId = CreateCommentFragmentArgs.fromBundle(requireArguments()).questionId
+            val action = EditCommentFragmentDirections.actionNavigationViewQuestion()
+            action.questionId = EditCommentFragmentArgs.fromBundle(requireArguments()).questionId
             NavHostFragment.findNavController(this).navigate(action)
         }
 
@@ -73,6 +69,7 @@ class CreateCommentFragment : Fragment() {
         binding.lifecycleOwner = this
 
         return binding.root
+
     }
 
 }

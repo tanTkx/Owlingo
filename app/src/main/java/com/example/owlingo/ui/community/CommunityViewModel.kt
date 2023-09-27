@@ -31,8 +31,13 @@ class CommunityViewModel( application: Application) : ViewModel(){
         initializeQuestionList( userId = 1)
     }
 
-    fun refreshQuestionList(userId: Int) {
-        initializeQuestionList(userId)
+    fun refreshQuestionList(userId: Int, searchText: String? = null) {
+        if(searchText!=null){
+            searchQuestionList(userId, searchText)
+        }
+        else {
+            initializeQuestionList(userId)
+        }
     }
 
     private fun initializeQuestionList( userId: Int) {
@@ -43,6 +48,30 @@ class CommunityViewModel( application: Application) : ViewModel(){
                 val jsonArrayRequest = JsonArrayRequest(
                     Request.Method.GET, urlWithParams, null,
                     { response ->
+                        _questionList.postValue(parseQuestions(response))
+                    },
+                    { error ->
+                        showToast("$error")
+                        Log.e("Connection Error Msg", "$error")
+                    }
+                )
+
+                requestQueue.add(jsonArrayRequest)
+            } catch (e: Exception) {
+                showToast("Exception $e")
+            }
+        }
+    }
+
+    private fun searchQuestionList( userId: Int, searchText: String) {
+        viewModelScope.launch {
+            try {
+                val urlWithParams = "http://10.0.2.2/Owlingo/questionDAO.php?userId=$userId&searchText=$searchText"
+                Log.e("url", urlWithParams)
+                val jsonArrayRequest = JsonArrayRequest(
+                    Request.Method.GET, urlWithParams, null,
+                    { response ->
+
                         _questionList.postValue(parseQuestions(response))
                     },
                     { error ->
