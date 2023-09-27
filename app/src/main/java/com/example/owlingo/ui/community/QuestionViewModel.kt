@@ -85,10 +85,10 @@ class QuestionViewModel(questionId: Int, application: Application) : ViewModel()
 
     }
 
-    fun deleteComment(commentId: Int){
+    fun deleteComment(commentId: Int, questionId: Int){
         try {
             val stringRequest: StringRequest = object : StringRequest(
-                Request.Method.GET, "http://10.0.2.2/Owlingo/questionDAO.php?commentId=$commentId",
+                Request.Method.GET, "http://10.0.2.2/Owlingo/questionDAO.php?commentId=$commentId&questionId=$questionId",
                 Response.Listener { response ->
 
                     if (response == "success") {

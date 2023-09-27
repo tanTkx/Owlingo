@@ -98,12 +98,12 @@ class QuestionFragment : Fragment(), ClickListener {
         }
 
         if(action=="del") {
-            val commentId = any as Int
-            showConfirmationDialog(commentId)
+            val comment = any as Comment
+            showConfirmationDialog(comment.commentId,comment.questionId )
         }
     }
 
-    private fun showConfirmationDialog(commentId: Int) {
+    private fun showConfirmationDialog(commentId: Int, questionId: Int) {
         val builder = AlertDialog.Builder(requireContext())
         val inflater = layoutInflater
         val dialogView = inflater.inflate(R.layout.confirmation_dialog, null)
@@ -115,7 +115,7 @@ class QuestionFragment : Fragment(), ClickListener {
 
         builder.setView(dialogView)
         builder.setPositiveButton("Yes") { _, _ ->
-            viewModel.deleteComment(commentId)
+            viewModel.deleteComment(commentId, questionId)
             viewModel.refresh(QuestionFragmentArgs.fromBundle(requireArguments()).questionId)
         }
         builder.setNegativeButton("No") { dialog, _ ->

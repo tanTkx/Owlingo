@@ -6,46 +6,65 @@
     android:id="@+id/mobile_navigation"
     app:startDestination="@+id/StartFragment">
 
+
     <fragment
         android:id="@+id/StartFragment"
-        android:name="com.example.owlingo.BlankFragment"
-        android:label="Start"
+        android:name="com.example.owlingo.StartFragment"
+        android:label="StartFragment"
         tools:layout="@layout/start_fragment" >
         <action
             android:id="@+id/action_StartFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
-    </fragment>
+        </fragment>
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.owlingo.LoginFragment"
+        android:name="com.example.owlingo.ui.profile.LoginFragment"
         android:label="login_fragment"
         tools:layout="@layout/login_fragment" >
-        <action
-            android:id="@+id/action_loginFragment_to_navigation_home"
-            app:destination="@id/navigation_home" />
         <action
             android:id="@+id/action_loginFragment_to_signupFragment"
             app:destination="@id/signupFragment" />
         <action
-            android:id="@+id/action_loginFragment_to_signupFragment2"
-            app:destination="@id/signupFragment" />
+            android:id="@+id/action_loginFragment_to_accountFragment"
+            app:destination="@id/accountFragment" />
         <action
             android:id="@+id/action_loginFragment_to_StartFragment"
             app:destination="@id/StartFragment" />
-        <action
-            android:id="@+id/action_loginFragment_to_profileFragment"
-            app:destination="@id/profileFragment" />
     </fragment>
     <fragment
         android:id="@+id/signupFragment"
-        android:name="com.example.owlingo.SignupFragment"
+        android:name="com.example.owlingo.ui.profile.SignupFragment"
         android:label="signup_fragment"
         tools:layout="@layout/signup_fragment" >
         <action
-            android:id="@+id/action_signupFragment_to_loginFragment2"
+            android:id="@+id/action_signupFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.owlingo.ui.profile.ProfileFragment"
+        android:label="profile_fragment"
+        tools:layout="@layout/profile_fragment" >
+        <action
+            android:id="@+id/action_profileFragment_to_accountFragment"
+            app:destination="@id/accountFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/accountFragment"
+        android:name="com.example.owlingo.ui.profile.AccountFragment"
+        android:label="fragment_account">
+        <action
+            android:id="@+id/action_accountFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_accountFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_accountFragment_to_navigation_home"
+            app:destination="@id/navigation_home" />
+        </fragment>
+
 
     <fragment
         android:id="@+id/navigation_home"
@@ -65,12 +84,44 @@
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
 
-
     <fragment
         android:id="@+id/navigation_community"
+        android:name="com.example.owlingo.ui.community.CommunityFragment"
+        android:label="@string/title_community"
+        tools:layout="@layout/fragment_community" >
+        <action
+            android:id="@+id/action_navigation_view_question"
+            app:destination="@id/navigation_view_question"
+            app:launchSingleTop="true"
+            app:popUpTo="@+id/title_destination" />
+        <argument
+            android:name="userId"
+            android:defaultValue="0"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_navigation_create_question"
+            app:destination="@id/navigation_create_question" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_view_question"
         android:name="com.example.owlingo.ui.community.QuestionFragment"
         android:label="@string/title_community"
-        tools:layout="@layout/fragment_question" />
+        tools:layout="@layout/fragment_question" >
+        <argument
+            android:name="questionId"
+            android:defaultValue="0"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_navigation_create_comment"
+            app:destination="@id/navigation_create_comment" />
+        <action
+            android:id="@+id/action_navigation_community"
+            app:destination="@id/navigation_community" />
+        <action
+            android:id="@+id/action_navigation_edit_comment"
+            app:destination="@id/navigation_edit_comment" />
+    </fragment>
 
 
     <fragment
@@ -128,22 +179,6 @@
             app:argType="integer" />
 
     </fragment>
-
-    <fragment
-        android:id="@+id/loginFragment"
-        android:name="com.example.owlingo.ui.profile.LoginFragment"
-        android:label="login_fragment"
-        tools:layout="@layout/login_fragment" />
-    <fragment
-        android:id="@+id/signupFragment"
-        android:name="com.example.owlingo.ui.profile.SignupFragment"
-        android:label="signup_fragment"
-        tools:layout="@layout/signup_fragment" />
-    <fragment
-        android:id="@+id/profileFragment"
-        android:name="com.example.owlingo.ProfileFragment"
-        android:label="profile_fragment"
-        tools:layout="@layout/profile_fragment" />
     
 
 </navigation>

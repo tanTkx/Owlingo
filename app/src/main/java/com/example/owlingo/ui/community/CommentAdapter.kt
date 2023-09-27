@@ -37,7 +37,7 @@ class CommentAdapter(
                 clickListener.onClick(item, "edit")
             }
             binding.delBtn.setOnClickListener{
-                clickListener.onClick(item.commentId, "del")
+                clickListener.onClick(item, "del")
             }
         }
 
