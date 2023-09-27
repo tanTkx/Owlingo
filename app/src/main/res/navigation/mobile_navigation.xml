@@ -4,7 +4,48 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/StartFragment">
+
+    <fragment
+        android:id="@+id/StartFragment"
+        android:name="com.example.owlingo.BlankFragment"
+        android:label="Start"
+        tools:layout="@layout/start_fragment" >
+        <action
+            android:id="@+id/action_StartFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.owlingo.LoginFragment"
+        android:label="login_fragment"
+        tools:layout="@layout/login_fragment" >
+        <action
+            android:id="@+id/action_loginFragment_to_navigation_home"
+            app:destination="@id/navigation_home" />
+        <action
+            android:id="@+id/action_loginFragment_to_signupFragment"
+            app:destination="@id/signupFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_signupFragment2"
+            app:destination="@id/signupFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_StartFragment"
+            app:destination="@id/StartFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signupFragment"
+        android:name="com.example.owlingo.SignupFragment"
+        android:label="signup_fragment"
+        tools:layout="@layout/signup_fragment" >
+        <action
+            android:id="@+id/action_signupFragment_to_loginFragment2"
+            app:destination="@id/loginFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_home"
@@ -24,50 +65,12 @@
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
 
-    <fragment
-        android:id="@+id/StartFragment"
-        android:name="com.example.owlingo.StartFragment"
-        android:label="Start"
-        tools:layout="@layout/start_fragment" />
 
     <fragment
         android:id="@+id/navigation_community"
-        android:name="com.example.owlingo.ui.community.CommunityFragment"
-        android:label="@string/title_community"
-        tools:layout="@layout/fragment_community" >
-        <action
-            android:id="@+id/action_navigation_view_question"
-            app:destination="@id/navigation_view_question"
-            app:launchSingleTop="true"
-            app:popUpTo="@+id/title_destination" />
-        <argument
-            android:name="userId"
-            android:defaultValue="0"
-            app:argType="integer" />
-        <action
-            android:id="@+id/action_navigation_create_question"
-            app:destination="@id/navigation_create_question" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/navigation_view_question"
         android:name="com.example.owlingo.ui.community.QuestionFragment"
         android:label="@string/title_community"
-        tools:layout="@layout/fragment_question" >
-        <argument
-            android:name="questionId"
-            android:defaultValue="0"
-            app:argType="integer" />
-        <action
-            android:id="@+id/action_navigation_create_comment"
-            app:destination="@id/navigation_create_comment" />
-        <action
-            android:id="@+id/action_navigation_community"
-            app:destination="@id/navigation_community" />
-        <action
-            android:id="@+id/action_navigation_edit_comment"
-            app:destination="@id/navigation_edit_comment" />
-    </fragment>
+        tools:layout="@layout/fragment_question" />
 
 
     <fragment
@@ -138,8 +141,9 @@
         tools:layout="@layout/signup_fragment" />
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.owlingo.ui.profile.ProfileFragment"
+        android:name="com.example.owlingo.ProfileFragment"
         android:label="profile_fragment"
         tools:layout="@layout/profile_fragment" />
+    
 
 </navigation>
