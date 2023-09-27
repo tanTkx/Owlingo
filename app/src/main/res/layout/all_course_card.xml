@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+
+
+    <data>
+        <variable
+            name="course"
+            type="com.example.owlingo.database.course.Course" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        app:checkedIconTint="#00FFFFFF">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:clickable="true">
+
+            <ImageView
+                android:id="@+id/img_java"
+                android:layout_width="88dp"
+                android:layout_height="83dp"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:background="#FAED76"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/programming" />
+
+            <TextView
+                android:id="@+id/tv1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="32dp"
+                android:text="Java Script"
+                android:textSize="16sp"
+                app:courseName="@{course}"
+                app:layout_constraintStart_toEndOf="@+id/img_java"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Mr.Tan"
+                android:textSize="12sp"
+                app:courseLecture="@{course}"
+                tools:layout_editor_absoluteX="124dp"
+                tools:layout_editor_absoluteY="53dp" />
+
+
+            <Button
+                android:id="@+id/editBtn"
+                android:layout_width="50dp"
+                android:layout_height="48dp"
+                android:backgroundTint="#00FFFFFF"
+                android:clickable="true"
+                android:outlineSpotShadowColor="#00FFFFFF"
+                android:src="@drawable/car_ui_icon_edit"
+                app:icon="@drawable/car_ui_icon_edit"
+                app:iconSize="25dp"
+                app:iconTint="#029AFF"
+                app:layout_constraintBottom_toBottomOf="@+id/textView8"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.705"
+                app:layout_constraintStart_toEndOf="@+id/tv2"
+                app:layout_constraintTop_toTopOf="@+id/textView7" />
+
+            <Button
+                android:id="@+id/delBtn"
+                android:layout_width="52dp"
+                android:layout_height="48dp"
+                android:backgroundTint="#00FFFFFF"
+                android:clickable="true"
+                android:outlineSpotShadowColor="#00FFFFFF"
+                android:src="@drawable/car_ui_icon_edit"
+                app:icon="@drawable/car_ui_icon_delete"
+                app:iconSize="25dp"
+                app:iconTint="#FA1500"
+                app:layout_constraintBottom_toBottomOf="@+id/textView8"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.962"
+                app:layout_constraintStart_toEndOf="@+id/tv2"
+                app:layout_constraintTop_toTopOf="@+id/textView7" />
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="96dp"
+                android:layout_height="29dp"
+                android:text="Hello World"
+                android:textSize="10sp"
+                app:courseDetail="@{course}"
+                tools:layout_editor_absoluteX="124dp"
+                tools:layout_editor_absoluteY="69dp" />
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="RM 188"
+                android:textSize="10sp"
+                app:courseFee="@{course}"
+                tools:layout_editor_absoluteX="124dp"
+                tools:layout_editor_absoluteY="98dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+
+
+</layout>
