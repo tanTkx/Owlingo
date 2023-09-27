@@ -64,7 +64,7 @@ class CommunityFragment : Fragment(), ClickListener {
         return binding.root
     }
 
-    override fun onClick(any: Any) {
+    override fun onClick(any: Any, action: String?) {
         val question = any as Question
         val action = CommunityFragmentDirections.actionNavigationViewQuestion()
         action.questionId = question.questionId

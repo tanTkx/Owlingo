@@ -1,10 +1,13 @@
 package com.example.owlingo.ui.community
 
+import android.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.owlingo.R
 import com.example.owlingo.component.ClickListener
 import com.example.owlingo.database.community.Comment
 import com.example.owlingo.databinding.AnswerCardBinding
@@ -31,7 +34,10 @@ class CommentAdapter(
             binding.comment = item
             binding.executePendingBindings()
             binding.editBtn.setOnClickListener{
-                clickListener.onClick(item)
+                clickListener.onClick(item, "edit")
+            }
+            binding.delBtn.setOnClickListener{
+                clickListener.onClick(item.commentId, "del")
             }
         }
 

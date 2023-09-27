@@ -5,6 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -56,6 +59,13 @@ class QuestionFragment : Fragment(), ClickListener {
             }
         })
 
+        viewModel.getToastMessage().observe(viewLifecycleOwner) { message ->
+            if (message != null) {
+                Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                viewModel.toastShown()
+            }
+        }
+
         binding.addComment.setOnClickListener {
             val action = QuestionFragmentDirections.actionNavigationCreateComment()
             action.questionId = QuestionFragmentArgs.fromBundle(requireArguments()).questionId
@@ -78,12 +88,42 @@ class QuestionFragment : Fragment(), ClickListener {
         return binding.root
     }
 
-    override fun onClick(any: Any) {
-        val comment = any as Comment
-        val action = QuestionFragmentDirections.actionNavigationEditComment()
-        action.commentId = comment.commentId
-        action.questionId = comment.questionId
-        NavHostFragment.findNavController(this).navigate(action)
+    override fun onClick(any: Any, action: String?) {
+        if(action=="edit") {
+            val comment = any as Comment
+            val action = QuestionFragmentDirections.actionNavigationEditComment()
+            action.commentId = comment.commentId
+            action.questionId = comment.questionId
+            NavHostFragment.findNavController(this).navigate(action)
+        }
+
+        if(action=="del") {
+            val commentId = any as Int
+            showConfirmationDialog(commentId)
+        }
+    }
+
+    private fun showConfirmationDialog(commentId: Int) {
+        val builder = AlertDialog.Builder(requireContext())
+        val inflater = layoutInflater
+        val dialogView = inflater.inflate(R.layout.confirmation_dialog, null)
+
+         val titleTextView = dialogView.findViewById<TextView>(R.id.dialog_title)
+         val messageTextView = dialogView.findViewById<TextView>(R.id.dialog_message)
+         titleTextView.text = "Sure to Delete the Comment?"
+         messageTextView.text = "Once delete cannot Undo the action"
+
+        builder.setView(dialogView)
+        builder.setPositiveButton("Yes") { _, _ ->
+            viewModel.deleteComment(commentId)
+            viewModel.refresh(QuestionFragmentArgs.fromBundle(requireArguments()).questionId)
+        }
+        builder.setNegativeButton("No") { dialog, _ ->
+            dialog.dismiss()
+        }
+
+        val dialog = builder.create()
+        dialog.show()
     }
 
 }

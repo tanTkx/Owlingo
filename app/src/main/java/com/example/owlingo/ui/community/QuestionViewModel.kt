@@ -19,7 +19,9 @@ import com.example.owlingo.database.community.Question
 import kotlinx.coroutines.launch
 import org.json.JSONArray
 import org.json.JSONObject
+import java.text.SimpleDateFormat
 import java.util.Date
+import java.util.Locale
 
 class QuestionViewModel(questionId: Int, application: Application) : ViewModel() {
 
@@ -83,6 +85,33 @@ class QuestionViewModel(questionId: Int, application: Application) : ViewModel()
 
     }
 
+    fun deleteComment(commentId: Int){
+        try {
+            val stringRequest: StringRequest = object : StringRequest(
+                Request.Method.GET, "http://10.0.2.2/Owlingo/questionDAO.php?commentId=$commentId",
+                Response.Listener { response ->
+
+                    if (response == "success") {
+                        showToast("Comment Successful Deleted ")
+                    } else if (response == "failure") {
+                        showToast("Comment Delete Failed")
+                    }else{
+                        showToast("Comment Delete Failed")
+                        Log.e("Connection Error Msg", response.toString())
+                    }},
+
+                Response.ErrorListener { error ->
+                    showToast("Comment Uploaded Failed")
+                    Log.e("Connection Error Msg", "$error")
+                }) {
+            }
+            requestQueue.add(stringRequest)
+        } catch (e: Exception) {
+            Log.e("Error", e.toString())
+            showToast("Exception $e")
+        }
+    }
+
     private fun parseQuestion(response: JSONObject): Question {
 
         return Question(
@@ -113,6 +142,7 @@ class QuestionViewModel(questionId: Int, application: Application) : ViewModel()
         }
         return comments
     }
+
 
     private fun showToast(message: String) {
         toastMsg.value = message

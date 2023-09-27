@@ -48,6 +48,7 @@ class EditCommentFragment : Fragment() {
                 viewModel.toastShown()
             }
         }
+
         binding.btnSave.setOnClickListener {
             val commentTitle = binding.answerTV.text.toString()
             val commentText = binding.commentExplainTV.text.toString()
@@ -56,6 +57,7 @@ class EditCommentFragment : Fragment() {
             action.questionId = EditCommentFragmentArgs.fromBundle(requireArguments()).questionId
             NavHostFragment.findNavController(this).navigate(action)
         }
+
         val topAppBar: MaterialToolbar = binding.topAppBar
         navController = NavHostFragment.findNavController(this)
         (activity as AppCompatActivity).setSupportActionBar(topAppBar)
