@@ -62,8 +62,11 @@
             android:id="@+id/action_navigation_create_comment"
             app:destination="@id/navigation_create_comment" />
         <action
-            android:id="@+id/action_navigation_view_question_to_navigation_community"
+            android:id="@+id/action_navigation_community"
             app:destination="@id/navigation_community" />
+        <action
+            android:id="@+id/action_navigation_edit_comment"
+            app:destination="@id/navigation_edit_comment" />
     </fragment>
 
 
@@ -100,6 +103,26 @@
         <action
             android:id="@+id/action_navigation_view_question"
             app:destination="@id/navigation_view_question" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_edit_comment"
+        android:name="com.example.owlingo.ui.community.EditCommentFragment"
+        android:label="edit_comment_fragment"
+        tools:layout="@layout/fragment_edit_comment" >
+        <action
+            android:id="@+id/action_navigation_view_question"
+            app:destination="@id/navigation_view_question" />
+
+        <argument
+            android:name="questionId"
+            android:defaultValue="0"
+            app:argType="integer" />
+        <argument
+            android:name="commentId"
+            android:defaultValue="0"
+            app:argType="integer" />
 
     </fragment>
 

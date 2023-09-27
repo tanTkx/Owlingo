@@ -12,13 +12,17 @@ import com.android.volley.AuthFailureError
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.Response
+import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.owlingo.database.community.Question
 import com.example.owlingo.database.course.Course
 import kotlinx.coroutines.launch
+import org.json.JSONArray
 import org.json.JSONObject
+import java.text.SimpleDateFormat
 import java.util.Date
+import java.util.Locale
 
 class CreateQuestionViewModel (userId: Int, application: Application) : ViewModel() {
 
@@ -26,17 +30,17 @@ class CreateQuestionViewModel (userId: Int, application: Application) : ViewMode
     val questionTitle : LiveData<String>
         get() = _questionTitle
 
-    private val _courseList = MutableLiveData<List<Course>>()
-    val courseList: LiveData<List<Course>>
+    private val _courseList = MutableLiveData<List<String>>()
+    val courseList: LiveData<List<String>>
         get() = _courseList
 
     private val _questionText = MutableLiveData<String>()
     val questionText : LiveData<String>
         get() = _questionText
 
-    private val _courseId = MutableLiveData<Int>()
-    val courseId: LiveData<Int>
-        get() = _courseId
+    val _courseName = MutableLiveData<String>()
+    val courseName: LiveData<String>
+        get() = _courseName
 
     private val _userId = MutableLiveData<Int>()
     val userId: LiveData<Int>
@@ -47,16 +51,39 @@ class CreateQuestionViewModel (userId: Int, application: Application) : ViewMode
     private val toastMsg = MutableLiveData<String?>()
 
     init {
+        getRegisteredCourse(userId)
         _questionTitle.value = " "
         _questionText.value = " "
-        _courseId.value = 1
-        _userId.value = 1
+        _courseName.value = " "
+        _userId.value = userId
+    }
+
+    private fun getRegisteredCourse(userId: Int){
+        viewModelScope.launch {
+            try {
+                val urlWithParams = "http://10.0.2.2/Owlingo/courseRegDAO.php?userId=$userId"
+
+                val jsonArrayRequest = JsonArrayRequest(
+                    Request.Method.GET, urlWithParams, null,
+                    { response ->
+                        _courseList.postValue(parseCourses(response))
+                    },
+                    { error ->
+                        showToast("$error")
+                        Log.e("Connection Error Msg", "$error")
+                    }
+                )
+
+                requestQueue.add(jsonArrayRequest)
+            } catch (e: Exception) {
+                showToast("Exception $e")
+            }
+        }
     }
 
     fun updateQuestionDetail(title:String, text: String) {
         _questionText.value = text
         _questionTitle.value = title
-        _courseId.value = 1
         createQuestion()
     }
 
@@ -71,6 +98,7 @@ class CreateQuestionViewModel (userId: Int, application: Application) : ViewMode
                     } else if (response == "failure") {
                         showToast("Question Uploaded Failed")
                     }else{
+                        showToast("Question Uploaded Failed")
                         Log.e("Connection Error Msg", response.toString())
                     }},
                 Response.ErrorListener { error ->
@@ -81,12 +109,13 @@ class CreateQuestionViewModel (userId: Int, application: Application) : ViewMode
                 @Throws(AuthFailureError::class)
                 override fun getParams(): Map<String, String>? {
                     val data: MutableMap<String, String> = HashMap()
+                    val dateFormat = SimpleDateFormat("yyyy-M-d", Locale.getDefault())
 
                     data["questionTitle"] = _questionTitle.value.toString()
                     data["questionText"] = _questionText.value.toString()
                     data["userId"] = userId.toString()
-                    data["courseId"] = courseId.toString()
-                    data["questionDateTime"] = Date().toString()
+                    data["courseName"] = _courseName.value.toString()
+                    data["questionDateTime"] = dateFormat.format(Date()).toString()
                     data["commentNo"] = "0"
                     return data
                 }
@@ -98,16 +127,14 @@ class CreateQuestionViewModel (userId: Int, application: Application) : ViewMode
         }
     }
 
-    private fun parseQuestion(response: JSONObject): Question {
-
-        return Question(
-            questionId = response.getInt("questionId"),
-            questionTitle = response.getString("questionTitle"),
-            questionText = response.getString("questionText"),
-            userId  = response.getInt("userId"),
-            questionDateTime = response.getString("questionDateTime"),
-            commentNo = response.getInt("commentNo"),
-        )
+    private fun parseCourses(response: JSONArray): MutableList<String> {
+        val courses = mutableListOf<String>()
+        for (i in 0 until response.length()) {
+            val jsonObject = response.getJSONObject(i)
+            val course = jsonObject.getString("course_name")
+            courses.add(course)
+        }
+        return courses
     }
 
     private fun showToast(message: String) {
