@@ -29,41 +29,38 @@
                 app:title="@string/title_community"
                 app:titleCentered="true" />
 
-            <android.widget.SearchView
-                android:id="@+id/searchView"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/searchViewLayout"
                 android:layout_width="0dp"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/activity_horizontal_margin"
-                android:layout_marginTop="@dimen/below_appBar"
-                android:layout_marginEnd="@dimen/activity_horizontal_margin"
-                android:baselineAligned="false"
-                android:iconifiedByDefault="false"
-                android:queryHint="Questions"
-                app:defaultQueryHint="hint"
-                app:iconifiedByDefault="false"
-                app:layout_constraintEnd_toStartOf="@+id/filterButton"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:queryHint="hint" />
-
-            <android.widget.Button
-                android:id="@+id/filterButton"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="@dimen/below_appBar"
-                android:layout_marginEnd="@dimen/activity_horizontal_margin"
-                android:layout_marginBottom="16dp"
-                android:backgroundTint="#FFFFFF"
-                android:foreground="@drawable/ic_filter"
-                app:layout_constraintBottom_toTopOf="@+id/question_list"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="16dp"
+                android:background="#E1CFCF"
+                android:gravity="center"
+                android:importantForAutofill="no"
+                app:boxBackgroundMode="outline"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/searchView"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/topAppBar">
+
+                <android.widget.SearchView
+                    android:id="@+id/searchView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:baselineAligned="false"
+                    android:iconifiedByDefault="false"
+                    android:queryHint="Questions"
+                    app:defaultQueryHint="hint"
+                    app:iconifiedByDefault="false"
+                    app:queryHint="hint" />
+            </com.google.android.material.textfield.TextInputLayout>
+
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/question_list"
-                android:layout_width="357dp"
-                android:layout_height="590dp"
+                android:layout_width="350dp"
+                android:layout_height="600dp"
                 android:layout_marginStart="@dimen/activity_horizontal_margin"
                 android:layout_marginTop="@dimen/activity_horizontal_margin"
                 android:layout_marginEnd="@dimen/activity_horizontal_margin"
@@ -72,7 +69,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/searchView" />
+                app:layout_constraintTop_toBottomOf="@+id/searchViewLayout" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/createBtn"
@@ -85,7 +82,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.895"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/searchView"
+                app:layout_constraintTop_toBottomOf="@+id/searchViewLayout"
                 app:layout_constraintVertical_bias="0.963"
                 android:contentDescription="Add Question" />
 
