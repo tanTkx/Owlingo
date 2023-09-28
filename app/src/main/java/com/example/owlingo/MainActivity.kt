@@ -29,6 +29,8 @@ class MainActivity : AppCompatActivity() {
             } else if (userId != null && userId !== "1"  && userId !== "-1") {
                 navView.menu.clear()
                 navView.inflateMenu(R.menu.bottom_nav_menu)
+            }else{
+                navView.menu.clear()
             }
         }
     }

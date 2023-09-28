@@ -53,7 +53,6 @@ class CommunityViewModel( application: Application) : ViewModel(){
                         _questionList.postValue(parseQuestions(response))
                     },
                     { error ->
-                        showToast("$error")
                         Log.e("Connection Error Msg", "$error")
                     }
                 )

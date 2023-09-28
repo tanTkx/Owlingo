@@ -29,7 +29,10 @@ class UserDetailCourseViewModel(courseId: Int, application: Application)  : View
     val course: LiveData<CourseWithSchedule>
         get() = _course
 
-    var _isVisible: String = "visible"
+    private val _isVisible = MutableLiveData<String>()
+    val isVisible: LiveData<String>
+        get() = _isVisible
+
 
     private val toastMsg = MutableLiveData<String?>()
 
@@ -64,12 +67,12 @@ class UserDetailCourseViewModel(courseId: Int, application: Application)  : View
         try {
             val stringRequest: StringRequest = object : StringRequest(
                 Request.Method.GET, "http://10.0.2.2/Owlingo/checkRegistered.php?userId=$userId&courseId=$courseId",
-                Response.Listener { response ->
 
+                Response.Listener { response ->
                     if (response == "visible") {
-                       _isVisible = response
+                        _isVisible.value = response
                     } else if (response == "invisible") {
-                        _isVisible = response
+                        _isVisible.value = response
                     }else{
                         Log.e("Connection Error Msg", response.toString())
                     }},
@@ -86,15 +89,19 @@ class UserDetailCourseViewModel(courseId: Int, application: Application)  : View
     }
     private fun parseCourse(response: JSONObject): CourseWithSchedule {
 
+        var selectedDay = response.getString("selectedDay")?.takeIf { it.isNotEmpty() } ?: "Assign soon"
+        var selectedStartTime = response.getString("selectedStartTime")?.takeIf { it.isNotEmpty() } ?: "Assign soon"
+        var selectedEndTime = response.getString("selectedEndTime")?.takeIf { it.isNotEmpty() } ?: "Assign soon"
+
         return CourseWithSchedule(
             course_id = response.getInt("course_id") ,
             course_name = response.getString("course_name"),
             course_detail = response.getString("course_detail"),
             course_lecture = response.getString("course_lecture"),
             course_fee = response.getInt("course_fee"),
-            selectedDay = response.getString("selectedDay"),
-            selectedStartTime = response.getString("selectedStartTime"),
-            selectedEndTime = response.getString("selectedEndTime"),
+            selectedDay = selectedDay,
+            selectedStartTime = selectedStartTime,
+            selectedEndTime = selectedEndTime,
         )
     }
 

@@ -55,16 +55,6 @@ class EditScheduleFragment : Fragment() {
             }
         }
 
-        binding.btnUpdate.setOnClickListener {
-            val selectedCourse = binding.spinnerCourse.selectedItem.toString()
-            val selectedDay = binding.spinnerDay.selectedItem.toString()
-            val selectedStartTime = binding.spinnerStartTime.selectedItem.toString()
-            val selectedEndTime = binding.spinnerEndTime.selectedItem.toString()
-            viewModel.updateScheduleDetail(selectedCourse, selectedDay,selectedStartTime,selectedEndTime)
-            val action = EditScheduleFragmentDirections.actionNavigationEditScheduleToNavigationManageSchedule()
-            NavHostFragment.findNavController(this).navigate(action)
-        }
-
         val scheduleDayArrayAdapter = ArrayAdapter.createFromResource(
             application,
             R.array.scheduleDay,
@@ -73,6 +63,16 @@ class EditScheduleFragment : Fragment() {
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         }
         binding.spinnerDay.adapter = scheduleDayArrayAdapter
+        viewModel.selectedDay.observe(viewLifecycleOwner) {
+            for (i in 0 until scheduleDayArrayAdapter.count) {
+                if ( viewModel.selectedDay.value.toString()
+                        .equals(scheduleDayArrayAdapter.getItem(i).toString())
+                ) {
+                    binding.spinnerDay.setSelection(i)
+                    break
+                }
+            }
+        }
         binding.spinnerDay.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 val selectedValue = parent?.getItemAtPosition(position).toString()
@@ -84,6 +84,8 @@ class EditScheduleFragment : Fragment() {
             }
         }
 
+
+
         val scheduleStartTimeArrayAdapter = ArrayAdapter.createFromResource(
             application,
             R.array.scheduleStartTime,
@@ -91,12 +93,9 @@ class EditScheduleFragment : Fragment() {
         ).also { adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         }
-
         binding.spinnerStartTime.adapter = scheduleStartTimeArrayAdapter
         viewModel.selectedStartTime.observe(viewLifecycleOwner) {
             for (i in 0 until scheduleStartTimeArrayAdapter.count) {
-                Log.i("VM",viewModel.selectedStartTime.value.toString() )
-                Log.i("AA",scheduleStartTimeArrayAdapter.getItem(i).toString() )
                 if ( viewModel.selectedStartTime.value.toString()
                         .equals(scheduleStartTimeArrayAdapter.getItem(i).toString())
                 ) {
@@ -105,7 +104,6 @@ class EditScheduleFragment : Fragment() {
                 }
             }
         }
-
         binding.spinnerStartTime.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 val selectedValue = parent?.getItemAtPosition(position).toString()
@@ -116,6 +114,8 @@ class EditScheduleFragment : Fragment() {
                 Log.i("Selected", "Nothing Selected")
             }
         }
+
+
 
         val scheduleEndTimeArrayAdapter = ArrayAdapter.createFromResource(
             application,
@@ -147,10 +147,14 @@ class EditScheduleFragment : Fragment() {
             }
         }
 
+
         courseListAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item)
         courseListAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spinnerCourse.adapter = courseListAdapter
-        viewModel.selectedCourse.observe(viewLifecycleOwner) {
+        viewModel.courseList.observe(viewLifecycleOwner) { courseList ->
+            courseListAdapter.clear()
+            courseListAdapter.addAll(courseList)
+            courseListAdapter.notifyDataSetChanged()
             for (i in 0 until courseListAdapter.count) {
                 if ( viewModel.selectedCourse.value.toString()
                         .equals(courseListAdapter.getItem(i).toString())
@@ -169,6 +173,17 @@ class EditScheduleFragment : Fragment() {
             override fun onNothingSelected(parent: AdapterView<*>?) {
                 Log.i("Selected", "Nothing Selected")
             }
+        }
+
+
+        binding.btnUpdate.setOnClickListener {
+            val selectedCourse = binding.spinnerCourse.selectedItem.toString()
+            val selectedDay = binding.spinnerDay.selectedItem.toString()
+            val selectedStartTime = binding.spinnerStartTime.selectedItem.toString()
+            val selectedEndTime = binding.spinnerEndTime.selectedItem.toString()
+            viewModel.updateScheduleDetail(selectedCourse, selectedDay,selectedStartTime,selectedEndTime)
+            val action = EditScheduleFragmentDirections.actionNavigationEditScheduleToNavigationManageSchedule()
+            NavHostFragment.findNavController(this).navigate(action)
         }
 
         val topAppBar: MaterialToolbar = binding.topAppBar

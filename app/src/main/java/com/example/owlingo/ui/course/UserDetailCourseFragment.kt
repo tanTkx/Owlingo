@@ -58,7 +58,9 @@ class UserDetailCourseFragment : Fragment() {
             }
         }
 
-        binding.btnUnlock.isVisible = (viewModel._isVisible != "visible")
+        viewModel.isVisible.observe(viewLifecycleOwner) {
+            binding.btnUnlock.isVisible = (viewModel.isVisible.value == "visible")
+        }
 
         binding.btnUnlock.setOnClickListener{
             viewModel.unlockCourse()

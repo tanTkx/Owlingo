@@ -96,7 +96,6 @@ class ScheduleFragment  : Fragment(), ClickListener {
        if(action=="del"){
            val schedule = any as Schedule
            showConfirmationDialog(schedule.scheduleID.toInt() )
-           viewModel.refresh()
        }
     }
 
@@ -113,6 +112,7 @@ class ScheduleFragment  : Fragment(), ClickListener {
         builder.setView(dialogView)
         builder.setPositiveButton("Yes") { _, _ ->
             viewModel.deleteSchedule(scheduleID)
+            viewModel.refresh()
         }
         builder.setNegativeButton("No") { dialog, _ ->
             dialog.dismiss()

@@ -1,20 +1,17 @@
 package com.example.owlingo.ui.community
 
-import android.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.owlingo.R
 import com.example.owlingo.component.ClickListener
-import com.example.owlingo.database.community.Comment
+import com.example.owlingo.database.community.CommentWithUser
 import com.example.owlingo.databinding.AnswerCardBinding
 
-class CommentAdapter(
+class CommentWithUserAdapter(
     private val clickListener: ClickListener
-) : ListAdapter<Comment, CommentAdapter.ViewHolder>(CommentDiffCallback()) {
+) : ListAdapter<CommentWithUser, CommentWithUserAdapter.ViewHolder>(CommentWithUserDiffCallback()) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
@@ -30,8 +27,8 @@ class CommentAdapter(
         private val clickListener: ClickListener
     ) : RecyclerView.ViewHolder(binding.root){
 
-        fun bind(item: Comment) {
-            binding.comment = item
+        fun bind(item: CommentWithUser) {
+            binding.commentWithUser = item
             binding.executePendingBindings()
             binding.editBtn.setOnClickListener{
                 clickListener.onClick(item, "edit")
@@ -53,12 +50,12 @@ class CommentAdapter(
     }
 }
 
-class CommentDiffCallback : DiffUtil.ItemCallback<Comment>() {
-    override fun areItemsTheSame(oldItem: Comment, newItem: Comment): Boolean {
+class CommentWithUserDiffCallback : DiffUtil.ItemCallback<CommentWithUser>() {
+    override fun areItemsTheSame(oldItem: CommentWithUser, newItem: CommentWithUser): Boolean {
         return oldItem.commentId == newItem.commentId
     }
 
-    override fun areContentsTheSame(oldItem: Comment, newItem: Comment): Boolean {
+    override fun areContentsTheSame(oldItem: CommentWithUser, newItem: CommentWithUser): Boolean {
         return oldItem.equals(newItem)
     }
 }

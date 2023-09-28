@@ -81,7 +81,6 @@ class CommunityFragment : Fragment(), ClickListener {
         })
 
         binding.topAppBar.setOnClickListener {
-
         }
 
         binding.lifecycleOwner = this
@@ -100,7 +99,7 @@ class CommunityFragment : Fragment(), ClickListener {
     }
 
     private fun handleSearchTextChange(newText: String) {
-        viewModel.refreshQuestionList(1, newText)
+        UserInformation._userID.value?.let { viewModel.refreshQuestionList(it.toInt(), newText) }
     }
 
 }

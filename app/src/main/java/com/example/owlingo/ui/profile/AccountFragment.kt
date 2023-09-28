@@ -53,7 +53,6 @@ class AccountFragment : Fragment() {
             val userID = UserInformation.userID
 
             if (userID != null) {
-                Log.d("deleteButtom", "clicked")
                 userID.value?.let { it1 -> deleteUserData(it1) }
             };
 
@@ -62,7 +61,7 @@ class AccountFragment : Fragment() {
         val logout_btn = view.findViewById<Button>(R.id.register_btn)
 
         logout_btn.setOnClickListener {
-            UserInformation._userID.value = "-1"
+            UserInformation.setUserID("-1")
 
             Toast.makeText(
                 requireActivity(),
@@ -102,7 +101,6 @@ class AccountFragment : Fragment() {
         val stringRequest: StringRequest = object : StringRequest(
             Request.Method.GET, getUserURL,
             Response.Listener { response ->
-                Log.d("FetchData", response)
                 handleUserResponse(response)
             },
             Response.ErrorListener { error ->

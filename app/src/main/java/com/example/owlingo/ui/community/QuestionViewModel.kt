@@ -15,6 +15,7 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.owlingo.database.community.Comment
+import com.example.owlingo.database.community.CommentWithUser
 import com.example.owlingo.database.community.Question
 import kotlinx.coroutines.launch
 import org.json.JSONArray
@@ -31,8 +32,8 @@ class QuestionViewModel(questionId: Int, application: Application) : ViewModel()
     val question: LiveData<Question>
         get() = _question
 
-    private val _commentList = MutableLiveData<List<Comment>>()
-    val commentList: LiveData<List<Comment>>
+    private val _commentList = MutableLiveData<List<CommentWithUser>>()
+    val commentList: LiveData<List<CommentWithUser>>
         get() = _commentList
 
     private val toastMsg = MutableLiveData<String?>()
@@ -81,6 +82,7 @@ class QuestionViewModel(questionId: Int, application: Application) : ViewModel()
             } catch (e: Exception) {
                 showToast("Exception $e")
             }
+
         }
 
     }
@@ -124,11 +126,11 @@ class QuestionViewModel(questionId: Int, application: Application) : ViewModel()
         )
     }
 
-    private fun parseComments(response: JSONArray): MutableList<Comment> {
-        val comments = mutableListOf<Comment>()
+    private fun parseComments(response: JSONArray): MutableList<CommentWithUser> {
+        val comments = mutableListOf<CommentWithUser>()
         for (i in 0 until response.length()) {
             val jsonObject = response.getJSONObject(i)
-            val comment = Comment(
+            val comment = CommentWithUser(
                 commentId = jsonObject.getInt("commentId"),
                 questionId = jsonObject.getInt("questionId"),
                 commentTitle = jsonObject.getString("commentTitle"),
@@ -136,7 +138,9 @@ class QuestionViewModel(questionId: Int, application: Application) : ViewModel()
                 userId  = jsonObject.getInt("userId"),
                 commentLike = jsonObject.getInt("commentLike"),
                 commentDisLike = jsonObject.getInt("commentDislike"),
-                commentDateTime   = jsonObject.getString("commentDateTime"),
+                commentDateTime = jsonObject.getString("commentDateTime"),
+                username = jsonObject.getString("name"),
+                useremail = jsonObject.getString("email"),
             )
             comments.add(comment)
         }

@@ -18,8 +18,10 @@ import androidx.navigation.fragment.NavHostFragment
 import com.example.owlingo.R
 import com.example.owlingo.component.ClickListener
 import com.example.owlingo.database.community.Comment
+import com.example.owlingo.database.community.CommentWithUser
 import com.example.owlingo.database.community.Question
 import com.example.owlingo.databinding.FragmentQuestionBinding
+import com.example.owlingo.ui.UserInformation
 import com.google.android.material.appbar.MaterialToolbar
 
 class QuestionFragment : Fragment(), ClickListener {
@@ -51,7 +53,7 @@ class QuestionFragment : Fragment(), ClickListener {
             .get(QuestionViewModel::class.java)
         binding.questionViewModel = viewModel
 
-        val adapter = CommentAdapter(clickListener)
+        val adapter = CommentWithUserAdapter(clickListener)
         binding.commentList.adapter = adapter
         viewModel.commentList.observe(viewLifecycleOwner, Observer {
             it?.let {
@@ -68,6 +70,7 @@ class QuestionFragment : Fragment(), ClickListener {
 
         binding.addComment.setOnClickListener {
             val action = QuestionFragmentDirections.actionNavigationCreateComment()
+            action.userId = UserInformation._userID.value?.toInt() ?: 0
             action.questionId = QuestionFragmentArgs.fromBundle(requireArguments()).questionId
             NavHostFragment.findNavController(this).navigate(action)
         }
@@ -90,7 +93,7 @@ class QuestionFragment : Fragment(), ClickListener {
 
     override fun onClick(any: Any, action: String?) {
         if(action=="edit") {
-            val comment = any as Comment
+            val comment = any as CommentWithUser
             val action = QuestionFragmentDirections.actionNavigationEditComment()
             action.commentId = comment.commentId
             action.questionId = comment.questionId
@@ -98,7 +101,7 @@ class QuestionFragment : Fragment(), ClickListener {
         }
 
         if(action=="del") {
-            val comment = any as Comment
+            val comment = any as CommentWithUser
             showConfirmationDialog(comment.commentId,comment.questionId )
         }
     }
