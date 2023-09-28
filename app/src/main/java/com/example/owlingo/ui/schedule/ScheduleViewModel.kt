@@ -11,7 +11,9 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.android.volley.RequestQueue
+import com.android.volley.Response
 import com.android.volley.toolbox.JsonArrayRequest
+import com.android.volley.toolbox.StringRequest
 import com.example.owlingo.database.schedule.Schedule
 
 
@@ -26,6 +28,10 @@ class ScheduleViewModel( application: Application) : ViewModel(){
     private val toastMsg = MutableLiveData<String?>()
 
     init {
+        initializeScheduleList()
+    }
+
+    fun refresh(){
         initializeScheduleList()
     }
 
@@ -52,6 +58,33 @@ class ScheduleViewModel( application: Application) : ViewModel(){
         }
 
         Log.i("ScheduleList", _scheduleList.toString())
+    }
+
+    fun deleteSchedule(scheduleID: Int){
+        try {
+            val stringRequest: StringRequest = object : StringRequest(
+                Request.Method.POST, "http://10.0.2.2/Owlingo/scheduleDAO.php?submitDelete=1&scheduleID=$scheduleID",
+                Response.Listener { response ->
+
+                    if (response == "success") {
+                        showToast("Schedule Successful Deleted ")
+                    } else if (response == "failure") {
+                        showToast("Schedule Delete Failed")
+                    }else{
+                        showToast("Comment Delete Failed")
+                        Log.e("Connection Error Msg", response.toString())
+                    }},
+
+                Response.ErrorListener { error ->
+                    showToast("Schedule Uploaded Failed")
+                    Log.e("Connection Error Msg", "$error")
+                }) {
+            }
+            requestQueue.add(stringRequest)
+        } catch (e: Exception) {
+            Log.e("Error", e.toString())
+            showToast("Exception $e")
+        }
     }
 
     private fun parseSchedule(response: JSONArray): MutableList<Schedule> {

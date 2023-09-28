@@ -189,6 +189,10 @@
         <action
             android:id="@+id/action_navigation_manage_schedule_to_navigation_add_schedule"
             app:destination="@id/navigation_add_schedule" />
+
+        <action
+            android:id="@+id/action_navigation_manage_schedule_to_navigation_edit_schedule"
+            app:destination="@id/navigation_edit_schedule" />
     </fragment>
 
     <fragment
@@ -198,6 +202,20 @@
         tools:layout="@layout/add_schedule" >
         <action
             android:id="@+id/action_navigation_add_schedule_to_navigation_manage_schedule"
+            app:destination="@id/navigation_manage_schedule" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_edit_schedule"
+        android:name="com.example.owlingo.ui.schedule.EditScheduleFragment"
+        android:label="edit_schedule_fragment"
+        tools:layout="@layout/edit_schedule" >
+        <argument
+            android:name="scheduleID"
+            android:defaultValue="0"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_navigation_edit_schedule_to_navigation_manage_schedule"
             app:destination="@id/navigation_manage_schedule" />
     </fragment>
 

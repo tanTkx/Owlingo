@@ -104,7 +104,7 @@ class AddScheduleViewModel (
     private fun getCourse(){
         viewModelScope.launch {
             try {
-                val urlWithParams = "http://10.0.2.2/Owlingo/scheduleDAO.php"
+                val urlWithParams = "http://10.0.2.2/Owlingo/courseAllDAO.php"
 
                 val jsonArrayRequest = JsonArrayRequest(
                     Request.Method.GET, urlWithParams, null,

@@ -23,7 +23,7 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-class EditCommentViewModel( commentId: Int, application: Application) : ViewModel(){
+class  EditCommentViewModel( commentId: Int, application: Application) : ViewModel(){
 
     private val requestQueue: RequestQueue = Volley.newRequestQueue(application)
     private val toastMsg = MutableLiveData<String?>()

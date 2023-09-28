@@ -31,7 +31,11 @@ class ScheduleAdapter(
             binding.schedule = item
             binding.executePendingBindings()
             binding.editScheduleBtn.setOnClickListener {
-                clickListener.onClick(item)
+                clickListener.onClick(item, "edit")
+            }
+
+            binding.deleteScheduleBtn.setOnClickListener {
+                clickListener.onClick(item, "del")
             }
         }
 
