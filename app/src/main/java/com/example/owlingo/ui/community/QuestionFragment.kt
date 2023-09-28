@@ -55,11 +55,11 @@ class QuestionFragment : Fragment(), ClickListener {
 
         val adapter = CommentWithUserAdapter(clickListener)
         binding.commentList.adapter = adapter
-        viewModel.commentList.observe(viewLifecycleOwner, Observer {
+        viewModel.commentList.observe(viewLifecycleOwner) {
             it?.let {
                 adapter.submitList(it)
             }
-        })
+        }
 
         viewModel.getToastMessage().observe(viewLifecycleOwner) { message ->
             if (message != null) {
@@ -103,6 +103,7 @@ class QuestionFragment : Fragment(), ClickListener {
         if(action=="del") {
             val comment = any as CommentWithUser
             showConfirmationDialog(comment.commentId,comment.questionId )
+            viewModel.refresh(QuestionFragmentArgs.fromBundle(requireArguments()).questionId)
         }
     }
 

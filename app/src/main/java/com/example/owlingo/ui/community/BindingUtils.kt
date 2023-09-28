@@ -1,11 +1,9 @@
 package com.example.owlingo.ui.community
 
 import android.widget.Button
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
-import com.example.owlingo.database.community.Comment
 import com.example.owlingo.database.community.CommentWithUser
 import com.example.owlingo.database.community.Question
 import com.example.owlingo.ui.UserInformation
@@ -32,6 +30,7 @@ class BindingUtils {
             text = item.commentNo.toString()
         }
 
+
         @BindingAdapter("commentTitle")
         @JvmStatic
         fun TextView.setCommentTitle(item: CommentWithUser) {
@@ -56,9 +55,9 @@ class BindingUtils {
             text = item.username
         }
 
-        @BindingAdapter("email")
+        @BindingAdapter("commentEmail")
         @JvmStatic
-        fun Button.setEmail(item: CommentWithUser) {
+        fun TextView.setCommentEmail(item: CommentWithUser) {
             text = item.useremail
         }
 
@@ -79,7 +78,6 @@ class BindingUtils {
         fun Button.setBtnVisible(item: CommentWithUser) {
             isVisible = (item.userId == UserInformation._userID.value?.toInt() ?: 0)
         }
-
 
     }
 }
