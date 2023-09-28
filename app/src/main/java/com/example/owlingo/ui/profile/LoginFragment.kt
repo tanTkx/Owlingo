@@ -80,7 +80,6 @@ class LoginFragment : Fragment() {
             val stringRequest: StringRequest = object : StringRequest(
                 Request.Method.POST, URL,
                 Response.Listener { response ->
-                    Log.d("res", response)
                     handleLoginResponse(response)
                 },
                 Response.ErrorListener { error ->

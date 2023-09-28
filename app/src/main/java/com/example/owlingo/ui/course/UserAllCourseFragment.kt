@@ -59,17 +59,18 @@ class UserAllCourseFragment : Fragment(), ClickListener {
             }
         }
 
+        viewModel.refreshCourseList()
+
         binding.lifecycleOwner = this
         return binding.root
     }
-    //
+
     override fun onClick(any: Any, action: String?) {
         val course = any as Course
-//
-//            val action = User
-//            action.courseId = course.course_id
-//            NavHostFragment.findNavController(this).navigate(action)
-//
+        Log.i("Tag", "Reach Here")
+            val action = UserAllCourseFragmentDirections.actionUserAllCourseFragmentToUserDetailCourseFragment()
+            action.courseId = course.course_id
+            NavHostFragment.findNavController(this).navigate(action)
 
     }
 

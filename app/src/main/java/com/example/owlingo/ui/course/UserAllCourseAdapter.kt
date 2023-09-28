@@ -17,7 +17,6 @@ import com.example.owlingo.databinding.UserAllCourseCardBinding
 
 class UserAllCourseAdapter(
     private val clickListener: ClickListener
-
 ) : ListAdapter<Course, UserAllCourseAdapter.ViewHolder>(UserCourseDiffCallback()) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

@@ -40,12 +40,12 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="16dp"
                 android:text="Java Script"
                 android:textSize="16sp"
-                app:mycourseName="@{myCourse}"
                 app:layout_constraintStart_toEndOf="@+id/img_java"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:mycourseName="@{myCourse}" />
 
             <TextView
                 android:id="@+id/tv2"
@@ -53,9 +53,9 @@
                 android:layout_height="wrap_content"
                 android:text="Mr.Tan"
                 android:textSize="12sp"
-                app:mycourseLecture="@{myCourse}"
-                tools:layout_editor_absoluteX="124dp"
-                tools:layout_editor_absoluteY="53dp" />
+                app:layout_constraintStart_toStartOf="@+id/tv1"
+                app:layout_constraintTop_toBottomOf="@+id/tv1"
+                app:mycourseLecture="@{myCourse}" />
 
             <TextView
                 android:id="@+id/textView7"
@@ -63,9 +63,9 @@
                 android:layout_height="29dp"
                 android:text="Hello World"
                 android:textSize="10sp"
-                app:mycourseDetail="@{myCourse}"
-                tools:layout_editor_absoluteX="124dp"
-                tools:layout_editor_absoluteY="69dp" />
+                app:layout_constraintStart_toStartOf="@+id/tv2"
+                app:layout_constraintTop_toBottomOf="@+id/tv2"
+                app:mycourseDetail="@{myCourse}" />
 
             <TextView
                 android:id="@+id/textView8"
@@ -73,9 +73,9 @@
                 android:layout_height="wrap_content"
                 android:text="RM 188"
                 android:textSize="10sp"
-                app:mycourseFee="@{myCourse}"
-                tools:layout_editor_absoluteX="124dp"
-                tools:layout_editor_absoluteY="98dp" />
+                app:layout_constraintStart_toStartOf="@+id/textView7"
+                app:layout_constraintTop_toBottomOf="@+id/textView7"
+                app:mycourseFee="@{myCourse}" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

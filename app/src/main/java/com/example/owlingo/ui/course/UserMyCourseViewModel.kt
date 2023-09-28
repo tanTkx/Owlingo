@@ -13,6 +13,7 @@ import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.owlingo.database.course.Course
+import com.example.owlingo.ui.UserInformation
 import kotlinx.coroutines.launch
 import org.json.JSONArray
 
@@ -27,17 +28,17 @@ class UserMyCourseViewModel(application: Application)  : ViewModel(){
     private val toastMsg = MutableLiveData<String?>()
 
     init {
-        initializeCourseList()
+        UserInformation.userID?.let { initializeCourseList(it.toInt()) }
     }
 
     fun refreshCourseList(){
-        initializeCourseList()
+        UserInformation.userID?.let { initializeCourseList(it.toInt()) }
     }
 
-    private fun initializeCourseList() {
+    private fun initializeCourseList(userId: Int) {
         viewModelScope.launch {
             try {
-                val urlWithParams = "http://10.0.2.2/Owlingo/usermycourseDAO.php"
+                val urlWithParams = "http://10.0.2.2/Owlingo/usermycourseDAO.php?userId=$userId"
 
                 val jsonArrayRequest = JsonArrayRequest(
                     Request.Method.GET, urlWithParams, null,
@@ -67,7 +68,7 @@ class UserMyCourseViewModel(application: Application)  : ViewModel(){
                 course_detail = jsonObject.getString("course_detail"),
                 course_lecture = jsonObject.getString("course_lecture"),
                 course_fee = jsonObject.getInt("course_fee"),
-                course_schedule = jsonObject.getString("course_schedule")
+//                course_schedule = jsonObject.getString("course_schedule")
 
             )
             courses.add(course)

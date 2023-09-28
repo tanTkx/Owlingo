@@ -205,7 +205,11 @@
     <fragment
         android:id="@+id/userAllCourseFragment"
         android:name="com.example.owlingo.ui.course.UserAllCourseFragment"
-        android:label="UserAllCourseFragment" />
+        android:label="UserAllCourseFragment" >
+        <action
+            android:id="@+id/action_userAllCourseFragment_to_userDetailCourseFragment"
+            app:destination="@id/userDetailCourseFragment" />
+    </fragment>
 
 
     <fragment
@@ -245,6 +249,23 @@
             android:id="@+id/action_navigation_edit_schedule_to_navigation_manage_schedule"
             app:destination="@id/navigation_manage_schedule" />
     </fragment>
+
+    <fragment
+        android:id="@+id/userDetailCourseFragment"
+        android:name="com.example.owlingo.ui.course.UserDetailCourseFragment"
+        android:label="UserDetailCourseFragment" >
+        <argument
+            android:name="courseId"
+            android:defaultValue="0"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_userDetailCourseFragment_to_userAllCourseFragment"
+            app:destination="@id/userAllCourseFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/userMYCourseFragment"
+        android:name="com.example.owlingo.ui.course.UserMYCourseFragment"
+        android:label="UserMYCourseFragment" />
 
 
 </navigation>

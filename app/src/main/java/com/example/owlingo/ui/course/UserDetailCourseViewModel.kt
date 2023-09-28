@@ -10,35 +10,41 @@ import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonArrayRequest
+import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.example.owlingo.database.community.Question
 import com.example.owlingo.database.course.Course
+import com.example.owlingo.ui.UserInformation
 import kotlinx.coroutines.launch
 import org.json.JSONArray
+import org.json.JSONObject
 
 class UserDetailCourseViewModel(courseId: Int, application: Application)  : ViewModel(){
 
     private val requestQueue: RequestQueue = Volley.newRequestQueue(application)
 
-    private val _courseList = MutableLiveData<List<Course>>()
-    val courseList: LiveData<List<Course>>
-        get() = _courseList
+    private val _course = MutableLiveData<Course>()
+    val course: LiveData<Course>
+        get() = _course
+
+    var _isVisible: String = "visible"
 
     private val toastMsg = MutableLiveData<String?>()
 
     init {
-        initializeCourseList()
+        initializeCourse(courseId)
     }
 
-    private fun initializeCourseList() {
+    private fun initializeCourse(courseId: Int) {
+
         viewModelScope.launch {
             try {
-                val urlWithParams = "http://10.0.2.2/Owlingo/usercourseAllDAO.php"
-
-                val jsonArrayRequest = JsonArrayRequest(
+                val urlWithParams = "http://10.0.2.2/Owlingo/getCourse.php?courseId=$courseId"
+                val jsonObjectRequest = JsonObjectRequest(
                     Request.Method.GET, urlWithParams, null,
                     { response ->
-                        _courseList.postValue(parseCourses(response))
+                        _course.value = parseCourse(response)
                     },
                     { error ->
                         showToast("$error")
@@ -46,27 +52,71 @@ class UserDetailCourseViewModel(courseId: Int, application: Application)  : View
                     }
                 )
 
-                requestQueue.add(jsonArrayRequest)
+                requestQueue.add(jsonObjectRequest)
             } catch (e: Exception) {
                 showToast("Exception $e")
             }
+
+        }
+
+        val userId: Int = UserInformation.userID?.toInt() ?: 0
+        try {
+            val stringRequest: StringRequest = object : StringRequest(
+                Request.Method.GET, "http://10.0.2.2/Owlingo/checkRegistered.php?userId=$userId&courseId=$courseId",
+                Response.Listener { response ->
+
+                    if (response == "visible") {
+                       _isVisible = response
+                    } else if (response == "invisible") {
+                        _isVisible = response
+                    }else{
+                        Log.e("Connection Error Msg", response.toString())
+                    }},
+
+                Response.ErrorListener { error ->
+                    Log.e("Connection Error Msg", "$error")
+                }) {
+            }
+            requestQueue.add(stringRequest)
+        } catch (e: Exception) {
+            Log.e("Error", e.toString())
+            showToast("Exception $e")
         }
     }
-    private fun parseCourses(response: JSONArray): MutableList<Course> {
-        val courses = mutableListOf<Course>()
-        for (i in 0 until response.length()) {
-            val jsonObject = response.getJSONObject(i)
-            val course = Course(
-                course_id = jsonObject.getInt("course_id") ,
-                course_name = jsonObject.getString("course_name"),
-                course_detail = jsonObject.getString("course_detail"),
-                course_lecture = jsonObject.getString("course_lecture"),
-                course_fee = jsonObject.getInt("course_fee"),
-                course_schedule = jsonObject.getString("course_schedule")
+    private fun parseCourse(response: JSONObject): Course {
+
+        return Course(
+            course_id = response.getInt("course_id") ,
+            course_name = response.getString("course_name"),
+            course_detail = response.getString("course_detail"),
+            course_lecture = response.getString("course_lecture"),
+            course_fee = response.getInt("course_fee"),
+//            course_schedule = response.getString("course_schedule").orEmpty()
+        )
+    }
+
+    fun unlockCourse(){
+        try {
+
+            val courseId: Int = _course.value?.course_id?: 0
+            val userId: Int = UserInformation.userID?.toInt() ?: 0
+
+            val urlWithParams = "http://10.0.2.2/Owlingo/unlockCourseDAO.php?courseId=$courseId&userId=$userId"
+            val jsonObjectRequest = JsonObjectRequest(
+                Request.Method.GET, urlWithParams, null,
+                { response ->
+                    showToast(response.toString())
+                },
+                { error ->
+                    showToast("$error")
+                    Log.e("Connection Error Msg", "$error")
+                }
             )
-            courses.add(course)
+
+            requestQueue.add(jsonObjectRequest)
+        } catch (e: Exception) {
+            showToast("Exception $e")
         }
-        return courses
     }
 
     private fun showToast(message: String) {
