@@ -94,7 +94,7 @@ class AdminAllCourseViewModel(application: Application)  : ViewModel(){
                 course_detail = jsonObject.getString("course_detail"),
                 course_lecture = jsonObject.getString("course_lecture"),
                 course_fee = jsonObject.getInt("course_fee"),
-                course_schedule = jsonObject.getString("course_schedule")
+//                course_schedule = jsonObject.getString("course_schedule")
 
             )
             courses.add(course)

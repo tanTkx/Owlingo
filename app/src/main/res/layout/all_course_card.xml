@@ -54,8 +54,8 @@
                 android:text="Mr.Tan"
                 android:textSize="12sp"
                 app:courseLecture="@{course}"
-                tools:layout_editor_absoluteX="124dp"
-                tools:layout_editor_absoluteY="53dp" />
+                app:layout_constraintStart_toStartOf="@+id/tv1"
+                app:layout_constraintTop_toBottomOf="@+id/tv1" />
 
 
             <Button
@@ -71,9 +71,10 @@
                 app:iconTint="#029AFF"
                 app:layout_constraintBottom_toBottomOf="@+id/textView8"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.705"
-                app:layout_constraintStart_toEndOf="@+id/tv2"
-                app:layout_constraintTop_toTopOf="@+id/textView7" />
+                app:layout_constraintHorizontal_bias="0.581"
+                app:layout_constraintStart_toEndOf="@+id/textView7"
+                app:layout_constraintTop_toTopOf="@+id/textView7"
+                app:layout_constraintVertical_bias="1.0" />
 
             <Button
                 android:id="@+id/delBtn"
@@ -88,9 +89,10 @@
                 app:iconTint="#FA1500"
                 app:layout_constraintBottom_toBottomOf="@+id/textView8"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.962"
-                app:layout_constraintStart_toEndOf="@+id/tv2"
-                app:layout_constraintTop_toTopOf="@+id/textView7" />
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/editBtn"
+                app:layout_constraintTop_toTopOf="@+id/textView7"
+                app:layout_constraintVertical_bias="1.0" />
 
             <TextView
                 android:id="@+id/textView7"
@@ -99,8 +101,8 @@
                 android:text="Hello World"
                 android:textSize="10sp"
                 app:courseDetail="@{course}"
-                tools:layout_editor_absoluteX="124dp"
-                tools:layout_editor_absoluteY="69dp" />
+                app:layout_constraintStart_toStartOf="@+id/tv2"
+                app:layout_constraintTop_toBottomOf="@+id/tv2" />
 
             <TextView
                 android:id="@+id/textView8"
@@ -109,8 +111,8 @@
                 android:text="RM 188"
                 android:textSize="10sp"
                 app:courseFee="@{course}"
-                tools:layout_editor_absoluteX="124dp"
-                tools:layout_editor_absoluteY="98dp" />
+                app:layout_constraintStart_toStartOf="@+id/textView7"
+                app:layout_constraintTop_toBottomOf="@+id/textView7" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 

@@ -48,7 +48,9 @@ class AdminEditCourseFragment : Fragment(){
             false
         )
         val application = requireNotNull(this.activity).application
-        viewModelFactory = AdminEditCourseFactory(application)
+        viewModelFactory = AdminEditCourseFactory(
+            AdminEditCourseFragmentArgs.fromBundle(requireArguments()).courseId,
+            application)
         viewModel = ViewModelProvider(this, viewModelFactory)
             .get(AdminEditCourseViewModel::class.java)
         binding.adminEditCourseViewModel = viewModel
@@ -68,7 +70,7 @@ class AdminEditCourseFragment : Fragment(){
 
             viewModel.editCourse(courseName, courseLecture, courseDetail, courseFee)
 
-            val action = AdminCreateCourseFragmentDirections.actionNavigationAdminCreateCourseToNavigationAdminViewAllCourse()
+            val action = AdminEditCourseFragmentDirections.actionNavigationAdminEditCourseToNavigationAdminViewAllCourse()
             NavHostFragment.findNavController(this).navigate(action)
         }
 

@@ -79,8 +79,6 @@ class AdminCreateCourseViewModel (application: Application) : ViewModel() {
                 @Throws(AuthFailureError::class)
                 override fun getParams(): Map<String, String>? {
                     val data: MutableMap<String, String> = HashMap()
-                    val dateFormat = SimpleDateFormat("yyyy-M-d", Locale.getDefault())
-
                     data["course_name"] = _courseName.value.toString()
                     data["course_detail"] = _courseDetail.value.toString()
                     data["course_lecture"] = _courseLecture.value.toString()
