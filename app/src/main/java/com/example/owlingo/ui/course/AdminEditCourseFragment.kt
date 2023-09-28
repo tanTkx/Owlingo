@@ -20,18 +20,20 @@ import com.example.owlingo.R
 import com.example.owlingo.database.course.Course
 import com.example.owlingo.databinding.FragmentCreateCourseBinding
 import com.example.owlingo.databinding.FragmentCreateQuestionBinding
+import com.example.owlingo.databinding.FragmentEditCourseBinding
 import com.example.owlingo.ui.community.CreateQuestionFactory
 import com.example.owlingo.ui.community.CreateQuestionFragmentArgs
 import com.example.owlingo.ui.community.CreateQuestionFragmentDirections
 import com.example.owlingo.ui.community.CreateQuestionViewModel
+import com.example.owlingo.ui.community.EditCommentFragmentArgs
+import com.example.owlingo.ui.community.EditCommentFragmentDirections
 import com.google.android.material.appbar.MaterialToolbar
 
-class AdminCreateCourseFragment : Fragment(){
+class AdminEditCourseFragment : Fragment(){
 
-    private lateinit var viewModel: AdminCreateCourseViewModel
-    private lateinit var viewModelFactory: AdminCreateCourseFactory
+    private lateinit var viewModel: AdminEditCourseViewModel
+    private lateinit var viewModelFactory: AdminEditCourseFactory
     private lateinit var navController: NavController
-    private lateinit var courseListAdapter: ArrayAdapter<String>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,17 +41,17 @@ class AdminCreateCourseFragment : Fragment(){
         savedInstanceState: Bundle?
     ): View? {
 
-        val binding: FragmentCreateCourseBinding = DataBindingUtil.inflate(
+        val binding: FragmentEditCourseBinding = DataBindingUtil.inflate(
             inflater,
-            R.layout.fragment_create_course,
+            R.layout.fragment_edit_course,
             container,
             false
         )
         val application = requireNotNull(this.activity).application
-        viewModelFactory = AdminCreateCourseFactory(application)
+        viewModelFactory = AdminEditCourseFactory(application)
         viewModel = ViewModelProvider(this, viewModelFactory)
-            .get(AdminCreateCourseViewModel::class.java)
-        binding.adminCreateCourseViewModel = viewModel
+            .get(AdminEditCourseViewModel::class.java)
+        binding.adminEditCourseViewModel = viewModel
 
         viewModel.getToastMessage().observe(viewLifecycleOwner) { message ->
             if (message != null) {
@@ -58,20 +60,17 @@ class AdminCreateCourseFragment : Fragment(){
             }
         }
 
-        binding.btnCreate.setOnClickListener {
+        binding.btnSave.setOnClickListener {
             val courseName = binding.etCn.text.toString()
             val courseLecture = binding.etLn.text.toString()
             val courseDetail = binding.etDes.text.toString()
             val courseFee = binding.etPrice.text.toString().toInt()
 
-            viewModel.createCourse(courseName, courseLecture, courseDetail, courseFee)
+            viewModel.editCourse(courseName, courseLecture, courseDetail, courseFee)
 
             val action = AdminCreateCourseFragmentDirections.actionNavigationAdminCreateCourseToNavigationAdminViewAllCourse()
             NavHostFragment.findNavController(this).navigate(action)
         }
-
-        courseListAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item)
-        courseListAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
         val topAppBar: MaterialToolbar = binding.topAppBar
         navController = NavHostFragment.findNavController(this)

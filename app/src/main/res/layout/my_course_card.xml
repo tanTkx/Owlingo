@@ -7,8 +7,8 @@
 
     <data>
         <variable
-            name="question"
-            type="com.example.owlingo.database.community.Question" />
+            name="myCourse"
+            type="com.example.owlingo.database.course.Question" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -39,10 +39,11 @@
                 android:id="@+id/tv1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/activity_horizontal_margin"
-                android:layout_marginTop="25dp"
-                android:text=" Programming Language"
-                android:textSize="11sp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="32dp"
+                android:text="Java Script"
+                android:textSize="16sp"
+                app:courseName="@{course}"
                 app:layout_constraintStart_toEndOf="@+id/img_java"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -50,24 +51,31 @@
                 android:id="@+id/tv2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text=" Java Script"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/tv1"
-                app:layout_constraintTop_toBottomOf="@+id/tv1"
-                app:layout_constraintVertical_bias="0.117" />
+                android:text="Mr.Tan"
+                android:textSize="12sp"
+                app:courseLecture="@{course}"
+                tools:layout_editor_absoluteX="124dp"
+                tools:layout_editor_absoluteY="53dp" />
 
             <TextView
-                android:id="@+id/pg_empty"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:id="@+id/textView7"
+                android:layout_width="96dp"
+                android:layout_height="29dp"
+                android:text="Hello World"
+                android:textSize="10sp"
+                app:courseDetail="@{course}"
+                tools:layout_editor_absoluteX="124dp"
+                tools:layout_editor_absoluteY="69dp" />
 
             <TextView
-                android:id="@+id/textView6"
+                android:id="@+id/textView8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView"
-                tools:layout_editor_absoluteX="120dp"
-                tools:layout_editor_absoluteY="65dp" />
+                android:text="RM 188"
+                android:textSize="10sp"
+                app:courseFee="@{course}"
+                tools:layout_editor_absoluteX="124dp"
+                tools:layout_editor_absoluteY="98dp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

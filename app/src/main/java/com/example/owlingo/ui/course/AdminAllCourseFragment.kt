@@ -50,30 +50,32 @@ class AdminAllCourseFragment : Fragment(), ClickListener {
                 adapter.submitList(it)
             }
         })
-//
-//        viewModel.getToastMessage().observe(viewLifecycleOwner) { message ->
-//            if (message != null) {
-//                Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
-//                viewModel.toastShown()
-//            }
-//        }
-//        viewModel.refreshQuestionList(1)
-//
-//        binding.createBtn.setOnClickListener{
-//            val action = CommunityFragmentDirections.actionNavigationCreateQuestion()
-//            action.userId = 1
-//            NavHostFragment.findNavController(this).navigate(action)
-//        }
-//
+
+        viewModel.getToastMessage().observe(viewLifecycleOwner) { message ->
+            if (message != null) {
+                Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                viewModel.toastShown()
+            }
+        }
+        viewModel.refreshCourseList()
+
+        binding.addBtn.setOnClickListener{
+            val action = AdminAllCourseFragmentDirections.actionNavigationAdminViewAllCourseToNavigationAdminCreateCourse()
+            NavHostFragment.findNavController(this).navigate(action)
+        }
+
         binding.lifecycleOwner = this
         return binding.root
     }
 //
     override fun onClick(any: Any, action: String?) {
-        val question = any as Course
-//        val action = .actionNavigationViewQuestion()
-//        action.questionId = question.questionId
-//        NavHostFragment.findNavController(this).navigate(action)
+        val course = any as Course
+    if( action=="edit"){
+        val action = AdminAllCourseFragmentDirections.actionNavigationAdminViewAllCourseToNavigationAdminEditCourse()
+        action.courseId = course.course_id
+        NavHostFragment.findNavController(this).navigate(action)
+    }
+
     }
 
 }

@@ -8,7 +8,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.android.volley.Request
 import com.android.volley.RequestQueue
+import com.android.volley.Response
 import com.android.volley.toolbox.JsonArrayRequest
+import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.owlingo.database.course.Course
 import kotlinx.coroutines.launch
@@ -28,10 +30,14 @@ class AdminAllCourseViewModel(application: Application)  : ViewModel(){
         initializeCourseList()
     }
 
+    fun refreshCourseList(){
+        initializeCourseList()
+    }
+
     private fun initializeCourseList() {
         viewModelScope.launch {
             try {
-                val urlWithParams = "http://10.0.2.2/Owlingo/courseDAO.php"
+                val urlWithParams = "http://10.0.2.2/Owlingo/courseAllDAO.php"
 
                 val jsonArrayRequest = JsonArrayRequest(
                     Request.Method.GET, urlWithParams, null,
@@ -48,6 +54,33 @@ class AdminAllCourseViewModel(application: Application)  : ViewModel(){
             } catch (e: Exception) {
                 showToast("Exception $e")
             }
+        }
+    }
+
+    fun deleteCourse(courseId:Int ){
+        try {
+            val stringRequest: StringRequest = object : StringRequest(
+                Request.Method.GET, "http://10.0.2.2/Owlingo/courseDeleteDAO.php?course_id=$courseId",
+                Response.Listener { response ->
+
+                    if (response == "success") {
+                        showToast("Course Successful Deleted ")
+                    } else if (response == "failure") {
+                        showToast("Course Delete Failed")
+                    }else{
+                        showToast("Course Delete Failed")
+                        Log.e("Connection Error Msg", response.toString())
+                    }},
+
+                Response.ErrorListener { error ->
+                    showToast("Course Delete Failed")
+                    Log.e("Connection Error Msg", "$error")
+                }) {
+            }
+            requestQueue.add(stringRequest)
+        } catch (e: Exception) {
+            Log.e("Error", e.toString())
+            showToast("Exception $e")
         }
     }
 

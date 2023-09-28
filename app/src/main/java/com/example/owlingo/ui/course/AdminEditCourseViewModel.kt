@@ -19,7 +19,7 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-class AdminCreateCourseViewModel (application: Application) : ViewModel() {
+class AdminEditCourseViewModel (application: Application) : ViewModel() {
 
     private val _courseName = MutableLiveData<String>()
     val courseName: LiveData<String>
@@ -49,30 +49,30 @@ class AdminCreateCourseViewModel (application: Application) : ViewModel() {
         _courseFee.value = 0
     }
 
-    fun createCourse(courseName:String, courseDetail: String, courseLecture:String, courseFee:Int) {
+    fun editCourse(courseName:String, courseDetail: String, courseLecture:String, courseFee:Int) {
         _courseName.value = courseName
         _courseDetail.value = courseDetail
         _courseLecture.value = courseLecture
         _courseFee.value = courseFee
-        createCourse()
+        editCourse()
     }
 
-    private fun createCourse() {
+    private fun editCourse() {
         try {
             val stringRequest: StringRequest = object : StringRequest(
-                Request.Method.POST, "http://10.0.2.2/Owlingo/courseCreateDAO.php",
+                Request.Method.POST, "http://10.0.2.2/Owlingo/courseEditDAO.php",
                 Response.Listener { response ->
 
                     if (response == "success") {
-                        showToast("Course Successful Created ")
+                        showToast("Course Successful Edited ")
                     } else if (response == "failure") {
-                        showToast("Course Unsuccessful Created")
+                        showToast("Course Unsuccessful Edited")
                     }else{
-                        showToast("Course Create Failed")
+                        showToast("Course Edit Failed")
                         Log.e("Connection Error Msg", response.toString())
                     }},
                 Response.ErrorListener { error ->
-                    showToast("Course Create Failed")
+                    showToast("Course Edit Failed")
                     Log.e("Connection Error Msg", "$error")
                 }) {
 

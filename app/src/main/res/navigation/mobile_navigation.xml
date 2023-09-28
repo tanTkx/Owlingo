@@ -179,6 +179,44 @@
             app:argType="integer" />
 
     </fragment>
-    
+
+    <fragment
+        android:id="@+id/navigation_adminViewAllCourse"
+        android:name="com.example.owlingo.ui.course.AdminAllCourseFragment"
+        android:label="Admin View All Course"
+        tools:layout="@layout/fragment_admin_course_detail" >
+        <action
+            android:id="@+id/action_navigation_adminViewAllCourse_to_navigation_adminCreateCourse"
+            app:destination="@id/navigation_adminCreateCourse" />
+        <action
+            android:id="@+id/action_navigation_adminViewAllCourse_to_navigation_adminEditCourse"
+            app:destination="@id/navigation_adminEditCourse" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_adminCreateCourse"
+        android:name="com.example.owlingo.ui.course.AdminCreateCourseFragment"
+        android:label="Admin Create Course"
+        tools:layout="@layout/fragment_create_course" >
+        <action
+            android:id="@+id/action_navigation_adminCreateCourse_to_navigation_adminViewAllCourse"
+            app:destination="@id/navigation_adminViewAllCourse" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_adminEditCourse"
+        android:name="com.example.owlingo.ui.course.AdminEditCourseFragment"
+        android:label="Admin Edit Course"
+        tools:layout="@layout/fragment_edit_course" >
+        <argument
+            android:name="courseId"
+            android:defaultValue="0"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_navigation_adminEditCourse_to_navigation_adminViewAllCourse"
+            app:destination="@id/navigation_adminViewAllCourse" />
+    </fragment>
+
+
 
 </navigation>
