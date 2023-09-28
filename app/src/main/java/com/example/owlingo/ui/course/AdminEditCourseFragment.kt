@@ -68,7 +68,7 @@ class AdminEditCourseFragment : Fragment(){
             val courseDetail = binding.etDes.text.toString()
             val courseFee = binding.etPrice.text.toString().toInt()
 
-            viewModel.editCourse(courseName, courseLecture, courseDetail, courseFee)
+            viewModel.editCourse(courseName, courseDetail, courseLecture, courseFee)
 
             val action = AdminEditCourseFragmentDirections.actionNavigationAdminEditCourseToNavigationAdminViewAllCourse()
             NavHostFragment.findNavController(this).navigate(action)

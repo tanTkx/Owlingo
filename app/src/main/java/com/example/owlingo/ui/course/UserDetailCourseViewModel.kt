@@ -15,6 +15,7 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.owlingo.database.community.Question
 import com.example.owlingo.database.course.Course
+import com.example.owlingo.database.course.CourseWithSchedule
 import com.example.owlingo.ui.UserInformation
 import kotlinx.coroutines.launch
 import org.json.JSONArray
@@ -24,8 +25,8 @@ class UserDetailCourseViewModel(courseId: Int, application: Application)  : View
 
     private val requestQueue: RequestQueue = Volley.newRequestQueue(application)
 
-    private val _course = MutableLiveData<Course>()
-    val course: LiveData<Course>
+    private val _course = MutableLiveData<CourseWithSchedule>()
+    val course: LiveData<CourseWithSchedule>
         get() = _course
 
     var _isVisible: String = "visible"
@@ -83,15 +84,17 @@ class UserDetailCourseViewModel(courseId: Int, application: Application)  : View
             showToast("Exception $e")
         }
     }
-    private fun parseCourse(response: JSONObject): Course {
+    private fun parseCourse(response: JSONObject): CourseWithSchedule {
 
-        return Course(
+        return CourseWithSchedule(
             course_id = response.getInt("course_id") ,
             course_name = response.getString("course_name"),
             course_detail = response.getString("course_detail"),
             course_lecture = response.getString("course_lecture"),
             course_fee = response.getInt("course_fee"),
-//            course_schedule = response.getString("course_schedule").orEmpty()
+            selectedDay = response.getString("selectedDay"),
+            selectedStartTime = response.getString("selectedStartTime"),
+            selectedEndTime = response.getString("selectedEndTime"),
         )
     }
 

@@ -79,15 +79,51 @@
 
     <TextView
         android:id="@+id/tv_schedule"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:text="Schedule will show here"
+        android:text="@{String.valueOf(userDetailCourseViewModel.course.selectedDay)}"
         app:layout_constraintBottom_toTopOf="@+id/btn_unlock"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.091"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.777" />
+        app:layout_constraintTop_toBottomOf="@+id/textView6"
+        app:layout_constraintVertical_bias="0.402" />
+
+    <TextView
+        android:id="@+id/tv_schedule4"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="Schedule:"
+        app:layout_constraintBottom_toTopOf="@+id/btn_unlock"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.09"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView6"
+        app:layout_constraintVertical_bias="0.225" />
+
+    <TextView
+        android:id="@+id/tv_schedule2"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="@{String.valueOf(userDetailCourseViewModel.course.selectedStartTime)}"
+        app:layout_constraintBottom_toTopOf="@+id/btn_unlock"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.043"
+        app:layout_constraintStart_toEndOf="@+id/tv_schedule"
+        app:layout_constraintTop_toBottomOf="@+id/textView6"
+        app:layout_constraintVertical_bias="0.401" />
+
+    <TextView
+        android:id="@+id/tv_schedule3"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="@{String.valueOf(userDetailCourseViewModel.course.selectedEndTime)}"
+        app:layout_constraintBottom_toTopOf="@+id/btn_unlock"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/tv_schedule2"
+        app:layout_constraintTop_toBottomOf="@+id/textView6"
+        app:layout_constraintVertical_bias="0.401" />
 
     <TextView
         android:id="@+id/lblLec"
@@ -103,7 +139,7 @@
         android:id="@+id/tvLec"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@{String.valueOf(userDetailCourseViewModel.course.course_lecture)}"
+        android:text="@{String.valueOf(userDetailCourseViewModel.course.course_fee)}"
         app:layout_constraintStart_toEndOf="@+id/textView6"
         app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
@@ -119,9 +155,9 @@
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="@dimen/activity_horizontal_margin"
-        android:text= "@{String.valueOf(userDetailCourseViewModel.course.course_fee)}"
+        android:text="@{String.valueOf(userDetailCourseViewModel.course.course_lecture)}"
         app:layout_constraintStart_toEndOf="@+id/textView6"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
