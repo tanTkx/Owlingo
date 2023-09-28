@@ -19,10 +19,10 @@ import com.example.owlingo.databinding.FragmentAdminCourseDetailBinding
 import com.example.owlingo.databinding.FragmentUserCourseDetailBinding
 
 
-class UserAllCourseFragment : Fragment(), ClickListener {
+class UserDetailCourseFragment : Fragment(), ClickListener {
 
     private lateinit var binding: FragmentUserCourseDetailBinding
-    private lateinit var viewModel: UserAllCourseViewModel
+    private lateinit var viewModel: UserDetailCourseViewModel
     private lateinit var clickListener: ClickListener
 
     override fun onCreateView(
@@ -32,25 +32,17 @@ class UserAllCourseFragment : Fragment(), ClickListener {
 
         binding = DataBindingUtil.inflate(
             inflater,
-            R.layout.fragment_user_course_detail,
+            R.layout.fragment_course_detail,
             container,
             false
         )
 
         clickListener = this
         val application = requireNotNull(this.activity).application
-        val viewModelFactory = UserAllCourseFactory(application)
+        val viewModelFactory = UserDetailCourseFactory(application)
 
-        viewModel = ViewModelProvider(this, viewModelFactory).get(UserAllCourseViewModel::class.java)
-        binding.userAllCourseViewModel = viewModel
-
-        val adapter = UserAllCourseAdapter(clickListener)
-        binding.courseList.adapter = adapter
-        viewModel.courseList.observe(viewLifecycleOwner, Observer {
-            it?.let {
-                adapter.submitList(it)
-            }
-        })
+        viewModel = ViewModelProvider(this, viewModelFactory).get(UserDetailCourseViewModel::class.java)
+        binding.userDetailCourseViewModel = viewModel
 
         viewModel.getToastMessage().observe(viewLifecycleOwner) { message ->
             if (message != null) {
