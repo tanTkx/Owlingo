@@ -15,7 +15,7 @@
         <action
             android:id="@+id/action_StartFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
-        </fragment>
+    </fragment>
 
     <fragment
         android:id="@+id/loginFragment"
@@ -31,6 +31,38 @@
         <action
             android:id="@+id/action_loginFragment_to_StartFragment"
             app:destination="@id/StartFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signupFragment"
+        android:name="com.example.owlingo.ui.profile.SignupFragment"
+        android:label="signup_fragment"
+        tools:layout="@layout/signup_fragment" >
+        <action
+            android:id="@+id/action_signupFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.owlingo.ui.profile.ProfileFragment"
+        android:label="profile_fragment"
+        tools:layout="@layout/profile_fragment" >
+        <action
+            android:id="@+id/action_profileFragment_to_accountFragment"
+            app:destination="@id/accountFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/accountFragment"
+        android:name="com.example.owlingo.ui.profile.AccountFragment"
+        android:label="fragment_account">
+        <action
+            android:id="@+id/action_accountFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_accountFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_accountFragment_to_navigation_home"
+            app:destination="@id/navigation_home" />
     </fragment>
 
     <fragment
