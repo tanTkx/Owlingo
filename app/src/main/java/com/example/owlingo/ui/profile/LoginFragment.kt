@@ -12,6 +12,7 @@ import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.android.volley.AuthFailureError
@@ -117,9 +118,14 @@ class LoginFragment : Fragment() {
                         Toast.LENGTH_SHORT
                     ).show()
 
-                    UserInformation.userID = userID
+                    UserInformation.setUserID(userID)
 
-                    findNavController().navigate(R.id.action_loginFragment_to_accountFragment)
+                    if(userID == "1"){
+                        findNavController().navigate(R.id.action_loginFragment_to_accountFragment)
+                    }else{
+                        findNavController().navigate(R.id.action_loginFragment_to_accountFragment)
+                    }
+
                 }
                 "failure" -> {
                     Toast.makeText(

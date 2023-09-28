@@ -59,7 +59,7 @@ class UserDetailCourseViewModel(courseId: Int, application: Application)  : View
 
         }
 
-        val userId: Int = UserInformation.userID?.toInt() ?: 0
+        val userId: Int = UserInformation.userID.value?.toInt() ?: 0
         try {
             val stringRequest: StringRequest = object : StringRequest(
                 Request.Method.GET, "http://10.0.2.2/Owlingo/checkRegistered.php?userId=$userId&courseId=$courseId",
@@ -99,7 +99,7 @@ class UserDetailCourseViewModel(courseId: Int, application: Application)  : View
         try {
 
             val courseId: Int = _course.value?.course_id?: 0
-            val userId: Int = UserInformation.userID?.toInt() ?: 0
+            val userId: Int = UserInformation.userID.value?.toInt() ?: 0
 
             val urlWithParams = "http://10.0.2.2/Owlingo/unlockCourseDAO.php?courseId=$courseId&userId=$userId"
             val jsonObjectRequest = JsonObjectRequest(

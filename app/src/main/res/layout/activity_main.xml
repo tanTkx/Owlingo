@@ -31,8 +31,7 @@
         android:layout_height="wrap_content"
         android:background="?android:attr/windowBackground"
         app:layout_anchor="@+id/nav_host_fragment_activity_main"
-        app:layout_anchorGravity="bottom|center"
-        app:menu="@menu/bottom_nav_menu" />
+        app:layout_anchorGravity="bottom|center" />
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

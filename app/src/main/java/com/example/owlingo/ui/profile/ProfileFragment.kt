@@ -45,7 +45,7 @@ class ProfileFragment : Fragment() {
         val rootView = inflater.inflate(R.layout.profile_fragment, container, false)
 
         // Assume you have a user ID, replace '123' with the actual user ID
-        val userID = UserInformation.userID
+        val userID = UserInformation.userID.value
         etEmail = rootView.findViewById(R.id.email_edit)
         etName = rootView.findViewById(R.id.name_edit)
         etPassword = rootView.findViewById(R.id.password_edit)
@@ -92,7 +92,7 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Fetch user data when the view is created
-        val userID = UserInformation.userID
+        val userID = UserInformation.userID.value
 
         if (userID != null) {
             fetchUserData(userID)
@@ -169,7 +169,7 @@ class ProfileFragment : Fragment() {
         email = etEmail.text.toString().trim()
         password = etPassword.text.toString().trim()
         courseLevel = etCourseLevel.selectedItem.toString().trim()
-        val userID = UserInformation.userID
+        val userID = UserInformation.userID.value
         Log.d("Test", "1")
         if (name != "" && email != "" && password != "" && courseLevel.toString() != "" && userID != "") {
             val stringRequest: StringRequest = object : StringRequest(

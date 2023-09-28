@@ -28,11 +28,11 @@ class UserMyCourseViewModel(application: Application)  : ViewModel(){
     private val toastMsg = MutableLiveData<String?>()
 
     init {
-        UserInformation.userID?.let { initializeCourseList(it.toInt()) }
+        UserInformation.userID?.let { it.value?.let { it1 -> initializeCourseList(it1.toInt()) } }
     }
 
     fun refreshCourseList(){
-        UserInformation.userID?.let { initializeCourseList(it.toInt()) }
+        UserInformation.userID?.let { it.value?.let { it1 -> initializeCourseList(it1.toInt()) } }
     }
 
     private fun initializeCourseList(userId: Int) {
