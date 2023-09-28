@@ -43,7 +43,7 @@ class CreateCommentViewModel (
         _commentTitle.value = " "
         _commentText.value = " "
         _questionId.value = questionId
-        _userId.value = 1
+        _userId.value = userId
     }
 
     fun updateCommentDetail(title:String, text: String) {

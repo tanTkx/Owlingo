@@ -8,9 +8,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.example.owlingo.R
 import com.example.owlingo.component.ClickListener
@@ -21,6 +23,7 @@ import com.example.owlingo.databinding.ManageScheduleBinding
 import com.example.owlingo.ui.community.CommunityViewModel
 import com.example.owlingo.ui.community.QuestionFragmentArgs
 import com.example.owlingo.ui.schedule.ScheduleAdapter
+import com.google.android.material.appbar.MaterialToolbar
 
 
 class ScheduleFragment  : Fragment(), ClickListener {
@@ -28,6 +31,7 @@ class ScheduleFragment  : Fragment(), ClickListener {
     private lateinit var binding: ManageScheduleBinding
     private lateinit var viewModel: ScheduleViewModel
     private lateinit var clickListener: ClickListener
+    private lateinit var navController: NavController
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -68,6 +72,14 @@ class ScheduleFragment  : Fragment(), ClickListener {
                 Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
                 viewModel.toastShown()
             }
+        }
+
+        val topAppBar: MaterialToolbar = binding.topAppBar
+        navController = NavHostFragment.findNavController(this)
+        (activity as AppCompatActivity).setSupportActionBar(topAppBar)
+
+        topAppBar.setNavigationOnClickListener {
+            navController.navigateUp()
         }
 
         binding.lifecycleOwner = this

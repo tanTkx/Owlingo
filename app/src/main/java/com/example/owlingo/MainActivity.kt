@@ -8,6 +8,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.owlingo.databinding.ActivityMainBinding
 import com.example.owlingo.ui.AppPreferences
 import com.example.owlingo.ui.UserInformation
+import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
@@ -18,7 +19,6 @@ class MainActivity : AppCompatActivity() {
         AppPreferences.init(applicationContext)
 
         val navView: BottomNavigationView = binding.navView
-
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
         navView.setupWithNavController(navController)
 

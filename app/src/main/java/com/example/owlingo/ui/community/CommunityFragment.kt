@@ -16,6 +16,7 @@ import com.example.owlingo.R
 import com.example.owlingo.component.ClickListener
 import com.example.owlingo.database.community.Question
 import com.example.owlingo.databinding.FragmentCommunityBinding
+import com.example.owlingo.ui.UserInformation
 
 class CommunityFragment : Fragment(), ClickListener {
 
@@ -59,7 +60,7 @@ class CommunityFragment : Fragment(), ClickListener {
 
         binding.createBtn.setOnClickListener{
             val action = CommunityFragmentDirections.actionNavigationCreateQuestion()
-            action.userId = 1
+            action.userId = UserInformation._userID.value?.toInt() ?: 0
             NavHostFragment.findNavController(this).navigate(action)
         }
 
@@ -78,6 +79,10 @@ class CommunityFragment : Fragment(), ClickListener {
                 return true
             }
         })
+
+        binding.topAppBar.setOnClickListener {
+
+        }
 
         binding.lifecycleOwner = this
         return binding.root

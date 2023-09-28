@@ -16,6 +16,7 @@ import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.StringRequest
+import com.example.owlingo.ui.UserInformation
 
 class CommunityViewModel( application: Application) : ViewModel(){
 
@@ -28,7 +29,8 @@ class CommunityViewModel( application: Application) : ViewModel(){
     private val toastMsg = MutableLiveData<String?>()
 
     init {
-        initializeQuestionList( userId = 1)
+        val userId: Int = UserInformation._userID.value?.toInt() ?: 0
+        initializeQuestionList(userId)
     }
 
     fun refreshQuestionList(userId: Int, searchText: String? = null) {

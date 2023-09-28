@@ -15,5 +15,10 @@
         android:id="@+id/navigation_community"
         android:icon="@drawable/ic_community_black"
         android:title="Schedule" />
+    <item
+        android:id="@+id/profileFragment"
+        android:icon="@android:drawable/ic_menu_my_calendar"
+        android:title="Profile" />
+
 
 </menu>
