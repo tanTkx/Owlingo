@@ -71,6 +71,8 @@
 
 
     <string name="explanation">Explanation</string>
+    <string name="title_editcourse">Edit Course</string>
+    <string name="my_course">My Course</string>
 
     <string-array name="CoursesLevel">
         <item>Select Your Course Level</item>
