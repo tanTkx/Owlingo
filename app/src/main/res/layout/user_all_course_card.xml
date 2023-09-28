@@ -4,24 +4,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     >
-
     <data>
         <variable
-            name="myCourse"
+            name="course"
             type="com.example.owlingo.database.course.Course" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="110dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginBottom="10dp"
         app:checkedIconTint="#00FFFFFF">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
             android:clickable="true">
 
             <ImageView
@@ -43,7 +40,7 @@
                 android:layout_marginTop="32dp"
                 android:text="Java Script"
                 android:textSize="16sp"
-                app:mycourseName="@{myCourse}"
+                app:courseName="@{course}"
                 app:layout_constraintStart_toEndOf="@+id/img_java"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -53,9 +50,10 @@
                 android:layout_height="wrap_content"
                 android:text="Mr.Tan"
                 android:textSize="12sp"
-                app:mycourseLecture="@{myCourse}"
+                app:courseLecture="@{course}"
                 tools:layout_editor_absoluteX="124dp"
                 tools:layout_editor_absoluteY="53dp" />
+
 
             <TextView
                 android:id="@+id/textView7"
@@ -63,7 +61,7 @@
                 android:layout_height="29dp"
                 android:text="Hello World"
                 android:textSize="10sp"
-                app:mycourseDetail="@{myCourse}"
+                app:courseDetail="@{course}"
                 tools:layout_editor_absoluteX="124dp"
                 tools:layout_editor_absoluteY="69dp" />
 
@@ -73,11 +71,15 @@
                 android:layout_height="wrap_content"
                 android:text="RM 188"
                 android:textSize="10sp"
-                app:mycourseFee="@{myCourse}"
+                app:courseFee="@{course}"
                 tools:layout_editor_absoluteX="124dp"
                 tools:layout_editor_absoluteY="98dp" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+
     </com.google.android.material.card.MaterialCardView>
+
+
+
+
 </layout>

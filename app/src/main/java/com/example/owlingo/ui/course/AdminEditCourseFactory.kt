@@ -8,8 +8,8 @@ class AdminEditCourseFactory(
     private val application: Application) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(AdminEditCourseFactory::class.java)) {
-            return AdminEditCourseFactory(application) as T
+        if (modelClass.isAssignableFrom(AdminEditCourseViewModel::class.java)) {
+            return AdminEditCourseViewModel(application) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

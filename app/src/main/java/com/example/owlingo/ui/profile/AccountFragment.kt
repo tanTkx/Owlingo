@@ -79,7 +79,7 @@ class AccountFragment : Fragment() {
         // Set an OnClickListener to handle button click
         backButton.setOnClickListener {
             // Navigate to another fragment (you'll need to replace YourNextFragment with the actual fragment)
-            findNavController().navigate(R.id.action_accountFragment_to_navigation_home)
+            findNavController().navigate(R.id.action_accountFragment_to_userAllCourseFragment)
         }
 
         return view

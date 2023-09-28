@@ -4,12 +4,12 @@ import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 
-class AdminCreateCourseFactory(
+class UserAllCourseFactory(
     private val application: Application) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(AdminCreateCourseViewModel::class.java)) {
-            return AdminCreateCourseViewModel(application) as T
+        if (modelClass.isAssignableFrom(UserAllCourseViewModel::class.java)) {
+            return UserAllCourseViewModel(application) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

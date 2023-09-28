@@ -61,50 +61,9 @@
             android:id="@+id/action_accountFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
         <action
-            android:id="@+id/action_accountFragment_to_navigation_home"
-            app:destination="@id/navigation_home" />
+            android:id="@+id/action_accountFragment_to_userAllCourseFragment"
+            app:destination="@id/userAllCourseFragment" />
     </fragment>
-
-    <fragment
-        android:id="@+id/signupFragment"
-        android:name="com.example.owlingo.ui.profile.SignupFragment"
-        android:label="signup_fragment"
-        tools:layout="@layout/signup_fragment" >
-        <action
-            android:id="@+id/action_signupFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/profileFragment"
-        android:name="com.example.owlingo.ui.profile.ProfileFragment"
-        android:label="profile_fragment"
-        tools:layout="@layout/profile_fragment" >
-        <action
-            android:id="@+id/action_profileFragment_to_accountFragment"
-            app:destination="@id/accountFragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/accountFragment"
-        android:name="com.example.owlingo.ui.profile.AccountFragment"
-        android:label="fragment_account">
-        <action
-            android:id="@+id/action_accountFragment_to_profileFragment"
-            app:destination="@id/profileFragment" />
-        <action
-            android:id="@+id/action_accountFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
-        <action
-            android:id="@+id/action_accountFragment_to_navigation_home"
-            app:destination="@id/navigation_home" />
-        </fragment>
-
-    <fragment
-        android:id="@+id/navigation_home"
-        android:name="com.example.owlingo.ui.home.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
@@ -243,7 +202,10 @@
             android:id="@+id/action_navigation_adminEditCourse_to_navigation_adminViewAllCourse"
             app:destination="@id/navigation_adminViewAllCourse" />
     </fragment>
-
+    <fragment
+        android:id="@+id/userAllCourseFragment"
+        android:name="com.example.owlingo.ui.course.UserAllCourseFragment"
+        android:label="UserAllCourseFragment" />
 
 
 </navigation>
