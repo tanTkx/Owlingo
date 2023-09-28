@@ -246,17 +246,5 @@
             app:destination="@id/navigation_manage_schedule" />
     </fragment>
 
-<!--    <fragment-->
-<!--        android:id="@+id/edit_schedule"-->
-<!--        android:name="com.example.owlingo.ui.she"-->
-<!--        android:label="fragment_edit_schedule"-->
-<!--        tools:layout="@layout/fragment_edit_schedule" />-->
-<!--    -->
-<!--    <activity-->
-<!--        android:id="@+id/addSchedule"-->
-<!--        android:name="com.example.owlingo.MainActivity"-->
-<!--        android:label="add_schedule"-->
-<!--        tools:layout="@layout/add_schedule" />-->
-
 
 </navigation>

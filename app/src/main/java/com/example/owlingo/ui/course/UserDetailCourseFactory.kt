@@ -1,7 +1,5 @@
 package com.example.owlingo.ui.course
 
-class UserDetailCourseFactory com.example.owlingo.ui.course
-
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -15,5 +13,4 @@ class UserDetailCourseFactory(
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }
-} {
 }

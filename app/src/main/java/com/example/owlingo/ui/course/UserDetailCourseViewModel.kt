@@ -16,7 +16,7 @@ import com.example.owlingo.database.course.Course
 import kotlinx.coroutines.launch
 import org.json.JSONArray
 
-class UserDetailCourseViewModel(application: Application)  : ViewModel(){
+class UserDetailCourseViewModel(courseId: Int, application: Application)  : ViewModel(){
 
     private val requestQueue: RequestQueue = Volley.newRequestQueue(application)
 
@@ -27,10 +27,6 @@ class UserDetailCourseViewModel(application: Application)  : ViewModel(){
     private val toastMsg = MutableLiveData<String?>()
 
     init {
-        initializeCourseList()
-    }
-
-    fun refreshCourseList(){
         initializeCourseList()
     }
 
