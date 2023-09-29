@@ -74,33 +74,42 @@ class LoginFragment : Fragment() {
         return view
     }
 
+    private fun isValidEmail(email: String): Boolean {
+        val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
+        return email.matches(emailPattern.toRegex())
+    }
+
     private fun login(view: View?) {
         val email = etEmail.text.toString().trim()
         val password = etPassword.text.toString().trim()
         if (email.isNotEmpty() && password.isNotEmpty()) {
-            val stringRequest: StringRequest = object : StringRequest(
-                Request.Method.POST, URL,
-                Response.Listener { response ->
-                    handleLoginResponse(response)
-                },
-                Response.ErrorListener { error ->
-                    Toast.makeText(
-                        requireActivity(),
-                        error.toString().trim { it <= ' ' },
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }) {
-                @Throws(AuthFailureError::class)
-                override fun getParams(): Map<String, String> {
-                    val data: MutableMap<String, String> = HashMap()
-                    data["email"] = email
-                    data["password"] = password
-                    return data
+            if(isValidEmail(email)) {
+                val stringRequest: StringRequest = object : StringRequest(
+                    Request.Method.POST, URL,
+                    Response.Listener { response ->
+                        handleLoginResponse(response)
+                    },
+                    Response.ErrorListener {
+                        Toast.makeText(
+                            requireActivity(),
+                            "Invalid Login Id/Password",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }) {
+                    @Throws(AuthFailureError::class)
+                    override fun getParams(): Map<String, String> {
+                        val data: MutableMap<String, String> = HashMap()
+                        data["email"] = email
+                        data["password"] = password
+                        return data
+                    }
                 }
-            }
 
-            val requestQueue = Volley.newRequestQueue(requireActivity())
-            requestQueue.add(stringRequest)
+                val requestQueue = Volley.newRequestQueue(requireActivity())
+                requestQueue.add(stringRequest)
+            } else {
+                Toast.makeText(requireActivity(), "Invalid Email Address!", Toast.LENGTH_SHORT).show()
+            }
         } else {
             Toast.makeText(requireActivity(), "Fields cannot be empty!", Toast.LENGTH_SHORT).show()
         }
@@ -137,7 +146,7 @@ class LoginFragment : Fragment() {
                 else -> {
                     Toast.makeText(
                         requireActivity(),
-                        "Unknown status: $status",
+                        "Invalid Login Id/Password",
                         Toast.LENGTH_SHORT
                     ).show()
                 }

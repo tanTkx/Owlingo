@@ -124,6 +124,16 @@ class ProfileFragment : Fragment() {
         requestQueue.add(stringRequest)
     }
 
+    private fun isValidName(name: String): Boolean {
+        val namePattern = "^[a-zA-Z]+$"
+        return name.matches(namePattern.toRegex())
+    }
+
+    private fun isValidEmail(email: String): Boolean {
+        val emailPattern = "[a-zA-Z0-9._-]+@[a-zA-Z]+\\.[a-zA-Z.]+"
+        return email.matches(emailPattern.toRegex())
+    }
+
     private fun handleUserResponse(response: String) {
         try {
             val jsonResponse = JSONObject(response)
@@ -172,47 +182,57 @@ class ProfileFragment : Fragment() {
         val userID = UserInformation.userID.value
         Log.d("Test", "1")
         if (name != "" && email != "" && password != "" && courseLevel.toString() != "" && userID != "") {
-            val stringRequest: StringRequest = object : StringRequest(
-                Request.Method.POST, URL,
-                Response.Listener { response ->
-                    Log.d("Update", response)
-                    if (response == "success") {
-                        Toast.makeText(
-                            requireContext(),
-                            "Update Successfully !!",
-                            Toast.LENGTH_SHORT
-                        ).show()
+            if(isValidEmail(email!!)){
+                if(isValidName(name!!)){
+                    val stringRequest: StringRequest = object : StringRequest(
+                        Request.Method.POST, URL,
+                        Response.Listener { response ->
+                            Log.d("Update", response)
+                            if (response == "success") {
+                                Toast.makeText(
+                                    requireContext(),
+                                    "Update Successfully !!",
+                                    Toast.LENGTH_SHORT
+                                ).show()
 
-                        findNavController().navigate(R.id.action_profileFragment_to_accountFragment)
-                    } else if (response == "failure") {
-                        Toast.makeText(
-                            requireContext(),
-                            "Update Fail !!",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                                findNavController().navigate(R.id.action_profileFragment_to_accountFragment)
+                            } else if (response == "failure") {
+                                Toast.makeText(
+                                    requireContext(),
+                                    "Update Fail !!",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                        },
+                        Response.ErrorListener { error ->
+                            Toast.makeText(
+                                requireContext(),
+                                error.toString().trim(),
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }) {
+                        @Throws(AuthFailureError::class)
+                        override fun getParams(): Map<String, String>? {
+                            val data: MutableMap<String, String> = HashMap()
+                            data["name"] = name!!
+                            data["email"] = email!!
+                            data["password"] = password!!
+                            data["courseLevel"] = courseLevel!!
+                            data["userID"] = userID!!
+                            return data
+                        }
                     }
-                },
-                Response.ErrorListener { error ->
-                    Toast.makeText(
-                        requireContext(),
-                        error.toString().trim(),
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }) {
-                @Throws(AuthFailureError::class)
-                override fun getParams(): Map<String, String>? {
-                    val data: MutableMap<String, String> = HashMap()
-                    data["name"] = name!!
-                    data["email"] = email!!
-                    data["password"] = password!!
-                    data["courseLevel"] = courseLevel!!
-                    data["userID"] = userID!!
-                    return data
-                }
-            }
 
-            val requestQueue = Volley.newRequestQueue(requireContext())
-            requestQueue.add(stringRequest)
+                    val requestQueue = Volley.newRequestQueue(requireContext())
+                    requestQueue.add(stringRequest)
+                } else {
+                    Toast.makeText(requireActivity(), "Invalid Name ( Only English Alphabet ) !", Toast.LENGTH_SHORT).show()
+                }
+            } else {
+                Toast.makeText(requireActivity(), "Invalid Email Address!", Toast.LENGTH_SHORT).show()
+            }
+        } else {
+            Toast.makeText(requireActivity(), "Fields cannot be empty!", Toast.LENGTH_SHORT).show()
         }
     }
 }

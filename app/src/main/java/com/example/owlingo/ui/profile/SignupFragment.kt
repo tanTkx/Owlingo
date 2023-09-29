@@ -94,6 +94,16 @@ class SignupFragment : Fragment() {
         return rootView
     }
 
+    private fun isValidName(name: String): Boolean {
+        val namePattern = "^[a-zA-Z]+$"
+        return name.matches(namePattern.toRegex())
+    }
+
+    private fun isValidEmail(email: String): Boolean {
+        val emailPattern = "[a-zA-Z0-9._-]+@[a-zA-Z]+\\.[a-zA-Z.]+"
+        return email.matches(emailPattern.toRegex())
+    }
+
     private fun save() {
         name = etName.text.toString().trim()
         email = etEmail.text.toString().trim()
@@ -101,44 +111,54 @@ class SignupFragment : Fragment() {
         courseLevel = etCourseLevel.selectedItem.toString().trim()
 
         if (name != "" && email != "" && password != "" && courseLevel.toString() != "") {
-            val stringRequest: StringRequest = object : StringRequest(
-                Request.Method.POST, URL,
-                Response.Listener { response ->
-                    Log.d("Register", response)
-                    if (response.trim() == "success") {
-                        Toast.makeText(
-                            requireContext(),
-                            "Sign Up Successfully!!",
-                            Toast.LENGTH_SHORT
-                        ).show()
+            if(isValidEmail(email!!)){
+                if(isValidName(name!!)){
+                    val stringRequest: StringRequest = object : StringRequest(
+                        Request.Method.POST, URL,
+                        Response.Listener { response ->
+                            Log.d("Register", response)
+                            if (response.trim() == "success") {
+                                Toast.makeText(
+                                    requireContext(),
+                                    "Sign Up Successfully!!",
+                                    Toast.LENGTH_SHORT
+                                ).show()
 
-                        // Delay the navigation slightly to ensure the Toast is displayed before navigation.
-                        Handler(Looper.getMainLooper()).postDelayed({
-                            findNavController().navigate(R.id.action_signupFragment_to_loginFragment)
-                        }, 100)
-                    } else if (response == "failure") {
+                                // Delay the navigation slightly to ensure the Toast is displayed before navigation.
+                                Handler(Looper.getMainLooper()).postDelayed({
+                                    findNavController().navigate(R.id.action_signupFragment_to_loginFragment)
+                                }, 100)
+                            } else if (response == "failure") {
+                            }
+                        },
+                        Response.ErrorListener { error ->
+                            Toast.makeText(
+                                requireContext(),
+                                error.toString().trim(),
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }) {
+                        @Throws(AuthFailureError::class)
+                        override fun getParams(): Map<String, String>? {
+                            val data: MutableMap<String, String> = HashMap()
+                            data["name"] = name!!
+                            data["email"] = email!!
+                            data["password"] = password!!
+                            data["courseLevel"] = courseLevel!!
+                            return data
+                        }
                     }
-                },
-                Response.ErrorListener { error ->
-                    Toast.makeText(
-                        requireContext(),
-                        error.toString().trim(),
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }) {
-                @Throws(AuthFailureError::class)
-                override fun getParams(): Map<String, String>? {
-                    val data: MutableMap<String, String> = HashMap()
-                    data["name"] = name!!
-                    data["email"] = email!!
-                    data["password"] = password!!
-                    data["courseLevel"] = courseLevel!!
-                    return data
-                }
-            }
 
-            val requestQueue = Volley.newRequestQueue(requireContext())
-            requestQueue.add(stringRequest)
+                    val requestQueue = Volley.newRequestQueue(requireContext())
+                    requestQueue.add(stringRequest)
+                } else {
+                    Toast.makeText(requireActivity(), "Invalid Name ( Only English Alphabet ) !", Toast.LENGTH_SHORT).show()
+                }
+            } else {
+                Toast.makeText(requireActivity(), "Invalid Email Address!", Toast.LENGTH_SHORT).show()
+            }
+        } else {
+            Toast.makeText(requireActivity(), "Fields cannot be empty!", Toast.LENGTH_SHORT).show()
         }
     }
 

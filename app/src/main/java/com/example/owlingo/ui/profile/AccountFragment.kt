@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.android.volley.Request
@@ -53,7 +54,21 @@ class AccountFragment : Fragment() {
             val userID = UserInformation.userID
 
             if (userID != null) {
-                userID.value?.let { it1 -> deleteUserData(it1) }
+                val alertDialogBuilder = AlertDialog.Builder(requireContext())
+                alertDialogBuilder.setTitle("Confirm Deletion")
+                alertDialogBuilder.setMessage("Are you sure you want to delete the user data?")
+
+                alertDialogBuilder.setPositiveButton("Yes") { _, _ ->
+                    // User clicked "Yes," perform the deletion
+                    userID.value?.let { it1 -> deleteUserData(it1) }
+                }
+
+                alertDialogBuilder.setNegativeButton("No") { _, _ ->
+                    // User clicked "No," do nothing or handle as needed
+                }
+
+                val alertDialog = alertDialogBuilder.create()
+                alertDialog.show()
             };
 
         }

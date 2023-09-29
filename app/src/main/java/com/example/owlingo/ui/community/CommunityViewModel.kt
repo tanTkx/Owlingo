@@ -67,8 +67,15 @@ class CommunityViewModel( application: Application) : ViewModel(){
     private fun searchQuestionList( userId: Int, searchText: String) {
         viewModelScope.launch {
             try {
-                val urlWithParams = "http://10.0.2.2/Owlingo/questionDAO.php?userId=$userId&searchText=$searchText"
-                Log.e("url", urlWithParams)
+
+                var urlWithParams = " "
+                if(searchText.isEmpty()){
+                    urlWithParams = "http://10.0.2.2/Owlingo/questionDAO.php?userId=$userId"
+                }else{
+                    urlWithParams = "http://10.0.2.2/Owlingo/questionDAO.php?userId=$userId&searchText=$searchText"
+                }
+
+
                 val jsonArrayRequest = JsonArrayRequest(
                     Request.Method.GET, urlWithParams, null,
                     { response ->
