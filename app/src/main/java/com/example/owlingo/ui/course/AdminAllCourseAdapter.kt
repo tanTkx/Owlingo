@@ -14,11 +14,14 @@ import com.example.owlingo.database.course.Course
 import com.example.owlingo.databinding.AllCourseCardBinding
 import com.example.owlingo.databinding.AnswerCardBinding
 
+
+//recycle view adapter
 class AdminAllCourseAdapter(
     private val clickListener: ClickListener
 
 ) : ListAdapter<Course, AdminAllCourseAdapter.ViewHolder>(CourseDiffCallback()) {
 
+    //abstract function
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
         holder.bind(item)
@@ -33,6 +36,7 @@ class AdminAllCourseAdapter(
         private val clickListener: ClickListener
     ) : RecyclerView.ViewHolder(binding.root){
 
+        //binding utils data from here
         fun bind(item: Course) {
             binding.course = item
             binding.executePendingBindings()

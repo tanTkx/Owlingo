@@ -20,6 +20,7 @@ class AdminAllCourseViewModel(application: Application)  : ViewModel(){
 
     private val requestQueue: RequestQueue = Volley.newRequestQueue(application)
 
+    //for recycle view adapter
     private val _courseList = MutableLiveData<List<Course>>()
     val courseList: LiveData<List<Course>>
         get() = _courseList
@@ -34,15 +35,17 @@ class AdminAllCourseViewModel(application: Application)  : ViewModel(){
         initializeCourseList()
     }
 
+    //Initialize recycle view data, get data from php database
+    //coroutine -> ui thread and network thread
     private fun initializeCourseList() {
         viewModelScope.launch {
             try {
-                val urlWithParams = "http://10.0.2.2/Owlingo/courseAllDAO.php"
+                val urlWithParams = "http://10.0.2.2/Owlingo/courseAllDAO.php" //php api
 
                 val jsonArrayRequest = JsonArrayRequest(
                     Request.Method.GET, urlWithParams, null,
                     { response ->
-                        _courseList.postValue(parseCourses(response))
+                        _courseList.postValue(parseCourses(response)) //echo as json
                     },
                     { error ->
                         showToast("$error")

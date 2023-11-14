@@ -70,9 +70,6 @@ class AdminCreateCourseFragment : Fragment(){
             NavHostFragment.findNavController(this).navigate(action)
         }
 
-        courseListAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item)
-        courseListAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-
         val topAppBar: MaterialToolbar = binding.topAppBar
         navController = NavHostFragment.findNavController(this)
         (activity as AppCompatActivity).setSupportActionBar(topAppBar)

@@ -32,6 +32,7 @@ class AdminAllCourseFragment : Fragment(), ClickListener {
         savedInstanceState: Bundle?
     ): View? {
 
+        //data binding
         binding = DataBindingUtil.inflate(
             inflater,
             R.layout.fragment_admin_course_detail,
@@ -46,8 +47,11 @@ class AdminAllCourseFragment : Fragment(), ClickListener {
         viewModel = ViewModelProvider(this, viewModelFactory).get(AdminAllCourseViewModel::class.java)
         binding.adminAllCourseViewModel = viewModel
 
+        //recycle view adapter
         val adapter = AdminAllCourseAdapter(clickListener)
         binding.courseList.adapter = adapter
+
+        //observe if courseList change then change adapter's list
         viewModel.courseList.observe(viewLifecycleOwner, Observer {
             it?.let {
                 adapter.submitList(it)
@@ -71,9 +75,11 @@ class AdminAllCourseFragment : Fragment(), ClickListener {
         return binding.root
     }
 
+    //adapter's card's click listener
     override fun onClick(any: Any, action: String?) {
         val course = any as Course
     if( action=="edit"){
+        //navigate to this screen
         val action = AdminAllCourseFragmentDirections.actionNavigationAdminViewAllCourseToNavigationAdminEditCourse()
         action.courseId = course.course_id
         NavHostFragment.findNavController(this).navigate(action)
@@ -85,6 +91,7 @@ class AdminAllCourseFragment : Fragment(), ClickListener {
 
     }
 
+    //confirmation dialog
     private fun showConfirmationDialog(courseId: Int) {
         val builder = AlertDialog.Builder(requireContext())
         val inflater = layoutInflater

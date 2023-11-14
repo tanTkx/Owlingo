@@ -7,11 +7,12 @@ import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 import com.example.owlingo.database.course.Course
 
-
 class BindingUtils {
 
     companion object {
 
+        //adapter binding
+        //card data getter and setter
         @BindingAdapter("courseName")
         @JvmStatic
         fun TextView.setCourseName(item: Course) {
